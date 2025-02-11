@@ -1,9 +1,10 @@
 @use 'modern-normalize';
 @use 'fonts';
 @use 'theme';
+@use 'classes';
 
 body {
-    background-color: var(--color-primary-400);
+    background-color: var(--color-primary-500);
     font-family: var(--font-family-primary);
     color: var(--color-text-primary);
     font-weight: 500;

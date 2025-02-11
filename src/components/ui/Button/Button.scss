@@ -1,0 +1,89 @@
+.button {
+    // Button accent colors
+    --btn-accent-color-500: var(--color-accent-500);
+    --btn-accent-color-450: var(--color-accent-450);
+    --btn-accent-color-400: var(--color-accent-400);
+    //
+
+    --color-icon: var(--color-secondary-600);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+
+    padding: 0.5rem;
+    letter-spacing: 0.02em;
+    border: none;
+    border-radius: var(--border-radius);
+    color: var(--color-secondary-600);
+    background-color: var(--color-primary-450);
+    font-size: var(--font-size-md);
+    line-height: 1;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    transition-duration: var(--transition-duration-normal);
+    transition-property: background-color, color;
+
+    svg {
+        height: 1rem;
+        width: auto;
+    }
+
+    &:disabled {
+        cursor: default;
+        --color-icon: var(--color-disabled-secondary);
+        background-color: var(--color-disabled-primary);
+        color: var(--color-disabled-secondary);
+    }
+
+    &:not(:disabled) {
+        @media (hover: hover) {
+            &:hover {
+                --color-icon: var(--btn-accent-color-500);
+                color: var(--btn-accent-color-500);
+            }
+        }
+
+        &:active {
+            background-color: var(--color-primary-400);
+        }
+
+        &:focus-visible {
+            outline: var(--outline);
+            outline-color: var(--btn-accent-color-500);
+        }
+    }
+
+    &_mini {
+        padding: 0.25rem;
+        min-width: 1.5rem;
+    }
+
+    &_filled {
+        --color-icon: var(--color-primary-500);
+
+        background-color: var(--btn-accent-color-500);
+        color: var(--color-primary-500);
+
+        &:not(:disabled) {
+            &:hover {
+                --color-icon: var(--color-primary-500);
+                background-color: var(--btn-accent-color-450);
+                color: var(--color-primary-500);
+            }
+
+            &:active {
+                background-color: var(--btn-accent-color-400);
+            }
+
+            &:focus-visible {
+                --color-icon: var(--color-primary-500);
+                color: var(--color-primary-500);
+                outline-offset: var(--border-width-thin);
+            }
+        }
+    }
+}
