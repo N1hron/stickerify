@@ -1,0 +1,43 @@
+.spin-button {
+    display: inline-flex;
+    gap: 0.25rem;
+
+    &__prev {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    &__next {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    &__view {
+        background-color: var(--color-primary-400);
+        overflow: hidden;
+        flex-grow: 1;
+
+        &:focus-visible {
+            outline: var(--outline);
+        }
+    }
+
+    &__options {
+        position: relative;
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        transition-duration: var(--transition-duration-slow);
+        transition-property: left;
+        transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+
+    &__option {
+        text-align: center;
+    }
+
+    &__alt-value {
+        color: var(--color-accent-500);
+    }
+}
