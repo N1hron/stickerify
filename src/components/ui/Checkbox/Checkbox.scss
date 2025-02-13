@@ -1,0 +1,123 @@
+.checkbox {
+    display: flex;
+
+    &:has(input:disabled) {
+        .checkbox {
+            &__label {
+                cursor: default;
+            }
+        }
+    }
+
+    &__input-wrapper {
+        --color-icon: var(--color-primary-500);
+
+        position: relative;
+
+        width: 1rem;
+        height: 1rem;
+    }
+
+    &__icon {
+        position: absolute;
+        pointer-events: none;
+
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        transform-origin: left top;
+
+        width: 60%;
+        height: 60%;
+    }
+
+    &__input {
+        appearance: none;
+        width: 100%;
+        height: 100%;
+        border: solid var(--border-width-normal) var(--color-secondary-600);
+        border-radius: var(--border-radius);
+        background-color: var(--color-primary-500);
+        cursor: pointer;
+
+        transition-duration: var(--transition-duration-normal);
+        transition-property: background-color, border-color;
+
+        &:disabled {
+            border-color: var(--color-disabled-primary);
+            cursor: default;
+        }
+
+        &:not(:disabled) {
+            &:hover {
+                &::before {
+                    scale: 1;
+                    opacity: 0.75;
+                }
+            }
+
+            &:active {
+                &::before,
+                &::after {
+                    scale: 1;
+                    opacity: 0.75;
+                }
+            }
+
+            &:focus-visible {
+                outline: var(--outline);
+                outline-offset: var(--border-width-thin);
+            }
+        }
+
+        &:checked {
+            background-color: var(--color-accent-500);
+            border-color: var(--color-accent-500);
+
+            &:disabled {
+                background-color: var(--color-disabled-primary);
+                border-color: var(--color-disabled-primary);
+            }
+        }
+
+        &::before,
+        &::after {
+            content: '';
+
+            display: block;
+            width: 200%;
+            height: 200%;
+            border-radius: 50%;
+            opacity: 0.75;
+
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            transform-origin: left top;
+            z-index: -1;
+
+            scale: 0;
+            opacity: 0;
+
+            transition-duration: var(--transition-duration-normal);
+            transition-property: scale, opacity;
+        }
+
+        &::before {
+            background-color: var(--color-primary-450);
+        }
+
+        &::after {
+            background-color: var(--color-primary-400);
+        }
+    }
+
+    &__label {
+        padding-left: 0.25rem;
+        line-height: 1.125rem;
+        font-size: var(--font-size-sm);
+        cursor: pointer;
+    }
+}
