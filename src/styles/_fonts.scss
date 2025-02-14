@@ -17,6 +17,15 @@
 }
 
 @font-face {
+    font-family: 'Roboto';
+    src:
+        url('../assets/fonts/roboto/Roboto-SemiBold.woff2') format('woff2'),
+        url('../assets/fonts/roboto/Roboto-SemiBold.woff') format('woff'),
+        url('../assets/fonts/roboto/Roboto-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+}
+
+@font-face {
     font-family: 'PermanentMarker';
     src:
         url('../assets/fonts/permanent-marker/PermanentMarker-Regular.woff2')

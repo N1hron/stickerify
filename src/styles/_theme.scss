@@ -1,5 +1,14 @@
 :root {
-    // Variables
+    // Font
+
+    --font-family-primary: 'Roboto', sans-serif;
+    --font-family-secondary: 'PermanentMarker';
+
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 2.25rem;
+
+    // Colors
 
     --color-primary-400: hsl(215, 38%, 90%);
     --color-primary-450: hsl(215, 38%, 95%);
@@ -12,15 +21,6 @@
     --color-accent-450: hsl(215, 47%, 46%);
     --color-accent-500: hsl(215, 47%, 52%);
 
-    // Constants
-
-    --font-family-primary: 'Roboto', sans-serif;
-    --font-family-secondary: 'PermanentMarker';
-
-    --font-size-sm: 0.875rem;
-    --font-size-md: 1rem;
-    --font-size-lg: 2rem;
-
     --color-text-primary: var(--color-secondary-500);
 
     --color-icon: var(--color-secondary-500);
@@ -28,14 +28,22 @@
     --color-disabled-primary: var(--color-secondary-600);
     --color-disabled-secondary: var(--color-primary-500);
 
+    // Border
+
     --border-width-normal: 0.125rem;
     --border-width-thin: calc(var(--border-width-normal) / 2);
 
     --border-radius: 0.25rem;
 
-    --transition-duration-fast: 0.1s;
-    --transition-duration-normal: 0.2s;
-    --transition-duration-slow: 0.4s;
-
     --outline: solid var(--color-accent-500) var(--border-width-normal);
+
+    // Transition
+
+    --transition-duration-fast: calc(var(--transition-duration-normal) / 2);
+    --transition-duration-normal: 0.2s;
+    --transition-duration-slow: calc(var(--transition-duration-normal) * 2);
+
+    @media (prefers-reduced-motion) {
+        --transition-duration-normal: 0;
+    }
 }

@@ -1,0 +1,15 @@
+.select-sticker-type {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    &__spin-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    &__spin-button {
+        width: 100%;
+    }
+}
