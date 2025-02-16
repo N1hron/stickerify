@@ -1,0 +1,39 @@
+.file-input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    &:has(.file-input__drop-area) {
+        gap: 0.25rem;
+    }
+
+    &:has(.file-input__original-input:focus-visible) {
+        .file-input__browse {
+            outline: var(--outline);
+            outline-offset: var(--border-width-thin);
+        }
+    }
+
+    &__drop-area {
+        border: dashed var(--color-secondary-600) var(--border-width-normal);
+        border-radius: var(--border-radius);
+        padding: 0.5rem;
+
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        transition-duration: var(--transition-duration-normal);
+        transition-property: border-color;
+
+        &_dragging-over {
+            border-color: var(--color-accent-500);
+        }
+
+        &-label {
+            user-select: none;
+            text-align: center;
+            font-size: var(--font-size-md);
+        }
+    }
+}

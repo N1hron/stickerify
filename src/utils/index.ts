@@ -1,1 +1,2 @@
-export { isStickerType } from './isStickerType';
+export { isStickerType } from './typeguards/isStickerType';
+export { isMobileDevice } from './isMobileDevice';
