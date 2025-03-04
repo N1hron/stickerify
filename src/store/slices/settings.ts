@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Settings } from '../../types';
-import { isSettings } from '../../utils/typeguards';
+import { isSettings, safeParseJson } from '../../utils';
 
 type SettingsSliceState = {
     settings: Settings;
@@ -17,23 +17,25 @@ const defaultSettings: Settings = {
 
 const defaultState: SettingsSliceState = {
     settings: defaultSettings,
-    remember: false,
+    remember: true,
 };
 
 function getInitialState(): SettingsSliceState {
-    const settingsString = localStorage.getItem('settings');
-    if (settingsString === null) return defaultState;
+    const rememberLS = localStorage.getItem('rememberSettings');
+    const settingsLS = localStorage.getItem('settings');
 
-    try {
-        const settings: unknown = JSON.parse(settingsString);
-        if (isSettings(settings)) {
-            return { settings, remember: true };
-        } else {
-            return defaultState;
-        }
-    } catch {
+    const remember = safeParseJson(rememberLS);
+    const settings = safeParseJson(settingsLS);
+
+    if (remember === null) {
         return defaultState;
+    } else if (remember === true) {
+        return { settings: isSettings(settings) ? settings : defaultSettings, remember };
+    } else if (remember === false) {
+        return { settings: defaultSettings, remember };
     }
+
+    return defaultState;
 }
 
 const settingsSlice = createSlice({

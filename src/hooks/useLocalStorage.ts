@@ -1,29 +1,23 @@
 import { useEffect, useState, useCallback } from 'react';
 
+import { safeStringify, safeParseJson } from '../utils';
+
 function useLocalStorage(key: string) {
     const [value, setValue] = useState<unknown>(() => {
         const valueLS = localStorage.getItem(key);
-        if (valueLS) {
-            try {
-                const value: unknown = JSON.parse(valueLS);
-                return value;
-            } catch {
-                return null;
-            }
-        }
-
-        return null;
+        return safeParseJson(valueLS);
     });
 
     useEffect(() => {
         if (value === null) {
             localStorage.removeItem(key);
         } else {
-            try {
-                const jsonValue = JSON.stringify(value);
-                localStorage.setItem(key, jsonValue);
-            } catch {
-                setValue(null);
+            const valueString = safeStringify(value);
+
+            if (valueString === null) {
+                localStorage.removeItem(key);
+            } else {
+                localStorage.setItem(key, valueString);
             }
         }
     }, [value]);

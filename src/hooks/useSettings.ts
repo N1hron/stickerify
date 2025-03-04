@@ -14,18 +14,21 @@ import {
 
 function useSettings() {
     const dispatch = useAppDispatch();
-    const settings = useAppSelector(selectSettings);
-    const rememberSettings = useAppSelector(selectRemember);
 
-    const [settingsLS, setSettingsLS, removeSettingsLS] = useLocalStorage('settings');
+    const settings = useAppSelector(selectSettings);
+    const remember = useAppSelector(selectRemember);
+
+    const [, setSettingsLS, removeSettingsLS] = useLocalStorage('settings');
+    const [, setRememberSettingsLS] = useLocalStorage('rememberSettings');
 
     useEffect(() => {
-        if (rememberSettings) {
+        if (remember) {
             setSettingsLS(settings);
-        } else if (settingsLS !== null) {
+        } else {
             removeSettingsLS();
         }
-    }, [settings, rememberSettings]);
+        setRememberSettingsLS(remember);
+    }, [settings, remember]);
 
     function setStickerSize(stickerSize: StickerSize) {
         if (settings.stickerSize !== stickerSize) {
@@ -58,7 +61,7 @@ function useSettings() {
     }
 
     function setRememberSettings(newRememberSettings: boolean) {
-        if (rememberSettings !== newRememberSettings) {
+        if (remember !== newRememberSettings) {
             dispatch(setRemember(newRememberSettings));
         }
     }
@@ -69,7 +72,7 @@ function useSettings() {
 
     return {
         settings,
-        rememberSettings,
+        rememberSettings: remember,
         setStickerSize,
         setStickerMotion,
         setStickerAlignment,
