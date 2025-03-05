@@ -1,0 +1,35 @@
+.link {
+    display: inline-block;
+    color: var(--color-accent-400);
+    --color-icon: var(--color-accent-400);
+    font-size: var(--font-size-sm);
+    line-height: 1;
+
+    transition-duration: var(--transition-duration);
+    transition-property: color;
+
+    svg {
+        height: 1.5rem;
+
+        path {
+            transition-duration: var(--transition-duration);
+            transition-property: stroke, fill, color;
+        }
+    }
+
+    &:has(svg) {
+        height: 1.5rem;
+    }
+
+    @media (hover: hover) {
+        &:hover {
+            color: var(--color-accent-600);
+            --color-icon: var(--color-accent-600);
+        }
+    }
+
+    &:active {
+        color: var(--color-accent-700);
+        --color-icon: var(--color-accent-700);
+    }
+}
