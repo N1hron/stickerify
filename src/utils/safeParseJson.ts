@@ -1,4 +1,3 @@
-/** Returns null on error */
 function safeParseJson(text: unknown): unknown {
     if (typeof text !== 'string') return null;
     try {

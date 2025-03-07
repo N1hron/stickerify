@@ -44,6 +44,7 @@
     justify-content: center;
     gap: 0.5rem;
 
+    --color-icon: var(--button-color-text);
     height: var(--button-full-height);
     min-width: $content-height;
     padding: 0.25rem 0.5rem;
@@ -63,13 +64,14 @@
     transition-property: background-color, color;
 
     svg {
-        --color-icon: var(--button-color-text);
         height: 100%;
     }
 
     &:disabled {
-        background-color: var(--color-disabled-050);
-        border-color: var(--color-disabled-200);
+        --color-icon: var(--color-text-alt);
+        background-color: var(--color-disabled-300);
+        border-color: var(--color-disabled-500);
+        color: var(--color-text-alt);
         cursor: default;
     }
 
@@ -89,13 +91,6 @@
 
     &:has(svg:only-child) {
         padding: 0.25rem;
-    }
-}
-
-.colored {
-    &:disabled {
-        background-color: var(--color-disabled-300);
-        border-color: var(--color-disabled-500);
     }
 }
 
