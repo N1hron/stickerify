@@ -1,8 +1,7 @@
 import { useState, useId, useEffect } from 'react';
-
 import clsx from 'clsx';
 
-import { Label, Button } from '../../ui';
+import { Label, Button } from '../';
 import { ArrowLeftIcon } from '../../icons';
 
 import styles from './style.module.scss';
@@ -24,24 +23,24 @@ function SpinButton<T extends string>({
     onChange,
     className,
 }: SpinButtonProps<T>) {
-    const valueIndex = value ? options.indexOf(value) : -1;
-    const [currentIndex, setCurrentIndex] = useState(() => {
-        return valueIndex > -1 ? valueIndex : 0;
+    const [currentOptionIndex, setCurrentOptionIndex] = useState(() => {
+        if (!value) return 0;
+        return options.indexOf(value);
     });
+
     const labelId = useId();
     const cl = clsx(styles.spinButton, disabled && styles.disabled, className);
 
     useEffect(() => {
-        if (valueIndex >= 0) {
-            setCurrentIndex(valueIndex);
-        }
-    }, [valueIndex]);
+        if (!value) return;
+        setCurrentOptionIndex(options.indexOf(value));
+    }, [value]);
 
     useEffect(() => {
         if (onChange) {
-            onChange(options[currentIndex]);
+            onChange(options[currentOptionIndex]);
         }
-    }, [currentIndex]);
+    }, [currentOptionIndex]);
 
     function handleKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
         switch (event.code) {
@@ -60,19 +59,19 @@ function SpinButton<T extends string>({
 
     function prev() {
         if (disabled) return;
-        const next = (currentIndex - 1 + options.length) % options.length;
-        setCurrentIndex(next);
+        const next = (currentOptionIndex - 1 + options.length) % options.length;
+        setCurrentOptionIndex(next);
     }
 
     function next() {
         if (disabled) return;
-        const next = (currentIndex + 1) % options.length;
-        setCurrentIndex(next);
+        const next = (currentOptionIndex + 1) % options.length;
+        setCurrentOptionIndex(next);
     }
 
     return (
         <div className={cl}>
-            <Label id={labelId} as='span'>
+            <Label className={styles.label} id={labelId} as='span'>
                 {label}
             </Label>
             <div className={styles.wrapper}>
@@ -90,8 +89,8 @@ function SpinButton<T extends string>({
                     className={styles.view}
                     role='spinbutton'
                     aria-labelledby={labelId}
-                    aria-valuenow={currentIndex + 1}
-                    aria-valuetext={options[currentIndex]}
+                    aria-valuenow={currentOptionIndex + 1}
+                    aria-valuetext={options[currentOptionIndex]}
                     aria-valuemin={1}
                     aria-valuemax={options.length}
                     tabIndex={disabled ? -1 : 0}
@@ -99,7 +98,7 @@ function SpinButton<T extends string>({
                 >
                     <div
                         className={styles.options}
-                        style={{ width: `${options.length}00%`, left: `-${currentIndex}00%` }}
+                        style={{ width: `${options.length}00%`, left: `-${currentOptionIndex}00%` }}
                     >
                         {options.map((option, i) => (
                             <div key={i} className={styles.option}>

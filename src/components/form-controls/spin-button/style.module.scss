@@ -1,5 +1,11 @@
 .spinButton {
-    display: inline-block;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.label {
+    padding: 0 0.25rem;
 }
 
 .disabled {
@@ -10,7 +16,6 @@
 }
 
 .wrapper {
-    margin-top: 0.25rem;
     display: flex;
     gap: 0.25rem;
 }

@@ -1,6 +1,6 @@
 import { useId } from 'react';
 
-import { Label } from '../label/Label';
+import { Label } from '../../form-controls/label/Label';
 import { CheckIcon } from '../../icons';
 
 import styles from './style.module.scss';

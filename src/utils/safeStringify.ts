@@ -1,4 +1,3 @@
-/** Returns null on error */
 function safeStringify(value: unknown): string | null {
     try {
         const res = JSON.stringify(value);
