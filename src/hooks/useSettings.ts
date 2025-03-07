@@ -1,15 +1,16 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 import { useLocalStorage } from './useLocalStorage';
-import { StickerMotion, StickerSize, StickerAlignment } from '../types';
+import { Settings } from '../types';
 import {
     useAppSelector,
     useAppDispatch,
     selectSettings,
     selectRemember,
-    setSettings,
-    setRemember,
+    setSetting as set,
+    setRememberSettings,
     restoreDefaultSettings,
+    defaultSettings,
 } from '../store';
 
 function useSettings() {
@@ -21,6 +22,9 @@ function useSettings() {
     const [, setSettingsLS, removeSettingsLS] = useLocalStorage('settings');
     const [, setRememberSettingsLS] = useLocalStorage('rememberSettings');
 
+    const isDefaultSettings =
+        Object.values(defaultSettings).join('') === Object.values(settings).join('');
+
     useEffect(() => {
         if (remember) {
             setSettingsLS(settings);
@@ -30,56 +34,35 @@ function useSettings() {
         setRememberSettingsLS(remember);
     }, [settings, remember]);
 
-    function setStickerSize(stickerSize: StickerSize) {
-        if (settings.stickerSize !== stickerSize) {
-            dispatch(setSettings({ ...settings, stickerSize }));
-        }
-    }
+    const setRemember = useCallback(
+        (newRememberSettings: boolean) => {
+            if (remember !== newRememberSettings) {
+                dispatch(setRememberSettings(newRememberSettings));
+            }
+        },
+        [remember]
+    );
 
-    function setStickerMotion(stickerMotion: StickerMotion) {
-        if (settings.stickerMotion !== stickerMotion) {
-            dispatch(setSettings({ ...settings, stickerMotion }));
-        }
-    }
+    const setSetting = useCallback(
+        <T extends keyof Settings>(settingName: T, value: Settings[T]) => {
+            if (settings[settingName] === value) return;
+            dispatch(set([settingName, value]));
+        },
+        [settings]
+    );
 
-    function setStickerAlignment(stickerAlignment: StickerAlignment) {
-        if (settings.stickerAlignment !== stickerAlignment) {
-            dispatch(setSettings({ ...settings, stickerAlignment }));
-        }
-    }
-
-    function setScaleUpSmallStickers(scaleUpSmallStickers: boolean) {
-        if (settings.scaleUpSmallStickers !== scaleUpSmallStickers) {
-            dispatch(setSettings({ ...settings, scaleUpSmallStickers }));
-        }
-    }
-
-    function setDisableFileLimit(disableFileLimit: boolean) {
-        if (settings.disableFileLimit !== disableFileLimit) {
-            dispatch(setSettings({ ...settings, disableFileLimit }));
-        }
-    }
-
-    function setRememberSettings(newRememberSettings: boolean) {
-        if (remember !== newRememberSettings) {
-            dispatch(setRemember(newRememberSettings));
-        }
-    }
-
-    function restoreDefaults() {
+    const restoreDefaults = useCallback(() => {
+        if (isDefaultSettings) return;
         dispatch(restoreDefaultSettings());
-    }
+    }, [isDefaultSettings]);
 
     return {
         settings,
-        rememberSettings: remember,
-        setStickerSize,
-        setStickerMotion,
-        setStickerAlignment,
-        setScaleUpSmallStickers,
-        setDisableFileLimit,
-        setRememberSettings,
+        remember,
+        setRemember,
+        setSetting,
         restoreDefaults,
+        isDefaultSettings,
     };
 }
 

@@ -1,72 +1,62 @@
-import { useSettings } from '../../hooks';
+import { Card, CardHeading, CardSegment, Divider } from '../ui';
+import { SpinButton, Checkbox, Button } from '../form-controls';
 import { StickerSize, StickerMotion, StickerAlignment } from '../../types';
-import { Card, CardSegment, Divider, SpinButton, Checkbox, Button } from '../ui';
+import { useSettings } from '../../hooks';
 
 import styles from './style.module.scss';
 
 function Settings() {
-    const {
-        settings,
-        rememberSettings,
-        setRememberSettings,
-        setStickerSize,
-        setStickerMotion,
-        setScaleUpSmallStickers,
-        setStickerAlignment,
-        setDisableFileLimit,
-        restoreDefaults,
-    } = useSettings();
+    const { settings, remember, setSetting, setRemember, restoreDefaults, isDefaultSettings } =
+        useSettings();
 
     return (
-        <Card as='aside' className={styles.settings}>
-            <CardSegment>
-                <h2>Settings</h2>
-            </CardSegment>
+        <Card as='section' className={styles.settings}>
+            <CardHeading>Settings</CardHeading>
             <Divider />
             <div className={styles.items}>
                 <CardSegment>
-                    <SpinButton<StickerSize>
-                        label='Sticker size type'
-                        options={['sticker', 'emoji']}
-                        value={settings.stickerSize}
-                        onChange={setStickerSize}
-                    />
                     <SpinButton<StickerMotion>
                         label='Sticker motion type'
                         options={['static', 'video', 'animated']}
                         value={settings.stickerMotion}
-                        onChange={setStickerMotion}
+                        onChange={(value) => setSetting('stickerMotion', value)}
+                    />
+                    <SpinButton<StickerSize>
+                        label='Sticker size type'
+                        options={['sticker', 'emoji']}
+                        value={
+                            settings.stickerMotion === 'animated' ? 'sticker' : settings.stickerSize
+                        }
+                        disabled={settings.stickerMotion === 'animated'}
+                        onChange={(value) => setSetting('stickerSize', value)}
                     />
                     <SpinButton<StickerAlignment>
-                        label='Align small stickers'
+                        label='Sticker alignment'
                         options={['left', 'center', 'right']}
                         value={settings.stickerAlignment}
-                        disabled={settings.scaleUpSmallStickers}
-                        onChange={setStickerAlignment}
+                        onChange={(value) => setSetting('stickerAlignment', value)}
                     />
                     <Checkbox
                         label='Scale up small stickers'
                         checked={settings.scaleUpSmallStickers}
-                        onChange={setScaleUpSmallStickers}
+                        onChange={(value) => setSetting('scaleUpSmallStickers', value)}
                     />
                     <Checkbox
                         label='Disable file limit'
                         checked={settings.disableFileLimit}
-                        onChange={setDisableFileLimit}
+                        onChange={(value) => setSetting('disableFileLimit', value)}
                     />
                 </CardSegment>
                 <Divider />
                 <CardSegment>
-                    <Checkbox
-                        label='Remember choice'
-                        checked={rememberSettings}
-                        onChange={setRememberSettings}
-                    />
+                    <Checkbox label='Remember choice' checked={remember} onChange={setRemember} />
                 </CardSegment>
             </div>
             <Divider />
             <CardSegment>
-                <Button onClick={restoreDefaults}>Restore defaults</Button>
+                <Button onClick={restoreDefaults} color={isDefaultSettings ? undefined : 'accent'}>
+                    Restore defaults
+                </Button>
             </CardSegment>
         </Card>
     );

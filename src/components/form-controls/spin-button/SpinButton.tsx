@@ -2,7 +2,7 @@ import { useState, useId, useEffect } from 'react';
 
 import clsx from 'clsx';
 
-import { Label, Button } from '../../ui';
+import { Label, Button } from '../';
 import { ArrowLeftIcon } from '../../icons';
 
 import styles from './style.module.scss';
@@ -72,7 +72,7 @@ function SpinButton<T extends string>({
 
     return (
         <div className={cl}>
-            <Label id={labelId} as='span'>
+            <Label className={styles.label} id={labelId} as='span'>
                 {label}
             </Label>
             <div className={styles.wrapper}>

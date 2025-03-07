@@ -5,7 +5,8 @@ export type StickerAlignment = 'left' | 'center' | 'right';
 export type Settings = {
     stickerSize: StickerSize;
     stickerMotion: StickerMotion;
-    scaleUpSmallStickers: boolean;
     stickerAlignment: StickerAlignment;
+    scaleUpSmallStickers: boolean;
     disableFileLimit: boolean;
 };
+

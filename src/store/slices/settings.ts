@@ -42,10 +42,14 @@ const settingsSlice = createSlice({
     name: 'settings',
     initialState: getInitialState,
     reducers: {
-        setSettings: (state, action: PayloadAction<Settings>) => {
-            state.settings = action.payload;
+        setSetting: <T extends keyof Settings>(
+            state: SettingsSliceState,
+            action: PayloadAction<[T, Settings[T]]>
+        ) => {
+            const [key, value] = action.payload;
+            state.settings[key] = value;
         },
-        setRemember: (state, action: PayloadAction<boolean>) => {
+        setRememberSettings: (state, action: PayloadAction<boolean>) => {
             state.remember = action.payload;
         },
         restoreDefaultSettings: (state) => {
@@ -58,6 +62,7 @@ const settingsSlice = createSlice({
     },
 });
 
+export { defaultSettings };
 export const { reducer } = settingsSlice;
-export const { setSettings, setRemember, restoreDefaultSettings } = settingsSlice.actions;
 export const { selectSettings, selectRemember } = settingsSlice.selectors;
+export const { setSetting, setRememberSettings, restoreDefaultSettings } = settingsSlice.actions;

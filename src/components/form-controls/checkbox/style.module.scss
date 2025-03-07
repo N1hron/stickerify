@@ -2,6 +2,7 @@
     height: calc(1rem + var(--border-width-thick) - var(--border-width-thin));
     display: inline-flex;
     align-items: center;
+    gap: 0.25rem;
 
     &:has(.input:disabled) {
         .label {
