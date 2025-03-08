@@ -21,6 +21,14 @@ function Settings() {
                         value={settings.stickerMotion}
                         onChange={(value) => setSetting('stickerMotion', value)}
                     />
+                    <Checkbox
+                        label='Scale up small stickers'
+                        checked={settings.scaleUpSmallStickers}
+                        onChange={(value) => setSetting('scaleUpSmallStickers', value)}
+                    />
+                </CardSegment>
+                <Divider />
+                <CardSegment>
                     <SpinButton<StickerSize>
                         label='Sticker size type'
                         options={['sticker', 'emoji']}
@@ -35,11 +43,14 @@ function Settings() {
                         options={['left', 'center', 'right']}
                         value={settings.stickerAlignment}
                         onChange={(value) => setSetting('stickerAlignment', value)}
+                        disabled={settings.scaleUpSmallStickers}
                     />
-                    <Checkbox
-                        label='Scale up small stickers'
-                        checked={settings.scaleUpSmallStickers}
-                        onChange={(value) => setSetting('scaleUpSmallStickers', value)}
+                    <SpinButton
+                        label='For long video stickers'
+                        options={['trim', 'speed up']}
+                        value={settings.longStickerProcessingMode}
+                        onChange={(value) => setSetting('longStickerProcessingMode', value)}
+                        disabled={settings.stickerMotion === 'static'}
                     />
                     <Checkbox
                         label='Disable file limit'

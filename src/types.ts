@@ -1,12 +1,18 @@
 export type StickerSize = 'sticker' | 'emoji';
 export type StickerMotion = 'static' | 'video' | 'animated';
 export type StickerAlignment = 'left' | 'center' | 'right';
+export type LongStickerProcessingMode = 'speed up' | 'trim';
 
 export type Settings = {
     stickerSize: StickerSize;
     stickerMotion: StickerMotion;
     stickerAlignment: StickerAlignment;
+    longStickerProcessingMode: LongStickerProcessingMode;
     scaleUpSmallStickers: boolean;
     disableFileLimit: boolean;
 };
 
+export type UploadedFile = {
+    id: string;
+    file: File;
+};

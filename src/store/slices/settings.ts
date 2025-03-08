@@ -10,8 +10,9 @@ type SettingsSliceState = {
 const defaultSettings: Settings = {
     stickerSize: 'sticker',
     stickerMotion: 'static',
-    scaleUpSmallStickers: false,
     stickerAlignment: 'left',
+    longStickerProcessingMode: 'trim',
+    scaleUpSmallStickers: false,
     disableFileLimit: false,
 };
 
