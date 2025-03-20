@@ -1,6 +1,9 @@
 import { Header } from '../header/Header';
 import { Footer } from '../footer/Footer';
 import { SettingsPanel } from '../settings-panel/SettingsPanel';
+import { DropArea } from '../drop-area/DropArea';
+import { FileList } from '../file-list/FileList';
+import { FileActions } from '../file-actions/FileActions';
 
 import styles from './style.module.scss';
 
@@ -9,7 +12,11 @@ function App() {
         <div className={styles.wrapper}>
             <Header />
             <SettingsPanel />
-            <main className={styles.main}></main>
+            <main className={styles.main}>
+                <DropArea />
+                <FileList />
+                <FileActions />
+            </main>
             <Footer />
         </div>
     );

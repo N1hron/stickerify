@@ -1,0 +1,20 @@
+.dropArea {
+    margin: 0 var(--border-radius);
+    position: relative;
+    grid-row: 1/-1;
+    grid-column: 1/2;
+    z-index: 0;
+
+    border: dashed var(--border-width) var(--color-accent-200);
+    border-radius: var(--border-radius);
+}
+
+.icon {
+    --color-icon: var(--color-accent-200);
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 3.5rem;
+}

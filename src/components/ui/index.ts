@@ -5,3 +5,4 @@ export { Button } from './button/Button';
 export { Label } from './label/Label';
 export { Checkbox } from './checkbox/Checkbox';
 export { SpinButton } from './spin-button/SpinButton';
+export { FileInput } from './file-input/FileInput';

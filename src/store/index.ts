@@ -1,14 +1,19 @@
 import { combineReducers, configureStore, Middleware } from '@reduxjs/toolkit';
 
 import { reducer as settingsReducer } from './slices/settings';
-import { rememberSettings } from './middleware';
+import { reducer as filesReducer } from './slices/files';
+import { preventFileDuplicates, syncWithSettings, rememberSettings } from './middleware';
 
-const rootReducer = combineReducers({ settings: settingsReducer });
+const rootReducer = combineReducers({ settings: settingsReducer, files: filesReducer });
 
 const store = configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) => {
-        return getDefaultMiddleware().concat(rememberSettings);
+        return getDefaultMiddleware().concat(
+            preventFileDuplicates,
+            rememberSettings,
+            syncWithSettings
+        );
     },
     devTools: import.meta.env.DEV,
 });

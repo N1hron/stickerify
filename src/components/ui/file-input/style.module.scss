@@ -1,0 +1,11 @@
+.fileInput {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.browse {
+    &:has(+ input[type='file']:focus-visible) {
+        outline: auto;
+    }
+}
