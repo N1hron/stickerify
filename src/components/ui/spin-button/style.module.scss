@@ -1,0 +1,50 @@
+.spinButton {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.label {
+    padding: 0 0.25rem;
+}
+
+.disabled {
+    .view {
+        background-color: var(--color-disabled-050);
+        border-color: var(--color-disabled-200);
+    }
+}
+
+.wrapper {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.view {
+    position: relative;
+    background-color: var(--color-accent-050);
+    border: solid var(--border-width-thin) var(--color-accent-200);
+    border-bottom-width: var(--border-width-thick);
+    border-radius: var(--border-radius);
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.options {
+    position: absolute;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.option {
+    padding: 0 0.25rem;
+    width: 100%;
+    font-size: var(--font-size-xm);
+    text-align: center;
+    user-select: none;
+}
+
+.iconRight {
+    transform: rotate(180deg);
+}

@@ -1,0 +1,17 @@
+.header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    grid-column: 1/2;
+    grid-row: 1/2;
+
+    h1 {
+        text-align: center;
+        color: var(--color-accent-500);
+        text-shadow: 0 var(--border-width-thick) 0 var(--color-accent-200);
+        user-select: none;
+        font-size: var(--font-size-xl);
+    }
+}

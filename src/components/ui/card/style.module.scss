@@ -1,0 +1,11 @@
+.card {
+    padding: 0.75rem;
+    border-radius: var(--border-radius);
+    background-color: var(--color-accent-025);
+    border: solid var(--border-width-thin) var(--color-accent-200);
+    border-bottom-width: var(--border-width-thick);
+}
+
+.mini {
+    padding: 0.25rem;
+}

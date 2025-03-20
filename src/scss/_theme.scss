@@ -1,15 +1,15 @@
 :root {
     // Colors
-    --color-main-900: hsl(216, 15%, 20%);
-    --color-main-800: hsl(216, 15%, 28%);
-    --color-main-700: hsl(216, 15%, 35%);
-    --color-main-600: hsl(216, 15%, 43%);
-    --color-main-500: hsl(216, 15%, 49%);
-    --color-main-400: hsl(216, 15%, 56%);
-    --color-main-300: hsl(216, 15%, 64%);
-    --color-main-200: hsl(216, 15%, 75%);
-    --color-main-100: hsl(216, 15%, 85%);
-    --color-main-050: hsl(216, 15%, 94%);
+    --color-main-900: hsl(216, 25%, 20%);
+    --color-main-800: hsl(216, 25%, 28%);
+    --color-main-700: hsl(216, 25%, 35%);
+    --color-main-600: hsl(216, 25%, 43%);
+    --color-main-500: hsl(216, 25%, 49%);
+    --color-main-400: hsl(216, 25%, 56%);
+    --color-main-300: hsl(216, 25%, 64%);
+    --color-main-200: hsl(216, 25%, 75%);
+    --color-main-100: hsl(216, 25%, 85%);
+    --color-main-050: hsl(216, 25%, 94%);
 
     --color-accent-900: hsl(213, 46%, 34%);
     --color-accent-800: hsl(213, 46%, 43%);
@@ -51,8 +51,6 @@
 
     --color-icon: var(--color-text);
 
-    --color-shadow: hsl(from var(--color-main-900) h s l / 0.25);
-
     --color-disabled-500: var(--color-main-500);
     --color-disabled-300: var(--color-main-300);
     --color-disabled-200: var(--color-main-200);
@@ -74,12 +72,7 @@
 
     --border-radius: 0.25rem;
 
-    // Box shadow
-    --box-shadow-low: 0 0.125rem 0.25rem 0 hsl(from var(--color-main-900) h s l / 0.25);
-    --box-shadow-medium: 0 0.25rem 0.5rem 0 hsl(from var(--color-main-900) h s l / 0.2);
-    --box-shadow-high: 0 0.5rem 1rem 0 hsl(from var(--color-main-900) h s l / 0.15);
-
     // Transitions
-    --transition-duration: 0.1s;
-    --transition-duration-slow: 0.2s;
+    --transition-duration: 0.2s;
+    --transition-duration-slow: calc(var(--transition-duration) * 2);
 }

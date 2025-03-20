@@ -1,0 +1,87 @@
+.button {
+    --color-icon: var(--color-text-alt);
+    --button-full-height: 2rem;
+
+    $border-width-min: var(--border-width-thin);
+    $border-width-max: var(--border-width-thick);
+    $border-width-diff: calc($border-width-max - $border-width-min);
+    $content-height: calc(var(--button-full-height) - $border-width-diff);
+
+    min-width: $content-height;
+    height: var(--button-full-height);
+    padding: 0.25rem 0.5rem;
+    line-height: 1;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    border: solid $border-width-min var(--button-color-border);
+    border-bottom-width: $border-width-max;
+    border-radius: var(--border-radius);
+
+    background-color: var(--button-color);
+    text-transform: uppercase;
+    font-weight: inherit;
+    color: var(--color-text-alt);
+    user-select: none;
+    cursor: pointer;
+
+    svg {
+        height: 100%;
+    }
+
+    &:disabled {
+        --color-icon: var(--color-text-alt);
+
+        background-color: var(--color-disabled-300);
+        border-color: var(--color-disabled-500);
+        color: var(--color-text-alt);
+        cursor: default;
+    }
+
+    &:not(:disabled) {
+        @media (hover: hover) {
+            &:hover {
+                background-color: var(--button-color-hover);
+            }
+        }
+
+        &:active {
+            height: $content-height;
+            margin-top: $border-width-diff;
+            border-bottom-width: $border-width-min;
+        }
+    }
+
+    &:has(svg:only-child) {
+        padding: 0.25rem;
+    }
+
+    &.mini {
+        --button-full-height: 1.5rem;
+
+        padding: 0.25rem;
+        gap: 0.25rem;
+        font-size: var(--font-size-xm);
+    }
+
+    &.accent {
+        --button-color: var(--color-accent-500);
+        --button-color-hover: var(--color-accent-600);
+        --button-color-border: var(--color-accent-800);
+    }
+
+    &.success {
+        --button-color: var(--color-success-500);
+        --button-color-hover: var(--color-success-600);
+        --button-color-border: var(--color-success-800);
+    }
+
+    &.danger {
+        --button-color: var(--color-danger-500);
+        --button-color-hover: var(--color-danger-600);
+        --button-color-border: var(--color-danger-800);
+    }
+}

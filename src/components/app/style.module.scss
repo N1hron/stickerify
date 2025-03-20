@@ -1,7 +1,21 @@
-.appWrapper {
-    min-height: 100vh;
+.wrapper {
+    height: 100dvh;
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 0.75rem;
 
-    @supports (min-height: 100dvh) {
-        min-height: 100dvh;
+    display: grid;
+    grid-template-columns: 14.25rem 1fr;
+    grid-template-rows: auto 1fr auto;
+    justify-content: center;
+    gap: 0.75rem;
+
+    @supports not (height: 100dvh) {
+        height: 100vh;
     }
+}
+
+.main {
+    grid-column: 2/3;
+    grid-row: 1/-1;
 }
