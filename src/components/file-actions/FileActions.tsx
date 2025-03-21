@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { selectSetting } from '../../store/slices/settings';
-import { addFiles, removeSelectedFiles, selectAllowRemove } from '../../store/slices/files';
+import { addFiles, removeSelectedFiles, selectAllowRemove } from '../../store/slices/transcoder';
 import { config } from '../../config';
 import { Card, FileInput, Button } from '../ui';
 

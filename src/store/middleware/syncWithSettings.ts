@@ -1,6 +1,6 @@
 import { AppMiddleware } from '..';
 import { isPayloadAction } from '../../utils';
-import { clearFiles } from '../slices/files';
+import { clearFiles } from '../slices/transcoder';
 
 const syncWithSettings: AppMiddleware =
     ({ getState, dispatch }) =>
@@ -11,7 +11,7 @@ const syncWithSettings: AppMiddleware =
         if (action.type === 'settings/setSetting' && Array.isArray(action.payload)) {
             next(action);
 
-            if (action.payload[0] === 'stickerMotion' && getState().files.items.length > 0) {
+            if (action.payload[0] === 'stickerMotion' && getState().transcoder.files.length > 0) {
                 dispatch(clearFiles());
             }
         } else {

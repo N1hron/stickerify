@@ -3,21 +3,21 @@ import { config } from '../../config';
 
 import { FileData } from '../../types';
 
-type FilesSliceState = {
-    items: FileData[];
+type TranscoderSliceState = {
+    files: FileData[];
 };
 
-const initialState: FilesSliceState = {
-    items: [],
+const initialState: TranscoderSliceState = {
+    files: [],
 };
 
-const filesSlice = createSlice({
-    name: 'files',
+const transcoderSlice = createSlice({
+    name: 'transcoder',
     initialState,
     reducers: {
         addFiles: {
             reducer: (state, action: PayloadAction<FileData[]>) => {
-                state.items = [...state.items, ...action.payload].slice(0, config.fileLimit);
+                state.files = [...state.files, ...action.payload].slice(0, config.fileLimit);
             },
             prepare(files: File[]) {
                 return {
@@ -44,13 +44,13 @@ const filesSlice = createSlice({
             }>
         ) => {
             const { id, isSelected } = action.payload;
-            const file = state.items.find((file) => file.id === id);
+            const file = state.files.find((file) => file.id === id);
             if (file) {
                 file.isSelected = isSelected;
             }
         },
         setIsSelectedAll: (state, action: PayloadAction<FileData['isSelected']>) => {
-            state.items.forEach((file) => {
+            state.files.forEach((file) => {
                 file.isSelected = action.payload;
             });
         },
@@ -62,39 +62,39 @@ const filesSlice = createSlice({
             }>
         ) => {
             const { id, name } = action.payload;
-            const file = state.items.find((file) => file.id === id);
+            const file = state.files.find((file) => file.id === id);
             if (file) {
                 file.output.name = name;
             }
         },
         removeSelectedFiles: (state) => {
-            state.items = state.items.filter((file) => !file.isSelected);
+            state.files = state.files.filter((file) => !file.isSelected);
         },
         clearFiles: (state) => {
-            state.items = initialState.items;
+            state.files = initialState.files;
         },
     },
     selectors: {
-        selectAllFiles: (state) => state.items,
+        selectAllFiles: (state) => state.files,
         selectIsAllFilesSelected: (state) => {
-            if (state.items.length === 0) return false;
-            return state.items.every((file) => file.isSelected === true);
+            if (state.files.length === 0) return false;
+            return state.files.every((file) => file.isSelected === true);
         },
         selectHasSelectedFiles: (state) => {
-            if (state.items.length === 0) return false;
-            return !!state.items.find((file) => file.isSelected === true);
+            if (state.files.length === 0) return false;
+            return !!state.files.find((file) => file.isSelected === true);
         },
-        selectIsFilesEmpty: (state) => state.items.length === 0,
+        selectIsFilesEmpty: (state) => state.files.length === 0,
     },
 });
 
-export const reducer = filesSlice.reducer;
+export const reducer = transcoderSlice.reducer;
 export const {
     selectAllFiles,
     selectIsAllFilesSelected,
     selectHasSelectedFiles,
     selectIsFilesEmpty,
-} = filesSlice.selectors;
+} = transcoderSlice.selectors;
 export const {
     addFiles,
     setIsSelected,
@@ -102,7 +102,7 @@ export const {
     removeSelectedFiles,
     clearFiles,
     renameFile,
-} = filesSlice.actions;
+} = transcoderSlice.actions;
 
 export const selectSelectedFiles = createSelector([selectAllFiles], (files) =>
     files.filter((file) => file.isSelected)

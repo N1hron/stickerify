@@ -11,7 +11,7 @@ const preventFileDuplicates: AppMiddleware =
             action.type === 'files/addFiles' &&
             Array.isArray(action.payload)
         ) {
-            const existingFiles = getState().files.items;
+            const existingFiles = getState().transcoder.files;
 
             action.payload = (action.payload as FileData[]).filter((file) => {
                 return !existingFiles.find((existingFile) => {

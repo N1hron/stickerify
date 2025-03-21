@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { selectIsAllFilesSelected, setIsSelectedAll } from '../../store/slices/files';
+import { selectIsAllFilesSelected, setIsSelectedAll } from '../../store/slices/transcoder';
 import { Card, Divider, Checkbox } from '../ui';
 
 import styles from './style.module.scss';

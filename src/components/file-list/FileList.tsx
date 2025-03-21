@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { addFiles, selectAllFiles } from '../../store/slices/files';
+import { addFiles, selectAllFiles } from '../../store/slices/transcoder';
 import { selectSetting } from '../../store/slices/settings';
 import { FileListHeader } from './FileListHeader';
 import { FileListItem } from './FileListItem';

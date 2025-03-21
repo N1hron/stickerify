@@ -1,10 +1,10 @@
 import { combineReducers, configureStore, Middleware } from '@reduxjs/toolkit';
 
 import { reducer as settingsReducer } from './slices/settings';
-import { reducer as filesReducer } from './slices/files';
+import { reducer as transcoderReducer } from './slices/transcoder';
 import { preventFileDuplicates, syncWithSettings, rememberSettings } from './middleware';
 
-const rootReducer = combineReducers({ settings: settingsReducer, files: filesReducer });
+const rootReducer = combineReducers({ settings: settingsReducer, transcoder: transcoderReducer });
 
 const store = configureStore({
     reducer: rootReducer,

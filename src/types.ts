@@ -11,7 +11,7 @@ export type Settings = {
     scaleUpSmallStickers: boolean;
 };
 
-export type FileState = 'idle' | 'processing' | 'success' | 'error';
+export type Status = 'idle' | 'loading' | 'success' | 'error';
 
 export type FileData = {
     id: string;
@@ -27,6 +27,6 @@ export type FileData = {
         size: number | null;
         url: string | null;
     };
-    status: FileState;
+    status: Status;
     isSelected: boolean;
 };

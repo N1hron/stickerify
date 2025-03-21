@@ -1,6 +1,6 @@
 import { ChangeEvent, memo } from 'react';
 import { useAppDispatch } from '../../store/hooks';
-import { renameFile, setIsSelected } from '../../store/slices/files';
+import { renameFile, setIsSelected } from '../../store/slices/transcoder';
 import { FileData } from '../../types';
 import { Divider, Checkbox, Card } from '../ui';
 import { formatFileSize } from '../../utils';
