@@ -16,7 +16,8 @@ function FileListItemInner({ index, fileData }: FileListItemProps) {
     const dispatch = useAppDispatch();
 
     const number = index + 1;
-    const { name, ext, size } = fileData.input;
+    const { name } = fileData.output;
+    const { ext, size } = fileData.input;
     const { id, status, isSelected } = fileData;
 
     function handleFileSelect(isSelected: boolean) {
