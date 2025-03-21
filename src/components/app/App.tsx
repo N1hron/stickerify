@@ -1,7 +1,6 @@
 import { Header } from '../header/Header';
 import { Footer } from '../footer/Footer';
 import { SettingsPanel } from '../settings-panel/SettingsPanel';
-import { DropArea } from '../drop-area/DropArea';
 import { FileList } from '../file-list/FileList';
 import { FileActions } from '../file-actions/FileActions';
 
@@ -13,7 +12,6 @@ function App() {
             <Header />
             <SettingsPanel />
             <main className={styles.main}>
-                <DropArea />
                 <FileList />
                 <FileActions />
             </main>

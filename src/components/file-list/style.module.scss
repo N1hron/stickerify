@@ -2,10 +2,10 @@
     $edge-col-size: calc(0.25rem + var(--border-radius) + var(--border-width));
 
     position: relative;
-    z-index: 1;
+    z-index: 0;
 
     grid-column: 1/-1;
-    grid-row: 1/-2;
+    grid-row: 1/-1;
 
     display: grid;
     grid-template-columns: $edge-col-size auto 1fr repeat(5, auto) $edge-col-size;
@@ -18,6 +18,7 @@
 .header {
     grid-row: 1/2;
     grid-column: 1/-1;
+    z-index: 2;
 
     display: grid;
     grid-template-columns: subgrid;
@@ -33,9 +34,12 @@
 }
 
 .list {
-    padding: 0.75rem 0;
+    position: relative;
+    margin: 0 var(--border-radius);
+    padding: calc(3rem - var(--border-width)) 0;
+    z-index: 1;
 
-    grid-row: 2/3;
+    grid-row: 1/-1;
     grid-column: 1/-1;
 
     display: grid;
@@ -45,6 +49,9 @@
 
     overflow-y: scroll;
     scrollbar-width: none;
+
+    border: dashed var(--border-width) var(--color-accent-200);
+    border-radius: var(--border-radius);
 }
 
 .listItem {
@@ -68,4 +75,15 @@
 
     background-color: var(--color-accent-050);
     border: solid var(--border-width-thin) var(--color-accent-200);
+}
+
+.icon {
+    --color-icon: var(--color-accent-200);
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 3.5rem;
+    z-index: 0;
 }
