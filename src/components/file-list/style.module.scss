@@ -15,6 +15,17 @@
     font-size: var(--font-size-xm);
 }
 
+.dragOver {
+    .list {
+        background-color: var(--color-accent-075);
+        border-color: var(--color-accent-300);
+    }
+
+    .icon {
+        --color-icon: var(--color-accent-300);
+    }
+}
+
 .header {
     grid-row: 1/2;
     grid-column: 1/-1;
@@ -85,5 +96,5 @@
     top: 50%;
     transform: translate(-50%, -50%);
     width: 3.5rem;
-    z-index: 0;
+    z-index: 3;
 }
