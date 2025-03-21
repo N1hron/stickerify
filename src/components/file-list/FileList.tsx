@@ -1,39 +1,55 @@
 import { useState, useEffect, useRef } from 'react';
+import clsx from 'clsx';
 
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { addFiles, selectAllFiles } from '../../store/slices/transcoder';
 import { selectSetting } from '../../store/slices/settings';
 import { FileListHeader } from './FileListHeader';
 import { FileListItem } from './FileListItem';
-import { UploadIcon } from '../icons';
+import { FileListStatus } from './FileListStatus';
 import { validateFiles } from '../../utils';
 import { config } from '../../config';
+import {
+    selectTranscoderStatus,
+    addFiles,
+    selectAllFiles,
+    loadFFmpeg,
+} from '../../store/slices/transcoder';
 
 import styles from './style.module.scss';
-import clsx from 'clsx';
+
+let didInit = false;
 
 function FileList() {
     const dispatch = useAppDispatch();
 
-    const listRef = useRef<HTMLUListElement>(null);
     const [dragEnterCount, setDragEnterCount] = useState(0);
+    const listRef = useRef<HTMLUListElement>(null);
+
+    const transcoderStatus = useAppSelector(selectTranscoderStatus);
     const files = useAppSelector(selectAllFiles);
     const stickerMotion = useAppSelector(selectSetting('stickerMotion'));
 
-    const filesEmpty = files.length === 0;
+    const allowInteraction = transcoderStatus === 'success';
     const accept = config.acceptValues[stickerMotion];
     const isDraggingOver = dragEnterCount !== 0;
 
     const cl = clsx(styles.fileList, isDraggingOver && styles.dragOver);
 
     useEffect(() => {
+        if (!didInit) {
+            dispatch(loadFFmpeg());
+            didInit = true;
+        }
+
         const setDropEffect = (event: DragEvent) => {
             event.preventDefault();
+            if (!event.dataTransfer) return;
 
-            if (event.dataTransfer && listRef.current) {
+            const dataTransfer = event.dataTransfer;
+
+            if (listRef.current && allowInteraction) {
                 const target = event.target as Node;
                 const list = listRef.current;
-                const dataTransfer = event.dataTransfer;
                 const isFile = Array.from(dataTransfer.items).find((item) => item.kind === 'file');
 
                 if (isFile && (list === target || list.contains(target))) {
@@ -41,6 +57,8 @@ function FileList() {
                 } else {
                     dataTransfer.dropEffect = 'none';
                 }
+            } else {
+                dataTransfer.dropEffect = 'none';
             }
         };
 
@@ -60,6 +78,8 @@ function FileList() {
     }, []);
 
     function handleDrop(event: React.DragEvent<HTMLUListElement>) {
+        if (!allowInteraction) return;
+
         const files = Array.from(event.dataTransfer.files);
         const [validFiles] = validateFiles(files, accept);
         dispatch(addFiles(validFiles));
@@ -68,16 +88,20 @@ function FileList() {
     }
 
     function handleDragEnter() {
+        if (!allowInteraction) return;
+
         setDragEnterCount((p) => p + 1);
     }
 
     function handleDragLeave() {
+        if (!allowInteraction) return;
+
         setDragEnterCount((p) => p - 1);
     }
 
     return (
         <div className={cl}>
-            {!filesEmpty && <FileListHeader />}
+            <FileListHeader />
             <ul
                 className={styles.list}
                 ref={listRef}
@@ -89,7 +113,7 @@ function FileList() {
                     <FileListItem key={fileData.id} index={i} fileData={fileData} />
                 ))}
             </ul>
-            {filesEmpty && <UploadIcon className={styles.icon} aria-hidden />}
+            <FileListStatus />
         </div>
     );
 }

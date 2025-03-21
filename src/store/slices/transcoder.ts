@@ -1,20 +1,34 @@
-import { createSelector, createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
-import { config } from '../../config';
+import {
+    createAsyncThunk,
+    createSelector,
+    createSlice,
+    nanoid,
+    PayloadAction,
+} from '@reduxjs/toolkit';
 
-import { FileData } from '../../types';
+import { config } from '../../config';
+import { FileData, Status } from '../../types';
+import { load } from '../../ffmpeg';
+
+const loadFFmpeg = createAsyncThunk('transcoder/loadFFmpeg', load);
 
 type TranscoderSliceState = {
     files: FileData[];
+    status: Status;
 };
 
 const initialState: TranscoderSliceState = {
     files: [],
+    status: 'idle',
 };
 
 const transcoderSlice = createSlice({
     name: 'transcoder',
     initialState,
     reducers: {
+        setStatus: (state, action: PayloadAction<Status>) => {
+            state.status = action.payload;
+        },
         addFiles: {
             reducer: (state, action: PayloadAction<FileData[]>) => {
                 state.files = [...state.files, ...action.payload].slice(0, config.fileLimit);
@@ -74,7 +88,19 @@ const transcoderSlice = createSlice({
             state.files = initialState.files;
         },
     },
+    extraReducers(builder) {
+        builder.addCase(loadFFmpeg.pending, (state) => {
+            state.status = 'loading';
+        });
+        builder.addCase(loadFFmpeg.rejected, (state) => {
+            state.status = 'error';
+        });
+        builder.addCase(loadFFmpeg.fulfilled, (state) => {
+            state.status = 'success';
+        });
+    },
     selectors: {
+        selectTranscoderStatus: (state) => state.status,
         selectAllFiles: (state) => state.files,
         selectIsAllFilesSelected: (state) => {
             if (state.files.length === 0) return false;
@@ -89,13 +115,18 @@ const transcoderSlice = createSlice({
 });
 
 export const reducer = transcoderSlice.reducer;
+export { loadFFmpeg };
+
 export const {
+    selectTranscoderStatus,
     selectAllFiles,
     selectIsAllFilesSelected,
     selectHasSelectedFiles,
     selectIsFilesEmpty,
 } = transcoderSlice.selectors;
+
 export const {
+    setStatus,
     addFiles,
     setIsSelected,
     setIsSelectedAll,

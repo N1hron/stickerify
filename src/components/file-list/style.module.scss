@@ -88,13 +88,24 @@
     border: solid var(--border-width-thin) var(--color-accent-200);
 }
 
-.icon {
+.status {
     --color-icon: var(--color-accent-200);
 
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    transform-origin: top left;
     width: 3.5rem;
     z-index: 3;
+}
+
+.loading {
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+    &:global {
+        animation-name: rotate;
+    }
 }

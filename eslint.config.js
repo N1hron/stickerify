@@ -30,6 +30,7 @@ export default tseslint
         ...reactHooks.configs.recommended.rules,
         'react-hooks/exhaustive-deps': ['off'],
         '@typescript-eslint/unbound-method': ['off'],
+        '@typescript-eslint/no-floating-promises': ['off'],
         'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
         ...react.configs.recommended.rules,
         ...react.configs['jsx-runtime'].rules,

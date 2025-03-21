@@ -1,17 +1,23 @@
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { selectIsAllFilesSelected, setIsSelectedAll } from '../../store/slices/transcoder';
 import { Card, Divider, Checkbox } from '../ui';
+import {
+    selectIsAllFilesSelected,
+    selectIsFilesEmpty,
+    setIsSelectedAll,
+} from '../../store/slices/transcoder';
 
 import styles from './style.module.scss';
 
 function FileListHeader() {
     const dispatch = useAppDispatch();
     const isAllSelected = useAppSelector(selectIsAllFilesSelected);
+    const isFilesEmpty = useAppSelector(selectIsFilesEmpty);
 
     function handleAllSelectedChange(isAllSelected: boolean) {
         dispatch(setIsSelectedAll(isAllSelected));
     }
 
+    if (isFilesEmpty) return null;
     return (
         <Card className={styles.header} mini>
             <div className={styles.headerItems}>
