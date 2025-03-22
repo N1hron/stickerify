@@ -1,6 +1,6 @@
 import { ChangeEvent, memo } from 'react';
 import { useAppDispatch } from '../../store/hooks';
-import { renameFile, setIsSelected } from '../../store/slices/transcoder';
+import { renameFile, setFileSelection } from '../../store/slices/transcoder';
 import { FileData } from '../../types';
 import { Divider, Checkbox, Card } from '../ui';
 import { formatFileSize } from '../../utils';
@@ -20,13 +20,12 @@ function FileListItemInner({ index, fileData }: FileListItemProps) {
     const { ext, size } = fileData.input;
     const { id, status, isSelected } = fileData;
 
-    function handleFileSelect(isSelected: boolean) {
-        dispatch(setIsSelected({ id, isSelected }));
+    function handleFileSelect(value: boolean) {
+        dispatch(setFileSelection([id, value]));
     }
 
     function handleNameChange(event: ChangeEvent<HTMLInputElement>) {
-        const name = event.target.value;
-        dispatch(renameFile({ id, name }));
+        dispatch(renameFile([id, event.target.value]));
     }
 
     return (

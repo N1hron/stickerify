@@ -12,7 +12,7 @@ import {
     selectTranscoderStatus,
     addFiles,
     selectAllFiles,
-    loadFFmpeg,
+    loadTranscoder,
 } from '../../store/slices/transcoder';
 
 import styles from './style.module.scss';
@@ -31,16 +31,18 @@ function FileList() {
 
     const transcoderReady = transcoderStatus === 'ready';
     const accept = config.acceptValues[stickerMotion];
-    const isDraggingOver = dragEnterCount !== 0;
+    const isDraggingOver = dragEnterCount > 0;
 
     const cl = clsx(styles.fileList, isDraggingOver && styles.dragOver);
 
     useEffect(() => {
         if (!didInit) {
-            dispatch(loadFFmpeg());
+            dispatch(loadTranscoder());
             didInit = true;
         }
+    }, []);
 
+    useEffect(() => {
         const setDropEffect = (event: DragEvent) => {
             event.preventDefault();
             if (!event.dataTransfer) return;
@@ -75,7 +77,7 @@ function FileList() {
             window.removeEventListener('dragover', setDropEffect);
             window.removeEventListener('drop', preventDefault);
         };
-    }, []);
+    }, [transcoderReady]);
 
     function handleDrop(event: React.DragEvent<HTMLUListElement>) {
         if (!transcoderReady) return;
@@ -90,13 +92,13 @@ function FileList() {
     function handleDragEnter() {
         if (!transcoderReady) return;
 
-        setDragEnterCount((p) => p + 1);
+        setDragEnterCount((p) => (p < 0 ? 0 : p + 1));
     }
 
     function handleDragLeave() {
         if (!transcoderReady) return;
 
-        setDragEnterCount((p) => p - 1);
+        setDragEnterCount((p) => (p <= 0 ? 0 : p - 1));
     }
 
     return (

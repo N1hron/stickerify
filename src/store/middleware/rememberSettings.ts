@@ -12,6 +12,7 @@ const rememberSettings: AppMiddleware =
 
         const saveToLocalStorage = () => {
             const settingsLS = safeStringify(getState().settings.items);
+
             if (settingsLS) {
                 localStorage.setItem('settings', settingsLS);
             }

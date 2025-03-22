@@ -1,18 +1,24 @@
 import { AppMiddleware } from '..';
 import { isPayloadAction } from '../../utils';
-import { clearFiles } from '../slices/transcoder';
+import { removeAllFiles } from '../slices/transcoder';
 
 const syncWithSettings: AppMiddleware =
     ({ getState, dispatch }) =>
     (next) =>
     (action) => {
         if (!isPayloadAction(action)) return next(action);
+        const [slice] = action.type.split('/');
 
-        if (action.type === 'settings/setSetting' && Array.isArray(action.payload)) {
+        if (slice === 'settings') {
+            const oldStickerMotion = getState().settings.items.stickerMotion;
+
             next(action);
 
-            if (action.payload[0] === 'stickerMotion' && getState().transcoder.files.length > 0) {
-                dispatch(clearFiles());
+            const filesEmpty = getState().transcoder.files.length === 0;
+            const newStickerMotion = getState().settings.items.stickerMotion;
+
+            if (oldStickerMotion !== newStickerMotion && !filesEmpty) {
+                dispatch(removeAllFiles());
             }
         } else {
             next(action);

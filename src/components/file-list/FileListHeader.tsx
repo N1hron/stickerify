@@ -3,7 +3,7 @@ import { Card, Divider, Checkbox } from '../ui';
 import {
     selectIsAllFilesSelected,
     selectIsFilesEmpty,
-    setIsSelectedAll,
+    setAllFilesSelection,
 } from '../../store/slices/transcoder';
 
 import styles from './style.module.scss';
@@ -14,7 +14,7 @@ function FileListHeader() {
     const isFilesEmpty = useAppSelector(selectIsFilesEmpty);
 
     function handleAllSelectedChange(isAllSelected: boolean) {
-        dispatch(setIsSelectedAll(isAllSelected));
+        dispatch(setAllFilesSelection(isAllSelected));
     }
 
     if (isFilesEmpty) return null;
