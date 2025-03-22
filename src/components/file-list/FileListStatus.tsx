@@ -11,7 +11,7 @@ function FileListStatus() {
 
     if (transcoderStatus === 'loading') {
         return <LoadingIcon className={clsx(style.status, style.loading)} aria-hidden />;
-    } else if (transcoderStatus === 'success' && isFilesEmpty) {
+    } else if (transcoderStatus === 'ready' && isFilesEmpty) {
         return <UploadIcon className={style.status} aria-hidden />;
     } else if (transcoderStatus === 'error') {
         return <ErrorIcon className={style.status} aria-hidden />;

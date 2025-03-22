@@ -29,7 +29,7 @@ function FileList() {
     const files = useAppSelector(selectAllFiles);
     const stickerMotion = useAppSelector(selectSetting('stickerMotion'));
 
-    const allowInteraction = transcoderStatus === 'success';
+    const transcoderReady = transcoderStatus === 'ready';
     const accept = config.acceptValues[stickerMotion];
     const isDraggingOver = dragEnterCount !== 0;
 
@@ -47,7 +47,7 @@ function FileList() {
 
             const dataTransfer = event.dataTransfer;
 
-            if (listRef.current && allowInteraction) {
+            if (listRef.current && transcoderReady) {
                 const target = event.target as Node;
                 const list = listRef.current;
                 const isFile = Array.from(dataTransfer.items).find((item) => item.kind === 'file');
@@ -78,7 +78,7 @@ function FileList() {
     }, []);
 
     function handleDrop(event: React.DragEvent<HTMLUListElement>) {
-        if (!allowInteraction) return;
+        if (!transcoderReady) return;
 
         const files = Array.from(event.dataTransfer.files);
         const [validFiles] = validateFiles(files, accept);
@@ -88,13 +88,13 @@ function FileList() {
     }
 
     function handleDragEnter() {
-        if (!allowInteraction) return;
+        if (!transcoderReady) return;
 
         setDragEnterCount((p) => p + 1);
     }
 
     function handleDragLeave() {
-        if (!allowInteraction) return;
+        if (!transcoderReady) return;
 
         setDragEnterCount((p) => p - 1);
     }

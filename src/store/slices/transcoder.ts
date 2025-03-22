@@ -6,15 +6,15 @@ import {
     PayloadAction,
 } from '@reduxjs/toolkit';
 
+import { FileData, TranscoderStatus } from '../../types';
 import { config } from '../../config';
-import { FileData, Status } from '../../types';
 import { load } from '../../ffmpeg';
 
 const loadFFmpeg = createAsyncThunk('transcoder/loadFFmpeg', load);
 
 type TranscoderSliceState = {
     files: FileData[];
-    status: Status;
+    status: TranscoderStatus;
 };
 
 const initialState: TranscoderSliceState = {
@@ -26,7 +26,7 @@ const transcoderSlice = createSlice({
     name: 'transcoder',
     initialState,
     reducers: {
-        setStatus: (state, action: PayloadAction<Status>) => {
+        setStatus: (state, action: PayloadAction<TranscoderSliceState['status']>) => {
             state.status = action.payload;
         },
         addFiles: {
@@ -96,7 +96,7 @@ const transcoderSlice = createSlice({
             state.status = 'error';
         });
         builder.addCase(loadFFmpeg.fulfilled, (state) => {
-            state.status = 'success';
+            state.status = 'ready';
         });
     },
     selectors: {

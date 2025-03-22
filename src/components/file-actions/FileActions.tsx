@@ -28,7 +28,7 @@ function FileActions() {
         dispatch(removeSelectedFiles());
     }
 
-    if (transcoderStatus !== 'success') return null;
+    if (transcoderStatus !== 'ready') return null;
     return (
         <Card className={styles.fileActions} mini>
             <FileInput label='Add files' mini accept={accept} onChange={handleFilesChange} />
