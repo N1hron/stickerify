@@ -8,16 +8,23 @@ import style from './style.module.scss';
 function FileListStatus() {
     const transcoderStatus = useAppSelector(selectTranscoderStatus);
     const isFilesEmpty = useAppSelector(selectIsFilesEmpty);
+    const cl = clsx(style.status, style[transcoderStatus]);
 
-    if (transcoderStatus === 'loading') {
-        return <LoadingIcon className={clsx(style.status, style.loading)} aria-hidden />;
-    } else if (transcoderStatus === 'ready' && isFilesEmpty) {
-        return <UploadIcon className={style.status} aria-hidden />;
-    } else if (transcoderStatus === 'error') {
-        return <ErrorIcon className={style.status} aria-hidden />;
+    function renderIcon() {
+        if (transcoderStatus === 'loading') {
+            return <LoadingIcon />;
+        } else if (transcoderStatus === 'ready' && isFilesEmpty) {
+            return <UploadIcon />;
+        } else if (transcoderStatus === 'error') {
+            return <ErrorIcon />;
+        }
     }
 
-    return null;
+    return (
+        <div className={cl} inert>
+            {renderIcon()}
+        </div>
+    );
 }
 
 export { FileListStatus };
