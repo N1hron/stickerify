@@ -36,7 +36,7 @@
 }
 
 .headerItems {
-    padding: 0 0.5rem;
+    padding: 0 calc(0.5rem + var(--border-width-thin));
     grid-column: 2/-2;
 
     display: grid;
