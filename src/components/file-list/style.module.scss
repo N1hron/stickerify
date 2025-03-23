@@ -86,6 +86,11 @@
 
     background-color: var(--color-accent-050);
     border: solid var(--border-width-thin) var(--color-accent-200);
+
+    &:focus {
+        border-color: var(--color-accent-500);
+        outline: solid var(--border-width-thin) var(--color-accent-500);
+    }
 }
 
 .status {

@@ -6,6 +6,7 @@
 
 .browse {
     &:has(+ input[type='file']:focus-visible) {
-        outline: auto;
+        outline: var(--outline-focus);
+        outline-offset: var(--outline-focus-offset);
     }
 }

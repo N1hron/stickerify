@@ -79,6 +79,11 @@
             }
         }
 
+        &:focus-visible {
+            outline: var(--outline-focus);
+            outline-offset: var(--outline-focus-offset);
+        }
+
         &:checked {
             @media (hover: hover) {
                 &:hover {

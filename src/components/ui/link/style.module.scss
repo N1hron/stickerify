@@ -14,4 +14,9 @@
     &:active {
         color: var(--color-accent-600);
     }
+
+    &:focus-visible {
+        outline: var(--outline-focus);
+        outline-offset: var(--outline-focus-offset);
+    }
 }

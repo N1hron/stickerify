@@ -28,6 +28,11 @@
     border-radius: var(--border-radius);
     flex-grow: 1;
     overflow: hidden;
+
+    &:focus-visible {
+        outline: var(--outline-focus);
+        outline-offset: var(--outline-focus-offset);
+    }
 }
 
 .options {

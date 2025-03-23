@@ -53,6 +53,11 @@
             margin-top: $border-width-diff;
             border-bottom-width: $border-width-min;
         }
+
+        &:focus-visible {
+            outline: var(--outline-focus);
+            outline-offset: var(--outline-focus-offset);
+        }
     }
 
     &:has(svg:only-child) {
