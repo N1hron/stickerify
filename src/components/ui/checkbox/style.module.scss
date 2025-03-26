@@ -1,6 +1,6 @@
 .checkbox {
     display: inline-flex;
-    align-items: center;
+    align-items: start;
     gap: 0.25rem;
 
     &:has(.input:disabled) {
@@ -114,5 +114,6 @@
 }
 
 .label {
+    align-self: center;
     cursor: pointer;
 }
