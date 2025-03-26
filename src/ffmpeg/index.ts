@@ -4,7 +4,7 @@ import { toBlobURL } from '@ffmpeg/util';
 const ffmpeg = new FFmpeg();
 const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.10/dist/esm';
 
-async function load() {
+export async function load() {
     ffmpeg.on('log', ({ message }) => {
         console.log(message);
     });
@@ -14,5 +14,3 @@ async function load() {
         wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
     });
 }
-
-export { load };

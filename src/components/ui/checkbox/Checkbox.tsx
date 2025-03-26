@@ -1,8 +1,8 @@
 import { useId } from 'react';
 import clsx from 'clsx';
 
-import { Label } from '../label/Label';
-import { CheckboxIcon } from '../../icons';
+import { Label } from '@components/ui';
+import { CheckboxIcon } from '@components/icons';
 
 import styles from './style.module.scss';
 

@@ -1,14 +1,14 @@
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { Card, Divider, Checkbox } from '../ui';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { Card, Divider, Checkbox } from '@components/ui';
 import {
     selectIsAllFilesSelected,
     selectIsFilesEmpty,
     setAllFilesSelection,
-} from '../../store/slices/transcoder';
+} from '@slices/transcoder';
 
 import styles from './style.module.scss';
 
-function FileListHeader() {
+function ListHeader() {
     const dispatch = useAppDispatch();
     const isAllSelected = useAppSelector(selectIsAllFilesSelected);
     const isFilesEmpty = useAppSelector(selectIsFilesEmpty);
@@ -38,4 +38,4 @@ function FileListHeader() {
     );
 }
 
-export { FileListHeader };
+export { ListHeader };

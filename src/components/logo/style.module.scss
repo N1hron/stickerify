@@ -1,11 +1,9 @@
-.header {
-    position: relative;
+.logo {
+    grid-row: 1/2;
+
     display: flex;
     justify-content: center;
     align-items: center;
-
-    grid-column: 1/2;
-    grid-row: 1/2;
 
     h1 {
         text-align: center;

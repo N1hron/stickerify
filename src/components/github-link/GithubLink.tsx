@@ -1,10 +1,10 @@
-import { Card, Link } from '../ui';
+import { Card, Link } from '@components/ui';
 
 import styles from './style.module.scss';
 
-function Footer() {
+function GithubLink() {
     return (
-        <Card className={styles.footer} as='footer'>
+        <Card className={styles.githubLink}>
             <Link href='https://github.com/N1hron/stickerify' aria-label='GitHub'>
                 GitHub page
             </Link>
@@ -12,4 +12,4 @@ function Footer() {
     );
 }
 
-export { Footer };
+export { GithubLink };

@@ -1,4 +1,4 @@
-import { mimeTypes } from '../data/mimeTypes';
+import { mimeTypes } from '@data';
 
 function validateFiles(files: File[], accept: string): [validFiles: File[], invalidFiles: File[]] {
     if (!accept) return [files, []];

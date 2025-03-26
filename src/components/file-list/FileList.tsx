@@ -1,19 +1,20 @@
 import { useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { selectSetting } from '../../store/slices/output-settings';
-import { FileListHeader } from './FileListHeader';
-import { FileListItem } from './FileListItem';
-import { FileListStatus } from './FileListStatus';
-import { validateFiles } from '../../utils';
-import { config } from '../../config';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { selectSetting } from '@slices/output-settings';
 import {
     selectTranscoderStatus,
     addFiles,
     selectAllFiles,
     loadTranscoder,
-} from '../../store/slices/transcoder';
+} from '@slices/transcoder';
+import { validateFiles } from '@utils';
+import { config } from '@data';
+
+import { ListHeader } from './ListHeader';
+import { ListItem } from './ListItem';
+import { Status } from './Status';
 
 import styles from './style.module.scss';
 
@@ -30,7 +31,7 @@ function FileList() {
     const stickerMotionType = useAppSelector(selectSetting('stickerMotionType'));
 
     const transcoderReady = transcoderStatus === 'ready';
-    const accept = config.acceptValues[stickerMotionType];
+    const accept = config.accept[stickerMotionType];
     const isDraggingOver = dragEnterCount > 0;
 
     const cl = clsx(styles.fileList, isDraggingOver && styles.dragOver);
@@ -103,7 +104,7 @@ function FileList() {
 
     return (
         <div className={cl}>
-            <FileListHeader />
+            <ListHeader />
             <ul
                 className={styles.list}
                 ref={listRef}
@@ -112,10 +113,10 @@ function FileList() {
                 onDragLeave={handleDragLeave}
             >
                 {files.map((fileData, i) => (
-                    <FileListItem key={fileData.id} index={i} fileData={fileData} />
+                    <ListItem key={fileData.id} index={i} fileData={fileData} />
                 ))}
             </ul>
-            <FileListStatus />
+            <Status />
         </div>
     );
 }

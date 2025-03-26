@@ -1,6 +1,6 @@
-import { AppMiddleware } from '..';
-import { isPayloadAction } from '../../utils';
-import { FileData } from '../../types';
+import { AppMiddleware } from '@store';
+import { isPayloadAction } from '@/utils';
+import { FileData } from '@/types';
 
 const preventFileDuplicates: AppMiddleware =
     ({ getState }) =>

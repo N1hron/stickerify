@@ -1,4 +1,5 @@
-import { Card, Divider } from '../ui';
+import { Card, Divider } from '@components/ui';
+
 import { Setting } from './Setting';
 import { RememberChoice } from './RememberChoice';
 import { RestoreDefaults } from './RestoreDefaults';

@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-import { RootState } from '../..';
+import { RootState } from '@store';
 
 export const selectAllFiles = (state: RootState) => {
     return state.transcoder.files;

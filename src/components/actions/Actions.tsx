@@ -1,22 +1,22 @@
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { selectSetting } from '../../store/slices/output-settings';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { selectSetting } from '@slices/output-settings';
 import {
     addFiles,
     removeSelectedFiles,
     selectAllowRemove,
     selectTranscoderStatus,
-} from '../../store/slices/transcoder';
-import { config } from '../../config';
-import { Card, FileInput, Button } from '../ui';
+} from '@slices/transcoder';
+import { Card, FileInput, Button } from '@components/ui';
+import { config } from '@data';
 
 import styles from './style.module.scss';
 
-function FileActions() {
+function Actions() {
     const dispatch = useAppDispatch();
 
     const transcoderStatus = useAppSelector(selectTranscoderStatus);
     const stickerMotionType = useAppSelector(selectSetting('stickerMotionType'));
-    const accept = config.acceptValues[stickerMotionType];
+    const accept = config.accept[stickerMotionType];
     const allowRemove = useAppSelector(selectAllowRemove);
 
     function handleFilesChange(files: File[]) {
@@ -30,7 +30,7 @@ function FileActions() {
 
     if (transcoderStatus !== 'ready') return null;
     return (
-        <Card className={styles.fileActions} mini>
+        <Card className={styles.actions} mini>
             <FileInput label='Add files' mini accept={accept} onChange={handleFilesChange} />
             <Button color='danger' mini onClick={handleRemoveClick} disabled={!allowRemove}>
                 Remove
@@ -39,4 +39,4 @@ function FileActions() {
     );
 }
 
-export { FileActions };
+export { Actions };

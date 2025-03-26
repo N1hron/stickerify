@@ -1,8 +1,8 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-import { RootState } from '../..';
-import { OutputSettings } from '../../../types';
-import { defaultSettings } from '.';
+import { RootState } from '@store';
+import { OutputSettings } from '@types';
+import { defaultSettings } from '@slices/output-settings';
 
 const selectSetting =
     <T extends keyof OutputSettings>(name: T) =>

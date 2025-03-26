@@ -1,8 +1,8 @@
 import { useRef } from 'react';
 import clsx from 'clsx';
 
-import { Button } from '../button/Button';
-import { validateFiles } from '../../../utils';
+import { Button } from '@components/ui';
+import { validateFiles } from '@utils';
 
 import styles from './style.module.scss';
 

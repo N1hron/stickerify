@@ -1,7 +1,7 @@
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { selectSetting, setSetting } from '../../store/slices/output-settings';
-import { OutputSettings } from '../../types';
-import { Checkbox, SpinButton } from '../ui';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { selectSetting, setSetting } from '@slices/output-settings';
+import { Checkbox, SpinButton } from '@components/ui';
+import { OutputSettings } from '@types';
 
 type SettingProps<S extends keyof OutputSettings> = {
     name: S;

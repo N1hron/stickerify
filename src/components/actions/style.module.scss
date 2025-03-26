@@ -1,8 +1,9 @@
-.fileActions {
+.actions {
     position: relative;
+    z-index: 1;
+
     grid-row: -2/-1;
     grid-column: 1/2;
-    z-index: 1;
 
     display: flex;
     gap: 0.25rem;

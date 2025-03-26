@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { OutputSettings } from '../../../types';
-import { safeParseJson, isOutputSettings } from '../../../utils';
+import { OutputSettings } from '@types';
+import { safeParseJson, isOutputSettings } from '@utils';
 
 type OutputSettingsSliceState = {
     items: OutputSettings;

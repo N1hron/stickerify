@@ -1,6 +1,6 @@
-import { AppMiddleware } from '..';
-import { isPayloadAction } from '../../utils';
-import { removeAllFiles } from '../slices/transcoder';
+import { AppMiddleware } from '@store';
+import { isPayloadAction } from '@utils';
+import { removeAllFiles } from '@slices/transcoder';
 
 const syncWithOutputSettings: AppMiddleware =
     ({ getState, dispatch }) =>

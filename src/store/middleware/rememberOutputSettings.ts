@@ -1,5 +1,5 @@
-import { AppMiddleware } from '..';
-import { isPayloadAction, safeStringify } from '../../utils';
+import { AppMiddleware } from '@store';
+import { isPayloadAction, safeStringify } from '@utils';
 
 const rememberOutputSettings: AppMiddleware =
     ({ getState }) =>

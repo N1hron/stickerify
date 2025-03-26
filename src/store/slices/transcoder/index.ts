@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { FileData, TranscoderStatus } from '../../../types';
-import { config } from '../../../config';
+import { FileData, TranscoderStatus } from '@types';
+import { config } from '@data';
+
 import { prepareFileData, revokeFileURLs } from './utils';
 import { loadTranscoder } from './thunks';
 

@@ -1,18 +1,19 @@
 import { ChangeEvent, memo } from 'react';
-import { useAppDispatch } from '../../store/hooks';
-import { renameFile, setFileSelection } from '../../store/slices/transcoder';
-import { FileData } from '../../types';
-import { Divider, Checkbox, Card } from '../ui';
-import { formatFileSize } from '../../utils';
+
+import { useAppDispatch } from '@store/hooks';
+import { renameFile, setFileSelection } from '@slices/transcoder';
+import { FileData } from '@types';
+import { Divider, Checkbox, Card } from '@components/ui';
+import { formatFileSize } from '@utils';
 
 import styles from './style.module.scss';
 
-type FileListItemProps = {
+type ListItemProps = {
     index: number;
     fileData: FileData;
 };
 
-function FileListItemInner({ index, fileData }: FileListItemProps) {
+function ListItemInner({ index, fileData }: ListItemProps) {
     const dispatch = useAppDispatch();
 
     const number = index + 1;
@@ -46,6 +47,6 @@ function FileListItemInner({ index, fileData }: FileListItemProps) {
     );
 }
 
-const FileListItem = memo(FileListItemInner) as typeof FileListItemInner;
+const ListItem = memo(ListItemInner) as typeof ListItemInner;
 
-export { FileListItem };
+export { ListItem };

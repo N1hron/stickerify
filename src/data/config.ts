@@ -1,11 +1,11 @@
-import { StickerMotionType } from './types';
+import { StickerMotionType } from '@/types';
 
 const config: {
     fileLimit: number;
-    acceptValues: Record<StickerMotionType, string>;
+    accept: Record<StickerMotionType, string>;
 } = {
     fileLimit: 25,
-    acceptValues: {
+    accept: {
         static: 'image/*',
         video: '.apng, .png, .avif, .gif, .webp, video/*',
     },

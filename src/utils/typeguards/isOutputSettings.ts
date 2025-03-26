@@ -1,8 +1,10 @@
-import { OutputSettings } from '../../types';
-import { isHorizontalAlignment } from './isHorizontalAlignment';
-import { isStickerMotionType } from './isStickerMotionType';
-import { isStickerSizeType } from './isStickerSizeType';
-import { isVerticalAlignment } from './isVerticalAlignment';
+import { OutputSettings } from '@types';
+import {
+    isHorizontalAlignment,
+    isStickerMotionType,
+    isStickerSizeType,
+    isVerticalAlignment,
+} from '@utils';
 
 function isOutputSettings(param: unknown): param is OutputSettings {
     if (!(param && typeof param === 'object')) return false;

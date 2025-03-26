@@ -1,6 +1,6 @@
 import { nanoid } from '@reduxjs/toolkit';
 
-import { FileData } from '../../../types';
+import { FileData } from '@types';
 
 export function prepareFileData(files: File[]) {
     return {
