@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { selectRememberSettings, setRememberSettings } from '../../store/slices/settings';
 import { Checkbox } from '../ui';
+import { selectRememberSettings, setRememberSettings } from '../../store/slices/output-settings';
 
 function RememberChoice() {
     const dispatch = useAppDispatch();

@@ -1,7 +1,9 @@
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { selectIsDefaultSettings } from '../../store/slices/settings';
-import { restoreDefaultSettings } from '../../store/slices/settings';
 import { Button } from '../ui';
+import {
+    selectIsDefaultSettings,
+    restoreDefaultSettings,
+} from '../../store/slices/output-settings';
 
 function RestoreDefaults() {
     const dispatch = useAppDispatch();

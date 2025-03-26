@@ -1,3 +1,3 @@
 export { preventFileDuplicates } from './preventFileDuplicates';
-export { syncWithSettings } from './syncWithSettings';
-export { rememberSettings } from './rememberSettings';
+export { syncWithOutputSettings } from './syncWithOutputSettings';
+export { rememberOutputSettings } from './rememberOutputSettings';

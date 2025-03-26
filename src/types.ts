@@ -1,14 +1,16 @@
-export type StickerSize = 'sticker' | 'emoji';
-export type StickerMotion = 'static' | 'video';
-export type StickerAlignment = 'left' | 'center' | 'right';
-export type LongStickerProcessingMode = 'speed up' | 'trim';
+export type StickerSizeType = 'sticker' | 'emoji';
+export type StickerMotionType = 'static' | 'video';
 
-export type Settings = {
-    stickerSize: StickerSize;
-    stickerMotion: StickerMotion;
-    stickerAlignment: StickerAlignment;
-    longStickerProcessingMode: LongStickerProcessingMode;
+export type HorizontalAlignment = 'left' | 'middle' | 'right';
+export type VerticalAlignment = 'top' | 'middle' | 'bottom';
+
+export type OutputSettings = {
+    stickerSizeType: StickerSizeType;
+    stickerMotionType: StickerMotionType;
+    horizontalAlignment: HorizontalAlignment;
+    verticalAlignment: VerticalAlignment;
     scaleUpSmallStickers: boolean;
+    removeEmptySpaces: boolean;
 };
 
 export type TranscoderStatus = 'idle' | 'loading' | 'ready' | 'transcoding' | 'error';

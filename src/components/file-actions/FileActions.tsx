@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { selectSetting } from '../../store/slices/settings';
+import { selectSetting } from '../../store/slices/output-settings';
 import {
     addFiles,
     removeSelectedFiles,
@@ -15,8 +15,8 @@ function FileActions() {
     const dispatch = useAppDispatch();
 
     const transcoderStatus = useAppSelector(selectTranscoderStatus);
-    const stickerMotion = useAppSelector(selectSetting('stickerMotion'));
-    const accept = config.acceptValues[stickerMotion];
+    const stickerMotionType = useAppSelector(selectSetting('stickerMotionType'));
+    const accept = config.acceptValues[stickerMotionType];
     const allowRemove = useAppSelector(selectAllowRemove);
 
     function handleFilesChange(files: File[]) {

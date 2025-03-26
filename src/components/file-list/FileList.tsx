@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { selectSetting } from '../../store/slices/settings';
+import { selectSetting } from '../../store/slices/output-settings';
 import { FileListHeader } from './FileListHeader';
 import { FileListItem } from './FileListItem';
 import { FileListStatus } from './FileListStatus';
@@ -27,10 +27,10 @@ function FileList() {
 
     const transcoderStatus = useAppSelector(selectTranscoderStatus);
     const files = useAppSelector(selectAllFiles);
-    const stickerMotion = useAppSelector(selectSetting('stickerMotion'));
+    const stickerMotionType = useAppSelector(selectSetting('stickerMotionType'));
 
     const transcoderReady = transcoderStatus === 'ready';
-    const accept = config.acceptValues[stickerMotion];
+    const accept = config.acceptValues[stickerMotionType];
     const isDraggingOver = dragEnterCount > 0;
 
     const cl = clsx(styles.fileList, isDraggingOver && styles.dragOver);

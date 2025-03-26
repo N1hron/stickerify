@@ -1,6 +1,6 @@
 import { Header } from '../header/Header';
 import { Footer } from '../footer/Footer';
-import { SettingsPanel } from '../settings-panel/SettingsPanel';
+import { OutputSettings } from '../output-settings/OutputSettings';
 import { FileList } from '../file-list/FileList';
 import { FileActions } from '../file-actions/FileActions';
 
@@ -10,7 +10,7 @@ function App() {
     return (
         <div className={styles.wrapper}>
             <Header />
-            <SettingsPanel />
+            <OutputSettings />
             <main className={styles.main}>
                 <FileList />
                 <FileActions />

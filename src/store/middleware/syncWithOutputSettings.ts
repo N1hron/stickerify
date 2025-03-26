@@ -2,22 +2,22 @@ import { AppMiddleware } from '..';
 import { isPayloadAction } from '../../utils';
 import { removeAllFiles } from '../slices/transcoder';
 
-const syncWithSettings: AppMiddleware =
+const syncWithOutputSettings: AppMiddleware =
     ({ getState, dispatch }) =>
     (next) =>
     (action) => {
         if (!isPayloadAction(action)) return next(action);
         const [slice] = action.type.split('/');
 
-        if (slice === 'settings') {
-            const oldStickerMotion = getState().settings.items.stickerMotion;
+        if (slice === 'outputSettings') {
+            const oldStickerMotionType = getState().outputSettings.items.stickerMotionType;
 
             next(action);
 
             const filesEmpty = getState().transcoder.files.length === 0;
-            const newStickerMotion = getState().settings.items.stickerMotion;
+            const newStickerMotionType = getState().outputSettings.items.stickerMotionType;
 
-            if (oldStickerMotion !== newStickerMotion && !filesEmpty) {
+            if (oldStickerMotionType !== newStickerMotionType && !filesEmpty) {
                 dispatch(removeAllFiles());
             }
         } else {
@@ -25,4 +25,4 @@ const syncWithSettings: AppMiddleware =
         }
     };
 
-export { syncWithSettings };
+export { syncWithOutputSettings };

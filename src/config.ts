@@ -1,8 +1,8 @@
-import { StickerMotion } from './types';
+import { StickerMotionType } from './types';
 
 const config: {
     fileLimit: number;
-    acceptValues: Record<StickerMotion, string>;
+    acceptValues: Record<StickerMotionType, string>;
 } = {
     fileLimit: 25,
     acceptValues: {

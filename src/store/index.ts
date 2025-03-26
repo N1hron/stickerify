@@ -1,18 +1,25 @@
 import { combineReducers, configureStore, Middleware } from '@reduxjs/toolkit';
 
-import { reducer as settingsReducer } from './slices/settings';
+import { reducer as outputSettingsReducer } from './slices/output-settings';
 import { reducer as transcoderReducer } from './slices/transcoder';
-import { preventFileDuplicates, syncWithSettings, rememberSettings } from './middleware';
+import {
+    preventFileDuplicates,
+    syncWithOutputSettings,
+    rememberOutputSettings,
+} from './middleware';
 
-const rootReducer = combineReducers({ settings: settingsReducer, transcoder: transcoderReducer });
+const rootReducer = combineReducers({
+    outputSettings: outputSettingsReducer,
+    transcoder: transcoderReducer,
+});
 
 const store = configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware().concat(
             preventFileDuplicates,
-            rememberSettings,
-            syncWithSettings
+            rememberOutputSettings,
+            syncWithOutputSettings
         );
     },
     devTools: import.meta.env.DEV,

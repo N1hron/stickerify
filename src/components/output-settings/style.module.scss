@@ -1,11 +1,11 @@
-.settingsPanel {
+.outputSettings {
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
-.mainContent {
+.items {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
