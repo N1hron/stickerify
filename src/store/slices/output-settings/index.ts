@@ -11,9 +11,9 @@ type OutputSettingsSliceState = {
 const defaultSettings: OutputSettings = {
     stickerSizeType: 'sticker',
     stickerMotionType: 'static',
-    horizontalAlignment: 'left',
+    horizontalAlignment: 'middle',
     verticalAlignment: 'middle',
-    scaleUpSmallStickers: false,
+    scaleUpSmallStickers: true,
     removeEmptySpaces: true,
 };
 
