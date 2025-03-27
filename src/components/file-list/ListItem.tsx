@@ -18,7 +18,7 @@ function ListItemInner({ index, fileData }: ListItemProps) {
 
     const number = index + 1;
     const { id, status, isSelected } = fileData;
-    const name = fileData.output.name || fileData.input.name;
+    const name = fileData.output.name;
 
     const inputExt = fileData.input.ext;
     const inputSize = fileData.input.size;

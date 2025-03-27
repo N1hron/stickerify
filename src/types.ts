@@ -24,7 +24,7 @@ export type FileInput = {
 };
 
 export type FileOutput = {
-    [K in keyof FileInput]: FileInput[K] | null;
+    [K in keyof FileInput]: K extends 'name' ? FileInput[K] : FileInput[K] | null;
 };
 
 export type FileData = {
