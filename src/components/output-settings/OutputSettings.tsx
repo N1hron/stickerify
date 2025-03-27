@@ -19,6 +19,7 @@ function OutputSettings() {
                     name='stickerMotionType'
                     label='Sticker motion type'
                     options={['static', 'video']}
+                    disabled
                 />
                 <Setting
                     name='horizontalAlignment'

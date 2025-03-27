@@ -5,12 +5,15 @@ import { FileData } from '@types';
 export function prepareFileData(files: File[]) {
     return {
         payload: files.map<FileData>((file) => {
-            const ext = file.name.match(/\.[^.]+$/)?.[0] || '';
-            const name = file.name.replace(ext, '');
+            const id = nanoid();
+            const ext = file.name.match(/\.[^.]+$/)?.[0].slice(1) || '';
+            const name = file.name.replace(`.${ext}`, '');
+            const size = file.size;
+            const url = URL.createObjectURL(file);
 
             return {
-                id: nanoid(),
-                input: { name, ext, size: file.size, url: URL.createObjectURL(file) },
+                id,
+                input: { name, ext, size, url },
                 output: { name, ext: null, size: null, url: null },
                 status: 'idle',
                 isSelected: false,

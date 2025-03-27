@@ -7,9 +7,15 @@ type SettingProps<S extends keyof OutputSettings> = {
     name: S;
     label: string;
     value?: OutputSettings[S];
+    disabled?: boolean;
 } & (OutputSettings[S] extends string ? { options: OutputSettings[S][] } : { options?: never });
 
-function Setting<S extends keyof OutputSettings>({ name, label, options }: SettingProps<S>) {
+function Setting<S extends keyof OutputSettings>({
+    name,
+    label,
+    disabled,
+    options,
+}: SettingProps<S>) {
     const dispatch = useAppDispatch();
     const currentValue = useAppSelector(selectSetting(name));
 
@@ -22,6 +28,7 @@ function Setting<S extends keyof OutputSettings>({ name, label, options }: Setti
             <Checkbox
                 label={label}
                 checked={currentValue}
+                disabled={disabled}
                 onChange={handleChange as (v: boolean) => void}
             />
         );
@@ -31,6 +38,7 @@ function Setting<S extends keyof OutputSettings>({ name, label, options }: Setti
                 label={label}
                 options={options}
                 value={currentValue}
+                disabled={disabled}
                 onChange={handleChange}
             />
         );

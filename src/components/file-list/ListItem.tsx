@@ -17,9 +17,14 @@ function ListItemInner({ index, fileData }: ListItemProps) {
     const dispatch = useAppDispatch();
 
     const number = index + 1;
-    const { name } = fileData.output;
-    const { ext, size } = fileData.input;
     const { id, status, isSelected } = fileData;
+    const name = fileData.output.name || fileData.input.name;
+
+    const inputExt = fileData.input.ext;
+    const inputSize = fileData.input.size;
+
+    const outputExt = fileData.output.ext;
+    const outputSize = fileData.output.size;
 
     function handleFileSelect(value: boolean) {
         dispatch(setFileSelection([id, value]));
@@ -33,10 +38,10 @@ function ListItemInner({ index, fileData }: ListItemProps) {
         <Card className={styles.listItem} as='li' mini>
             <div>{number}</div>
             <input className={styles.rename} type='text' value={name} onChange={handleNameChange} />
-            <div>{ext.slice(1)}</div>
-            <div>{formatFileSize(size)}</div>
+            <div>{outputExt || inputExt}</div>
+            <div>{formatFileSize(outputSize || inputSize)}</div>
             <div>{status}</div>
-            <Divider horizontal />
+            <Divider vertical />
             <Checkbox
                 label='Select file'
                 hideLabel

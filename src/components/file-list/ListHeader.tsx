@@ -26,7 +26,7 @@ function ListHeader() {
                 <div>Ext</div>
                 <div>Size</div>
                 <div>State</div>
-                <Divider horizontal />
+                <Divider vertical />
                 <Checkbox
                     label='Select all files'
                     hideLabel

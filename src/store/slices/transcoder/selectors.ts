@@ -25,14 +25,41 @@ export const selectSelectedFiles = createSelector([selectAllFiles], (files) =>
     files.filter((file) => file.isSelected)
 );
 
-export const selectAllowTranscode = createSelector([selectSelectedFiles], (selectedFiles) => {
-    return !!(selectedFiles.length && selectedFiles.every((file) => !file.output.url));
-});
+export const selectAllowTranscode = createSelector(
+    [selectSelectedFiles, selectTranscoderStatus],
+    (selectedFiles, transcoderStatus) => {
+        return !!selectedFiles.length && transcoderStatus === 'ready';
+    }
+);
 
-export const selectAllowDownload = createSelector([selectSelectedFiles], (selectedFiles) => {
-    return !!(selectedFiles.length && selectedFiles.every((file) => file.output.url));
-});
+export const selectAllowDownload = createSelector(
+    [selectSelectedFiles, selectTranscoderStatus],
+    (selectedFiles, transcoderStatus) => {
+        return (
+            !!(selectedFiles.length && selectedFiles.every((file) => file.output.url)) &&
+            transcoderStatus === 'ready'
+        );
+    }
+);
 
-export const selectAllowRemove = createSelector([selectSelectedFiles], (selectedFiles) => {
-    return !!selectedFiles.length;
+export const selectAllowRemove = createSelector(
+    [selectSelectedFiles, selectTranscoderStatus],
+    (selectedFiles, transcoderStatus) => {
+        return !!selectedFiles.length && transcoderStatus === 'ready';
+    }
+);
+
+export const selectDownloadData = createSelector([selectSelectedFiles], (selectedFiles) => {
+    return selectedFiles
+        .map((file) => {
+            const { name, ext, url } = file.output;
+
+            if (name && ext && url) {
+                return {
+                    fileName: `${name}.${ext}`,
+                    url,
+                };
+            }
+        })
+        .filter((data) => data != undefined);
 });

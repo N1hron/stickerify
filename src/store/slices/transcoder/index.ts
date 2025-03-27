@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { FileData, TranscoderStatus } from '@types';
+import { FileData, FileStatus, TranscoderStatus } from '@types';
 import { config } from '@data';
 
 import { prepareFileData, revokeFileURLs } from './utils';
-import { loadTranscoder } from './thunks';
+import { loadTranscoder, transcodeSelectedFiles } from './thunks';
 
 type TranscoderSliceState = {
     files: FileData[];
@@ -26,10 +26,7 @@ const transcoderSlice = createSlice({
             },
             prepare: prepareFileData,
         },
-        setFileSelection: (
-            state,
-            action: PayloadAction<[FileData['id'], FileData['isSelected']]>
-        ) => {
+        setFileSelection: (state, action: PayloadAction<[string, FileData['isSelected']]>) => {
             const [id, isSelected] = action.payload;
             const file = state.files.find((file) => file.id === id);
 
@@ -39,6 +36,19 @@ const transcoderSlice = createSlice({
         },
         setAllFilesSelection: (state, action: PayloadAction<FileData['isSelected']>) => {
             state.files.forEach((file) => (file.isSelected = action.payload));
+        },
+        setFileOutput: (state, action: PayloadAction<[string, FileData['output']]>) => {
+            const [id, outputFile] = action.payload;
+            const file = state.files.find((file) => file.id === id);
+            if (file) file.output = outputFile;
+        },
+        setFileStatus: (state, action: PayloadAction<[string, FileStatus]>) => {
+            const [id, status] = action.payload;
+            const file = state.files.find((file) => file.id === id);
+            if (file) file.status = status;
+        },
+        setTranscoderStatus: (state, action: PayloadAction<TranscoderStatus>) => {
+            state.status = action.payload;
         },
         removeSelectedFiles: (state) => {
             state.files = state.files.filter((file) => {
@@ -52,7 +62,7 @@ const transcoderSlice = createSlice({
             state.files.forEach(revokeFileURLs);
             state.files = [];
         },
-        renameFile: (state, action: PayloadAction<[FileData['id'], string]>) => {
+        renameFile: (state, action: PayloadAction<[string, string]>) => {
             const [id, newName] = action.payload;
             const file = state.files.find((file) => file.id === id);
 
@@ -77,7 +87,7 @@ const transcoderSlice = createSlice({
 export const reducer = transcoderSlice.reducer;
 
 export * from './selectors';
-export { loadTranscoder };
+export { loadTranscoder, transcodeSelectedFiles };
 export const {
     addFiles,
     setFileSelection,
@@ -85,4 +95,7 @@ export const {
     removeSelectedFiles,
     removeAllFiles,
     renameFile,
+    setFileOutput,
+    setFileStatus,
+    setTranscoderStatus,
 } = transcoderSlice.actions;

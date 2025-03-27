@@ -16,20 +16,21 @@ export type OutputSettings = {
 export type TranscoderStatus = 'idle' | 'loading' | 'ready' | 'transcoding' | 'error';
 export type FileStatus = 'idle' | 'transcoding' | 'success' | 'error';
 
+export type FileInput = {
+    name: string;
+    ext: string;
+    size: number;
+    url: string;
+};
+
+export type FileOutput = {
+    [K in keyof FileInput]: FileInput[K] | null;
+};
+
 export type FileData = {
     id: string;
-    input: {
-        name: string;
-        ext: string;
-        size: number;
-        url: string;
-    };
-    output: {
-        name: string;
-        ext: string | null;
-        size: number | null;
-        url: string | null;
-    };
+    input: FileInput;
+    output: FileOutput;
     status: FileStatus;
     isSelected: boolean;
 };
