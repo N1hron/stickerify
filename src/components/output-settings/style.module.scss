@@ -1,4 +1,5 @@
 .outputSettings {
+    padding: 0.75rem 0;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -9,6 +10,7 @@
 }
 
 .items {
+    padding: 0 0.75rem;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -16,4 +18,11 @@
 
     overflow-y: scroll;
     scrollbar-width: none;
+}
+
+.restoreDefaultsWrapper {
+    padding: 0 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }

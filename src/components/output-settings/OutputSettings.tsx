@@ -41,10 +41,10 @@ function OutputSettings() {
 
                 <RememberChoice />
             </div>
-
-            <Divider />
-
-            <RestoreDefaults />
+            <div className={styles.restoreDefaultsWrapper}>
+                <Divider />
+                <RestoreDefaults />
+            </div>
         </Card>
     );
 }
