@@ -2,7 +2,7 @@ import { ChangeEvent, memo } from 'react';
 
 import { useAppDispatch } from '@store/hooks';
 import { renameFile, setFileSelection } from '@slices/transcoder';
-import { FileData } from '@types';
+import { TranscoderFile } from '@types';
 import { Divider, Checkbox, Card } from '@components/ui';
 import { formatFileSize } from '@utils';
 
@@ -10,7 +10,7 @@ import styles from './style.module.scss';
 
 type ListItemProps = {
     index: number;
-    fileData: FileData;
+    fileData: TranscoderFile;
 };
 
 function ListItemInner({ index, fileData }: ListItemProps) {

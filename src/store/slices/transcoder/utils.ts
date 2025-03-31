@@ -1,10 +1,10 @@
 import { nanoid } from '@reduxjs/toolkit';
 
-import { FileData } from '@types';
+import { TranscoderFile } from '@types';
 
-export function prepareFileData(files: File[]) {
+function prepareFiles(files: File[]) {
     return {
-        payload: files.map<FileData>((file) => {
+        payload: files.map<TranscoderFile>((file) => {
             const id = nanoid();
             const ext = file.name.match(/\.[^.]+$/)?.[0].slice(1) || '';
             const name = file.name.replace(`.${ext}`, '');
@@ -22,7 +22,13 @@ export function prepareFileData(files: File[]) {
     };
 }
 
-export function revokeFileURLs(file: FileData) {
+function findFile(files: TranscoderFile[], id: string) {
+    return files.find((file) => file.id === id);
+}
+
+function revokeFileURLs(file: TranscoderFile) {
     URL.revokeObjectURL(file.input.url);
     if (file.output.url) URL.revokeObjectURL(file.output.url);
 }
+
+export { prepareFiles, findFile, revokeFileURLs };

@@ -14,23 +14,25 @@ export type OutputSettings = {
 };
 
 export type TranscoderStatus = 'idle' | 'loading' | 'ready' | 'transcoding' | 'error';
-export type FileStatus = 'idle' | 'transcoding' | 'success' | 'error';
+export type TranscoderFileStatus = 'idle' | 'transcoding' | 'success' | 'error';
 
-export type FileInput = {
+export type TranscoderFileInput = {
     name: string;
     ext: string;
     size: number;
     url: string;
 };
 
-export type FileOutput = {
-    [K in keyof FileInput]: K extends 'name' ? FileInput[K] : FileInput[K] | null;
+export type TranscoderFileOutput = {
+    [K in keyof TranscoderFileInput]: K extends 'name'
+        ? TranscoderFileInput[K]
+        : TranscoderFileInput[K] | null;
 };
 
-export type FileData = {
+export type TranscoderFile = {
     id: string;
-    input: FileInput;
-    output: FileOutput;
-    status: FileStatus;
+    input: TranscoderFileInput;
+    output: TranscoderFileOutput;
+    status: TranscoderFileStatus;
     isSelected: boolean;
 };

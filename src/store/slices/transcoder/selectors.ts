@@ -2,37 +2,37 @@ import { createSelector } from '@reduxjs/toolkit';
 
 import { RootState } from '@store';
 
-export const selectAllFiles = (state: RootState) => {
+const selectAllFiles = (state: RootState) => {
     return state.transcoder.files;
 };
 
-export const selectTranscoderStatus = (state: RootState) => {
+const selectTranscoderStatus = (state: RootState) => {
     return state.transcoder.status;
 };
 
-export const selectIsAllFilesSelected = (state: RootState) => {
+const selectIsAllFilesSelected = (state: RootState) => {
     const files = state.transcoder.files;
 
     if (files.length === 0) return false;
     return files.every((file) => file.isSelected === true);
 };
 
-export const selectIsFilesEmpty = (state: RootState) => {
+const selectIsFilesEmpty = (state: RootState) => {
     return state.transcoder.files.length === 0;
 };
 
-export const selectSelectedFiles = createSelector([selectAllFiles], (files) =>
+const selectSelectedFiles = createSelector([selectAllFiles], (files) =>
     files.filter((file) => file.isSelected)
 );
 
-export const selectAllowTranscode = createSelector(
+const selectAllowTranscode = createSelector(
     [selectSelectedFiles, selectTranscoderStatus],
     (selectedFiles, transcoderStatus) => {
         return !!selectedFiles.length && transcoderStatus === 'ready';
     }
 );
 
-export const selectAllowDownload = createSelector(
+const selectAllowDownload = createSelector(
     [selectSelectedFiles, selectTranscoderStatus],
     (selectedFiles, transcoderStatus) => {
         return (
@@ -42,14 +42,14 @@ export const selectAllowDownload = createSelector(
     }
 );
 
-export const selectAllowRemove = createSelector(
+const selectAllowRemove = createSelector(
     [selectSelectedFiles, selectTranscoderStatus],
     (selectedFiles, transcoderStatus) => {
         return !!selectedFiles.length && transcoderStatus === 'ready';
     }
 );
 
-export const selectDownloadData = createSelector([selectSelectedFiles], (selectedFiles) => {
+const selectDownloadData = createSelector([selectSelectedFiles], (selectedFiles) => {
     return selectedFiles
         .map((file) => {
             const { name, ext, url } = file.output;
@@ -63,3 +63,15 @@ export const selectDownloadData = createSelector([selectSelectedFiles], (selecte
         })
         .filter((data) => data != undefined);
 });
+
+export {
+    selectAllFiles,
+    selectSelectedFiles,
+    selectTranscoderStatus,
+    selectDownloadData,
+    selectIsAllFilesSelected,
+    selectIsFilesEmpty,
+    selectAllowTranscode,
+    selectAllowDownload,
+    selectAllowRemove,
+};

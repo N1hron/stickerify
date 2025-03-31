@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { load, transcode } from '@/ffmpeg';
 import { AppDispatch, RootState } from '@/store';
-import { setFileOutput, setFileStatus, setTranscoderStatus } from '@slices/transcoder';
+import { selectSelectedFiles, setFileOutput, setFileStatus, setStatus } from '@slices/transcoder';
 
 const loadTranscoder = createAsyncThunk('transcoder/loadTranscoder', load);
 
@@ -11,19 +11,20 @@ const transcodeSelectedFiles = createAsyncThunk<
     undefined,
     { dispatch: AppDispatch; state: RootState }
 >('transcoder/transcodeSelectedFiles', async (_, { getState, dispatch }) => {
-    const selectedFiles = getState().transcoder.files.filter((file) => file.isSelected);
+    const selectedFiles = selectSelectedFiles(getState());
     const settings = getState().outputSettings.items;
 
-    dispatch(setTranscoderStatus('transcoding'));
+    dispatch(setStatus('transcoding'));
 
     for (let i = 0; i < selectedFiles.length; i++) {
-        const { id, input, output } = selectedFiles[i];
+        const file = selectedFiles[i];
+        const id = file.id;
 
         dispatch(setFileStatus([id, 'transcoding']));
 
-        await transcode(input, settings)
+        await transcode(file, settings)
             .then((res) => {
-                dispatch(setFileOutput([id, { ...output, ...res }]));
+                dispatch(setFileOutput([id, { ...file.output, ...res }]));
                 dispatch(setFileStatus([id, 'success']));
             })
             .catch((error) => {
@@ -32,7 +33,7 @@ const transcodeSelectedFiles = createAsyncThunk<
             });
     }
 
-    dispatch(setTranscoderStatus('ready'));
+    dispatch(setStatus('ready'));
 });
 
 export { loadTranscoder, transcodeSelectedFiles };

@@ -97,10 +97,18 @@ function createCommandStatic(inputName: string, outputName: string, settings: Ou
     return ['-i', inputName].concat(oneFrame, scale, maxQualityWebp, [outputName]);
 }
 
-function createCommand(inputName: string, outputName: string, settings: OutputSettings) {
-    const command = createCommandStatic(inputName, outputName, settings);
+// TODO
+function createCommandVideo() {
+    return [];
+}
 
-    return command;
+function createCommand(inputName: string, outputName: string, settings: OutputSettings) {
+    switch (settings.stickerMotionType) {
+        case 'static':
+            return createCommandStatic(inputName, outputName, settings);
+        case 'video':
+            return createCommandVideo();
+    }
 }
 
 export { createCommand, getOutputExt };

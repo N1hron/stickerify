@@ -1,6 +1,6 @@
 import { AppMiddleware } from '@store';
 import { isPayloadAction } from '@/utils';
-import { FileData } from '@/types';
+import { TranscoderFile } from '@/types';
 
 const preventFileDuplicates: AppMiddleware =
     ({ getState }) =>
@@ -11,7 +11,7 @@ const preventFileDuplicates: AppMiddleware =
         if (action.type === 'transcoder/addFiles' && Array.isArray(action.payload)) {
             const existingFiles = getState().transcoder.files;
 
-            action.payload = (action.payload as FileData[]).filter((file) => {
+            action.payload = (action.payload as TranscoderFile[]).filter((file) => {
                 return !existingFiles.find((existingFile) => {
                     return (
                         file.input.name === existingFile.input.name &&
