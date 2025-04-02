@@ -6,7 +6,7 @@ function formatFileSize(bytes: number): string {
 
     while (true) {
         if (amount < 1024 || unitIndex === units.length - 1) {
-            return `${amount.toFixed(1).replace('.0', '')} ${units[unitIndex]}`;
+            return `${amount.toPrecision(4)} ${units[unitIndex]}`;
         }
 
         amount /= 1024;
