@@ -25,16 +25,15 @@
         content: '';
         display: block;
         position: absolute;
+        top: 0;
         right: calc(var(--border-radius) + var(--border-width));
         width: calc(2.5rem - var(--border-width));
-        height: 2.5rem;
+        height: 100%;
         z-index: 2;
         pointer-events: none;
-    }
-
-    &::before {
-        top: 0;
-        box-shadow: inset 0 2.5rem 0.25rem -0.25rem var(--color-accent-050);
+        box-shadow:
+            inset 0 2.5rem 0.25rem -0.25rem var(--color-accent-050),
+            inset 0 -2.5rem 0.25rem -0.25rem var(--color-accent-050);
     }
 }
 
@@ -224,7 +223,7 @@
     margin: 0;
     z-index: 4;
 
-    grid-column: 1/-1;
+    grid-column: 1/-4;
     grid-row: -2/-1;
 
     display: flex;
