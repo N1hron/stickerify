@@ -7,7 +7,7 @@ const config: {
     fileLimit: 25,
     accept: {
         static: 'image/*',
-        video: '.apng, .png, .avif, .gif, .webp, video/*',
+        video: 'video/*, .apng, .png, .avif, .gif, .webp',
     },
 };
 

@@ -6,10 +6,9 @@ import { UploadIcon, LoadingIcon, ErrorIcon } from '@components/icons';
 
 import style from './style.module.scss';
 
-function Status() {
+function TranscoderStatus() {
     const transcoderStatus = useAppSelector(selectTranscoderStatus);
     const isFilesEmpty = useAppSelector(selectIsFilesEmpty);
-    const cl = clsx(style.status, style[transcoderStatus]);
 
     function renderIcon() {
         if (transcoderStatus === 'loading') {
@@ -22,10 +21,10 @@ function Status() {
     }
 
     return (
-        <div className={cl} inert>
-            {renderIcon()}
+        <div className={style.status} inert>
+            <div className={clsx(style.statusIcon, style[transcoderStatus])}>{renderIcon()}</div>
         </div>
     );
 }
 
-export { Status };
+export { TranscoderStatus };

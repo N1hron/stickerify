@@ -1,4 +1,4 @@
-function ErrorIcon(props: React.SVGProps<SVGSVGElement>) {
+function DoubleCheckIcon(props: React.SVGProps<SVGSVGElement>) {
     return (
         <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -13,16 +13,15 @@ function ErrorIcon(props: React.SVGProps<SVGSVGElement>) {
             <path
                 stroke='var(--color-icon)'
                 strokeLinecap='round'
-                d='M20.043 21H3.957c-1.538 0-2.5-1.664-1.734-2.997l8.043-13.988c.77-1.337 2.699-1.337 3.468 0l8.043 13.988C22.543 19.336 21.58 21 20.043 21ZM12 9v4'
+                d='m1.5 12.5 4.076 4.076a.6.6 0 0 0 .848 0L9 14M16 7l-4 4'
             ></path>
             <path
                 stroke='var(--color-icon)'
                 strokeLinecap='round'
-                strokeLinejoin='round'
-                d='m12 17.01.01-.011'
+                d='m7 12 4.576 4.576a.6.6 0 0 0 .848 0L22 7'
             ></path>
         </svg>
     );
 }
 
-export { ErrorIcon };
+export { DoubleCheckIcon };

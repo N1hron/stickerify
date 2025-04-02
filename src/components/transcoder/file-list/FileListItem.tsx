@@ -6,25 +6,24 @@ import { TranscoderFile } from '@types';
 import { Divider, Checkbox, Card } from '@components/ui';
 import { formatFileSize } from '@utils';
 
-import styles from './style.module.scss';
+import styles from '../style.module.scss';
 
-type ListItemProps = {
-    index: number;
-    fileData: TranscoderFile;
+type FileListItemProps = {
+    number: number;
+    file: TranscoderFile;
 };
 
-function ListItemInner({ index, fileData }: ListItemProps) {
+function FileListItemInner({ number, file }: FileListItemProps) {
     const dispatch = useAppDispatch();
 
-    const number = index + 1;
-    const { id, status, isSelected } = fileData;
-    const name = fileData.output.name;
+    const { id, isSelected } = file;
+    const name = file.output.name;
 
-    const inputExt = fileData.input.ext;
-    const inputSize = fileData.input.size;
+    const inputExt = file.input.ext;
+    const inputSize = file.input.size;
 
-    const outputExt = fileData.output.ext;
-    const outputSize = fileData.output.size;
+    const outputExt = file.output.ext;
+    const outputSize = file.output.size;
 
     function handleFileSelect(value: boolean) {
         dispatch(setFileSelection([id, value]));
@@ -35,12 +34,11 @@ function ListItemInner({ index, fileData }: ListItemProps) {
     }
 
     return (
-        <Card className={styles.listItem} as='li' mini>
+        <Card className={styles.fileListItem} as='li'>
             <div>{number}</div>
-            <input className={styles.rename} type='text' value={name} onChange={handleNameChange} />
+            <input type='text' value={name} onChange={handleNameChange} />
             <div>{outputExt || inputExt}</div>
             <div>{formatFileSize(outputSize || inputSize)}</div>
-            <div>{status}</div>
             <Divider vertical />
             <Checkbox
                 label='Select file'
@@ -52,6 +50,6 @@ function ListItemInner({ index, fileData }: ListItemProps) {
     );
 }
 
-const ListItem = memo(ListItemInner) as typeof ListItemInner;
+const FileListItem = memo(FileListItemInner) as typeof FileListItemInner;
 
-export { ListItem };
+export { FileListItem };

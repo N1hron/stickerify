@@ -1,6 +1,8 @@
 import { createSelector } from '@reduxjs/toolkit';
 
 import { RootState } from '@store';
+import { config } from '@/data';
+import { TranscoderFile, TranscoderFileOutput } from '@/types';
 
 const selectAllFiles = (state: RootState) => {
     return state.transcoder.files;
@@ -21,8 +23,19 @@ const selectIsFilesEmpty = (state: RootState) => {
     return state.transcoder.files.length === 0;
 };
 
+const selectFilesAmount = (state: RootState) => {
+    return state.transcoder.files.length;
+};
+
 const selectSelectedFiles = createSelector([selectAllFiles], (files) =>
     files.filter((file) => file.isSelected)
+);
+
+const selectAllowAdd = createSelector(
+    [selectFilesAmount, selectTranscoderStatus],
+    (amount, transcoderStatus) => {
+        return amount < config.fileLimit && transcoderStatus === 'ready';
+    }
 );
 
 const selectAllowTranscode = createSelector(
@@ -49,29 +62,28 @@ const selectAllowRemove = createSelector(
     }
 );
 
-const selectDownloadData = createSelector([selectSelectedFiles], (selectedFiles) => {
-    return selectedFiles
-        .map((file) => {
-            const { name, ext, url } = file.output;
-
-            if (name && ext && url) {
-                return {
-                    fileName: `${name}.${ext}`,
-                    url,
-                };
-            }
-        })
-        .filter((data) => data != undefined);
+const selectDownloadableFiles = createSelector([selectSelectedFiles], (selectedFiles) => {
+    return selectedFiles.filter(
+        (
+            file
+        ): file is TranscoderFile & {
+            output: { [K in keyof TranscoderFileOutput]: NonNullable<TranscoderFileOutput[K]> };
+        } => {
+            const { name, ext, url, size } = file.output;
+            return !!(name && ext && url && size);
+        }
+    );
 });
 
 export {
     selectAllFiles,
     selectSelectedFiles,
     selectTranscoderStatus,
-    selectDownloadData,
+    selectDownloadableFiles,
     selectIsAllFilesSelected,
     selectIsFilesEmpty,
     selectAllowTranscode,
     selectAllowDownload,
     selectAllowRemove,
+    selectAllowAdd,
 };
