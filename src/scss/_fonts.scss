@@ -1,4 +1,18 @@
 @font-face {
+    font-family: 'Roboto-fallback';
+    src: local('Arial');
+    font-weight: 400;
+    size-adjust: 92%;
+}
+
+@font-face {
+    font-family: 'Roboto-fallback';
+    src: local('Arial Bold');
+    font-weight: 500;
+    size-adjust: 91%;
+}
+
+@font-face {
     font-family: 'Roboto';
     src:
         url('./assets/fonts/roboto/Roboto-Regular.woff2') format('woff2'),
@@ -6,6 +20,7 @@
         url('./assets/fonts/roboto/Roboto-Regular.ttf') format('truetype');
     font-weight: 400;
     font-display: swap;
+    size-adjust: 1rem;
 }
 
 @font-face {
@@ -16,6 +31,7 @@
         url('./assets/fonts/roboto/Roboto-Medium.ttf') format('truetype');
     font-weight: 500;
     font-display: swap;
+    size-adjust: 1rem;
 }
 
 @font-face {
@@ -26,4 +42,5 @@
         url('./assets/fonts/roboto/Roboto-SemiBold.ttf') format('truetype');
     font-weight: 600;
     font-display: swap;
+    size-adjust: 1rem;
 }

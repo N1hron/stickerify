@@ -57,7 +57,7 @@
     --color-disabled-050: var(--color-main-050);
 
     // Fonts
-    --font-family: 'Roboto', sans-serif;
+    --font-family: 'Roboto', 'Roboto-fallback', sans-serif;
 
     --font-size-xm: 0.875rem;
     --font-size-sm: 1rem;
