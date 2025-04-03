@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import clsx from 'clsx';
 
 import { useAppDispatch } from '@store/hooks';
 import { loadTranscoder } from '@slices/transcoder';
@@ -16,8 +15,6 @@ let didInit = false;
 function Transcoder() {
     const dispatch = useAppDispatch();
 
-    const cl = clsx(styles.transcoder);
-
     useEffect(() => {
         if (!didInit) {
             dispatch(loadTranscoder());
@@ -26,7 +23,7 @@ function Transcoder() {
     }, []);
 
     return (
-        <div className={cl}>
+        <div className={styles.transcoder}>
             <TranscoderHeader />
             <div className={styles.list} tabIndex={-1}>
                 <FileList />
