@@ -8,8 +8,8 @@ import styles from './style.module.scss';
 
 function OutputSettings() {
     return (
-        <Card className={styles.outputSettings} as='aside'>
-            <div className={styles.items}>
+        <Card className={styles.outputSettings} as='aside' tabIndex={-1}>
+            <div className={styles.items} tabIndex={-1}>
                 <Setting
                     name='stickerSizeType'
                     label='Sticker size type'

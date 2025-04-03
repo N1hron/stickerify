@@ -49,8 +49,9 @@ function FileInput({
                 className={styles.browse}
                 color='accent'
                 mini={mini}
-                tabIndex={-1}
                 disabled={disabled}
+                aria-hidden
+                tabIndex={-1}
                 onClick={handleBrowse}
             >
                 {label}

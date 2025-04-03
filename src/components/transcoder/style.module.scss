@@ -220,7 +220,6 @@
 }
 
 .footer {
-    margin: 0;
     z-index: 4;
 
     grid-column: 1/-4;
@@ -229,6 +228,12 @@
     display: flex;
     justify-content: space-between;
     gap: 0.25rem;
+
+    menu {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
 }
 
 .footerGroup {

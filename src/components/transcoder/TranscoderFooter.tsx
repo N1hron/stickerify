@@ -8,6 +8,7 @@ import {
     selectAllowRemove,
     selectAllowTranscode,
     selectDownloadableFiles,
+    selectTranscoderStatus,
     transcodeSelectedFiles,
 } from '@/store/slices/transcoder';
 import { downloadFile } from '@/utils';
@@ -17,6 +18,7 @@ import styles from './style.module.scss';
 function TranscoderFooter() {
     const dispatch = useAppDispatch();
 
+    const transcoderStatus = useAppSelector(selectTranscoderStatus);
     const allowRemove = useAppSelector(selectAllowRemove);
     const allowTranscode = useAppSelector(selectAllowTranscode);
     const allowAdd = useAppSelector(selectAllowAdd);
@@ -33,20 +35,27 @@ function TranscoderFooter() {
         dispatch(transcodeSelectedFiles());
     }
 
+    if (!(transcoderStatus === 'ready' || transcoderStatus === 'transcoding')) return null;
     return (
-        <Card className={styles.footer} as='menu' mini>
+        <Card className={styles.footer} mini>
             <div className={styles.footerGroup}>
                 <FileInput label='Add' mini disabled={!allowAdd} onChange={handleFilesChange} />
             </div>
-            <div className={styles.footerGroup}>
-                <Button color='danger' mini disabled={!allowRemove} onClick={handleRemoveClick}>
-                    Remove
-                </Button>
-                <Button mini disabled={!allowTranscode} onClick={handleTranscodeClick}>
-                    Transcode
-                </Button>
-                <Download />
-            </div>
+            <menu className={styles.footerGroup}>
+                <li>
+                    <Button color='danger' mini disabled={!allowRemove} onClick={handleRemoveClick}>
+                        Remove
+                    </Button>
+                </li>
+                <li>
+                    <Button mini disabled={!allowTranscode} onClick={handleTranscodeClick}>
+                        Transcode
+                    </Button>
+                </li>
+                <li>
+                    <Download />
+                </li>
+            </menu>
         </Card>
     );
 }

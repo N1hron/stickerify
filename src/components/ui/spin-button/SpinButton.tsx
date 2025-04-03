@@ -62,6 +62,7 @@ function SpinButton<T extends string>({
             </Label>
             <div className={styles.wrapper}>
                 <Button
+                    aria-hidden
                     tabIndex={-1}
                     aria-label='Previous option'
                     mini
@@ -69,7 +70,7 @@ function SpinButton<T extends string>({
                     disabled={disabled}
                     onClick={() => updateCurrent(prev)}
                 >
-                    <ArrowIcon aria-hidden />
+                    <ArrowIcon />
                 </Button>
                 <div
                     className={styles.view}
@@ -79,6 +80,7 @@ function SpinButton<T extends string>({
                     aria-valuetext={options[current]}
                     aria-valuemin={1}
                     aria-valuemax={options.length}
+                    aria-disabled={disabled}
                     tabIndex={disabled ? -1 : 0}
                     onKeyDown={handleKeyDown}
                 >
@@ -94,6 +96,7 @@ function SpinButton<T extends string>({
                     </div>
                 </div>
                 <Button
+                    aria-hidden
                     tabIndex={-1}
                     aria-label='Next option'
                     mini
@@ -101,7 +104,7 @@ function SpinButton<T extends string>({
                     disabled={disabled}
                     onClick={() => updateCurrent(next)}
                 >
-                    <ArrowIcon className={styles.iconRight} aria-hidden />
+                    <ArrowIcon className={styles.iconRight} />
                 </Button>
             </div>
         </div>
