@@ -9,13 +9,19 @@ function App() {
     return (
         <div className={styles.wrapper}>
             <main className={styles.main}>
-                <div className={styles.sidebar}>
-                    <Logo />
-                    <OutputSettings />
-                    <GithubLink />
-                </div>
+                <Sidebar />
                 <Transcoder />
             </main>
+        </div>
+    );
+}
+
+function Sidebar() {
+    return (
+        <div className={styles.sidebar}>
+            <Logo />
+            <OutputSettings />
+            <GithubLink />
         </div>
     );
 }
