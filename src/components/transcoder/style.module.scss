@@ -138,7 +138,21 @@
 }
 
 .statusListItem {
-    --color-icon: var(--color-accent-300);
+    --color-icon: var(--color-accent-500);
+    --color-shadow: var(--color-accent-300);
+
+    width: 1.5rem;
+    height: 1.5rem;
+    place-self: center;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+
+    &:hover {
+        svg {
+            transform: scale(1.125);
+            filter: drop-shadow(0 0 0.125rem var(--color-shadow));
+        }
+    }
 
     svg {
         width: 100%;
@@ -157,10 +171,12 @@
 
     &.success {
         --color-icon: var(--color-success-500);
+        --color-shadow: var(--color-success-300);
     }
 
     &.error {
         --color-icon: var(--color-danger-500);
+        --color-shadow: var(--color-danger-300);
     }
 }
 
@@ -189,9 +205,8 @@
 .statusIcon {
     --color-icon: var(--color-accent-200);
 
-    padding: 0.75rem;
-    width: 5rem;
-    height: 5rem;
+    width: 4.5rem;
+    height: 4.5rem;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -205,7 +220,7 @@
 
     svg {
         width: 100%;
-        height: 100%;
+        height: auto;
     }
 
     &.loading {
@@ -216,6 +231,18 @@
         &:global {
             animation-name: rotate;
         }
+    }
+
+    &.ready {
+        svg {
+            stroke-width: 1.225;
+        }
+    }
+
+    &.loading,
+    &.error {
+        width: 4rem;
+        height: 4rem;
     }
 }
 

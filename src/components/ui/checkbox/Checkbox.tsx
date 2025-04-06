@@ -2,7 +2,7 @@ import { useId } from 'react';
 import clsx from 'clsx';
 
 import { Label } from '@components/ui';
-import { CheckboxIcon } from '@components/icons';
+import { CheckIcon } from '@components/icons';
 
 import styles from './style.module.scss';
 
@@ -34,7 +34,7 @@ function Checkbox({ label, hideLabel, checked, disabled, onChange }: CheckboxPro
                     checked={checked}
                     disabled={disabled}
                 />
-                <CheckboxIcon className={styles.icon} aria-hidden />
+                <CheckIcon className={styles.icon} aria-hidden />
             </div>
             <Label className={clsx(styles.label, hideLabel && 'visually-hidden')} htmlFor={inputId}>
                 {label}

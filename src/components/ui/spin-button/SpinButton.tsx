@@ -70,7 +70,7 @@ function SpinButton<T extends string>({
                     disabled={disabled}
                     onClick={() => updateCurrent(prev)}
                 >
-                    <ArrowIcon />
+                    <ArrowIcon className={styles.icon} />
                 </Button>
                 <div
                     className={styles.view}
@@ -104,7 +104,7 @@ function SpinButton<T extends string>({
                     disabled={disabled}
                     onClick={() => updateCurrent(next)}
                 >
-                    <ArrowIcon className={styles.iconRight} />
+                    <ArrowIcon className={clsx(styles.icon, styles.iconRight)} />
                 </Button>
             </div>
         </div>

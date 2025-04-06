@@ -1,7 +1,6 @@
 .checkbox {
     display: inline-flex;
     align-items: start;
-    gap: 0.25rem;
 
     &:has(.input:disabled) {
         .label {
@@ -27,7 +26,6 @@
     background-color: var(--color-accent-050);
     border: solid var(--border-width-thin) var(--color-accent-200);
     border-bottom: solid var(--border-width-thick) var(--color-accent-200);
-
     border-radius: 0.15rem;
 
     cursor: pointer;
@@ -102,8 +100,9 @@
     --color-icon: var(--color-text-alt);
 
     position: absolute;
-    width: 0.6rem;
-    height: 0.6rem;
+    width: calc(1rem - var(--border-width-thin));
+    height: auto;
+    stroke-width: 2.39;
     opacity: 0;
 
     top: calc(50% - var(--border-width-thin));
@@ -114,6 +113,7 @@
 }
 
 .label {
+    padding-left: 0.25rem;
     align-self: center;
     cursor: pointer;
 }

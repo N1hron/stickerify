@@ -2,9 +2,6 @@
     display: inline;
     color: var(--color-accent-400);
 
-    transition-duration: var(--transition-duration);
-    transition-property: color;
-
     @media (hover: hover) {
         &:hover {
             color: var(--color-accent-500);
