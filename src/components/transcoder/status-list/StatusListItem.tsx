@@ -1,7 +1,9 @@
+import { useId, useState } from 'react';
 import clsx from 'clsx';
 
 import { TranscoderFileStatus } from '@/types';
 import { CheckIcon, DoubleCheckIcon, ErrorIcon, LoadingIcon } from '@components/icons';
+import { Tooltip } from '@/components/ui';
 
 import styles from '../style.module.scss';
 
@@ -10,7 +12,9 @@ type StatusListItemProps = {
 };
 
 function StatusListItem({ status }: StatusListItemProps) {
+    const id = useId();
     const cl = clsx(styles.statusListItem, styles[status]);
+    const [showTooltip, setShowTooltip] = useState(false);
 
     function renderIcon() {
         switch (status) {
@@ -25,7 +29,35 @@ function StatusListItem({ status }: StatusListItemProps) {
         }
     }
 
-    return <li className={cl}>{renderIcon()}</li>;
+    function renderTooltipContent() {
+        switch (status) {
+            case 'idle':
+                return 'UPLOADED';
+            case 'transcoding':
+                return 'TRANSCODING';
+            case 'success':
+                return 'TRANSCODED';
+            case 'error':
+                return 'ERROR';
+        }
+    }
+
+    function handleMouseEnter() {
+        setShowTooltip(true);
+    }
+
+    function handleMouseLeave() {
+        setShowTooltip(false);
+    }
+
+    return (
+        <li className={cl} id={id} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+            <div>{renderIcon()}</div>
+            <Tooltip elementId={id} visible={showTooltip}>
+                {renderTooltipContent()}
+            </Tooltip>
+        </li>
+    );
 }
 
 export { StatusListItem };
