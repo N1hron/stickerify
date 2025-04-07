@@ -1,8 +1,7 @@
 import { useLayoutEffect, useRef, useState } from 'react';
-import clsx from 'clsx';
+import { createPortal } from 'react-dom';
 
 import styles from './style.module.scss';
-import { createPortal } from 'react-dom';
 
 type TooltipProps = {
     elementId: string;
@@ -16,7 +15,6 @@ const tooltipOffsetPx = rootFontSizePx * tooltipOffsetRem;
 
 function Tooltip({ elementId, children, visible }: TooltipProps) {
     const ref = useRef<HTMLDivElement>(null);
-    const cl = clsx(styles.tooltip, visible && styles.visible);
 
     const [tooltipHeight, setTooltipHeight] = useState(0);
     const [tooltipWidth, setTooltipWidth] = useState(0);
@@ -66,8 +64,14 @@ function Tooltip({ elementId, children, visible }: TooltipProps) {
         }
     };
 
+    if (!visible) return null;
     return createPortal(
-        <div className={cl} role='tooltip' style={{ left: setLeft(), top: setTop() }} ref={ref}>
+        <div
+            className={styles.tooltip}
+            role='tooltip'
+            style={{ left: setLeft(), top: setTop() }}
+            ref={ref}
+        >
             {children}
         </div>,
         document.body

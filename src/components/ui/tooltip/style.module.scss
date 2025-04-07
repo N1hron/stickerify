@@ -9,10 +9,4 @@
     border-radius: calc(var(--border-radius));
     box-shadow: 0 0.1rem 0.2rem 0.1rem hsl(from var(--color-accent-500) h s l / 0.25);
     text-transform: none;
-
-    visibility: hidden;
-
-    &.visible {
-        visibility: visible;
-    }
 }
