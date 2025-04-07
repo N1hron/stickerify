@@ -115,6 +115,7 @@
 
         background-color: var(--color-accent-050);
         border: solid var(--border-width-thin) var(--color-accent-200);
+        border-radius: 0;
 
         &:focus {
             outline: none;
