@@ -9,31 +9,28 @@
     grid-template-columns:
         var(--border-radius) $padding-with-border auto 1fr repeat(4, auto)
         $padding-with-border var(--border-radius) $status-list-offset
-        2rem var(--border-radius);
+        calc(2rem + var(--border-width)) var(--border-radius);
     grid-template-rows: 2.25rem 1fr 2.25rem;
 
+    &::before,
     &::after {
         content: '';
-        position: absolute;
         display: block;
-        right: var(--border-radius);
-        height: 100%;
-        border-right: dashed var(--color-accent-200) var(--border-width);
+        position: absolute;
+        right: calc(var(--border-radius) + var(--border-width));
+        width: calc(2.5rem - var(--border-width));
+        height: 2.25rem;
+        z-index: 2;
     }
 
     &::before {
-        content: '';
-        display: block;
-        position: absolute;
         top: 0;
-        right: calc(var(--border-radius) + var(--border-width));
-        width: calc(2.5rem - var(--border-width));
-        height: 100%;
-        z-index: 2;
-        pointer-events: none;
-        box-shadow:
-            inset 0 2.5rem 0.25rem -0.25rem var(--color-accent-050),
-            inset 0 -2.5rem 0.25rem -0.25rem var(--color-accent-050);
+        background: linear-gradient(180deg, var(--color-accent-050) 85%, transparent 100%);
+    }
+
+    &::after {
+        bottom: 0;
+        background: linear-gradient(0deg, var(--color-accent-050) 85%, transparent 100%);
     }
 }
 
@@ -141,7 +138,6 @@
     --color-icon: var(--color-accent-500);
     --color-shadow: var(--color-accent-300);
 
-    width: 1.5rem;
     height: 1.5rem;
     place-self: center;
     border-radius: var(--border-radius);
@@ -156,7 +152,7 @@
 
     svg {
         width: 100%;
-        height: 100%;
+        height: auto;
     }
 
     &.transcoding {
@@ -266,4 +262,11 @@
 .footerGroup {
     display: flex;
     gap: 0.25rem;
+}
+
+.borderRight {
+    grid-row: 1/-1;
+    grid-column: -3/-2;
+    border-right: dashed var(--color-accent-200) var(--border-width);
+    pointer-events: none;
 }

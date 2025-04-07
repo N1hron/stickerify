@@ -52,7 +52,7 @@ function StatusListItem({ status }: StatusListItemProps) {
 
     return (
         <li className={cl} id={id} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-            <div>{renderIcon()}</div>
+            {renderIcon()}
             <Tooltip elementId={id} visible={showTooltip}>
                 {renderTooltipContent()}
             </Tooltip>

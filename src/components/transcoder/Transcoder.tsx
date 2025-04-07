@@ -31,6 +31,7 @@ function Transcoder() {
             </div>
             <TranscoderStatus />
             <TranscoderFooter />
+            <div className={styles.borderRight}></div>
         </div>
     );
 }
