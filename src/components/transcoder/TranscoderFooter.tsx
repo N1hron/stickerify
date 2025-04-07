@@ -14,6 +14,8 @@ import {
 import { downloadFile } from '@/utils';
 
 import styles from './style.module.scss';
+import { selectSetting } from '@/store/slices/settings';
+import { config } from '@/data';
 
 function TranscoderFooter() {
     const dispatch = useAppDispatch();
@@ -21,11 +23,6 @@ function TranscoderFooter() {
     const transcoderStatus = useAppSelector(selectTranscoderStatus);
     const allowRemove = useAppSelector(selectAllowRemove);
     const allowTranscode = useAppSelector(selectAllowTranscode);
-    const allowAdd = useAppSelector(selectAllowAdd);
-
-    function handleFilesChange(files: File[]) {
-        dispatch(addFiles(files));
-    }
 
     function handleRemoveClick() {
         dispatch(removeSelectedFiles());
@@ -39,7 +36,7 @@ function TranscoderFooter() {
     return (
         <Card className={styles.footer} mini>
             <div className={styles.footerGroup}>
-                <FileInput label='Add' mini disabled={!allowAdd} onChange={handleFilesChange} />
+                <AddFiles />
             </div>
             <menu className={styles.footerGroup}>
                 <li>
@@ -53,14 +50,35 @@ function TranscoderFooter() {
                     </Button>
                 </li>
                 <li>
-                    <Download />
+                    <DownloadFiles />
                 </li>
             </menu>
         </Card>
     );
 }
 
-function Download() {
+function AddFiles() {
+    const dispatch = useAppDispatch();
+    const allowAdd = useAppSelector(selectAllowAdd);
+    const stickerMotionType = useAppSelector(selectSetting('stickerMotionType'));
+    const accept = config.accept[stickerMotionType];
+
+    function handleFilesChange(files: File[]) {
+        dispatch(addFiles(files));
+    }
+
+    return (
+        <FileInput
+            label='Add'
+            accept={accept}
+            disabled={!allowAdd}
+            mini
+            onChange={handleFilesChange}
+        />
+    );
+}
+
+function DownloadFiles() {
     const allowDownload = useAppSelector(selectAllowDownload);
     const downloadableFiles = useAppSelector(selectDownloadableFiles);
 
