@@ -1,15 +1,9 @@
 .logo {
-    grid-row: 1/2;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
     h1 {
-        text-align: center;
         color: var(--color-accent-500);
         text-shadow: 0 var(--border-width-thick) 0 var(--color-accent-200);
-        user-select: none;
         font-size: var(--font-size-xl);
+        text-align: center;
+        user-select: none;
     }
 }
