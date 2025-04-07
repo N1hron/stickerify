@@ -1,6 +1,6 @@
 import {
     HorizontalAlignment,
-    OutputSettings,
+    Settings,
     StickerMotionType,
     StickerSizeType,
     VerticalAlignment,
@@ -61,7 +61,7 @@ function createCommandScale({
     verticalAlignment,
     removeEmptySpaces,
     scaleUpSmallStickers,
-}: OutputSettings) {
+}: Settings) {
     const sizePx = getSizePx(stickerSizeType);
     const [padX, padY] = getPadding(sizePx, horizontalAlignment, verticalAlignment);
 
@@ -91,7 +91,7 @@ function createCommandScale({
     }
 }
 
-function createCommandStatic(inputName: string, outputName: string, settings: OutputSettings) {
+function createCommandStatic(inputName: string, outputName: string, settings: Settings) {
     const scale = createCommandScale(settings);
 
     return ['-i', inputName].concat(oneFrame, scale, maxQualityWebp, [outputName]);
@@ -102,7 +102,7 @@ function createCommandVideo() {
     return [];
 }
 
-function createCommand(inputName: string, outputName: string, settings: OutputSettings) {
+function createCommand(inputName: string, outputName: string, settings: Settings) {
     switch (settings.stickerMotionType) {
         case 'static':
             return createCommandStatic(inputName, outputName, settings);

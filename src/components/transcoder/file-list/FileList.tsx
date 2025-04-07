@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { addFiles, selectAllFiles, selectAllowAdd } from '@/store/slices/transcoder';
-import { selectSetting } from '@/store/slices/output-settings';
+import { selectSetting } from '@/store/slices/settings';
 import { validateFiles } from '@/utils';
 import { config } from '@/data';
 import { FileListItem } from './FileListItem';

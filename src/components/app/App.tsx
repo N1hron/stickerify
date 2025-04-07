@@ -1,5 +1,5 @@
 import { Logo } from '@components/logo/Logo';
-import { OutputSettings } from '@components/output-settings/OutputSettings';
+import { Settings } from '@/components/settings/Settings';
 import { GithubPage } from '@/components/github-page/GithubLink';
 import { Transcoder } from '@/components/transcoder/Transcoder';
 
@@ -20,7 +20,7 @@ function Sidebar() {
     return (
         <div className={styles.sidebar}>
             <Logo />
-            <OutputSettings />
+            <Settings />
             <GithubPage />
         </div>
     );

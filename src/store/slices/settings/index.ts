@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { OutputSettings } from '@types';
-import { safeParseJson, isOutputSettings } from '@utils';
+import { Settings } from '@types';
+import { safeParseJson, isSettings } from '@utils';
 
-type OutputSettingsSliceState = {
-    items: OutputSettings;
+type SettingsSliceState = {
+    items: Settings;
     remember: boolean;
 };
 
-const defaultSettings: OutputSettings = {
+const defaultSettings: Settings = {
     stickerSizeType: 'sticker',
     stickerMotionType: 'static',
     horizontalAlignment: 'middle',
@@ -17,19 +17,19 @@ const defaultSettings: OutputSettings = {
     removeEmptySpaces: true,
 };
 
-const defaultState: OutputSettingsSliceState = {
+const defaultState: SettingsSliceState = {
     items: defaultSettings,
     remember: true,
 };
 
-function getInitialState(): OutputSettingsSliceState {
-    const settingsLS = localStorage.getItem('outputSettings');
-    const rememberLS = localStorage.getItem('rememberOutputSettings');
+function getInitialState(): SettingsSliceState {
+    const settingsLS = localStorage.getItem('settings');
+    const rememberLS = localStorage.getItem('rememberSettings');
 
     const settings = safeParseJson(settingsLS);
     const remember = safeParseJson(rememberLS);
 
-    if (remember === true && isOutputSettings(settings)) {
+    if (remember === true && isSettings(settings)) {
         return { items: settings, remember };
     } else if (remember === false) {
         return { ...defaultState, remember };
@@ -38,13 +38,13 @@ function getInitialState(): OutputSettingsSliceState {
     return defaultState;
 }
 
-const outputSettingsSlice = createSlice({
-    name: 'outputSettings',
+const settingsSlice = createSlice({
+    name: 'settings',
     initialState: getInitialState,
     reducers: {
-        setSetting: <T extends keyof OutputSettings>(
-            state: OutputSettingsSliceState,
-            action: PayloadAction<[T, OutputSettings[T]]>
+        setSetting: <T extends keyof Settings>(
+            state: SettingsSliceState,
+            action: PayloadAction<[T, Settings[T]]>
         ) => {
             const [key, value] = action.payload;
             state.items[key] = value;
@@ -58,8 +58,7 @@ const outputSettingsSlice = createSlice({
     },
 });
 
-export const reducer = outputSettingsSlice.reducer;
-export const { setSetting, setRememberSettings, restoreDefaultSettings } =
-    outputSettingsSlice.actions;
+export const reducer = settingsSlice.reducer;
+export const { setSetting, setRememberSettings, restoreDefaultSettings } = settingsSlice.actions;
 export * from './selectors';
 export { defaultSettings };

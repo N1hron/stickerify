@@ -12,7 +12,7 @@ const transcodeSelectedFiles = createAsyncThunk<
     { dispatch: AppDispatch; state: RootState }
 >('transcoder/transcodeSelectedFiles', async (_, { getState, dispatch }) => {
     const selectedFiles = selectSelectedFiles(getState());
-    const settings = getState().outputSettings.items;
+    const settings = getState().settings.items;
 
     dispatch(setStatus('transcoding'));
 

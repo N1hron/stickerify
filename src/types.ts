@@ -4,7 +4,7 @@ export type StickerMotionType = 'static' | 'video';
 export type HorizontalAlignment = 'left' | 'middle' | 'right';
 export type VerticalAlignment = 'top' | 'middle' | 'bottom';
 
-export type OutputSettings = {
+export type Settings = {
     stickerSizeType: StickerSizeType;
     stickerMotionType: StickerMotionType;
     horizontalAlignment: HorizontalAlignment;

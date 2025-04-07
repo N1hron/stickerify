@@ -1,7 +1,7 @@
 import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile, toBlobURL } from '@ffmpeg/util';
 
-import { TranscoderFileOutput, OutputSettings, TranscoderFile } from '@/types';
+import { TranscoderFileOutput, Settings, TranscoderFile } from '@/types';
 import { createCommand, getOutputExt } from './utils';
 
 const ffmpeg = new FFmpeg();
@@ -22,7 +22,7 @@ async function load() {
 
 async function transcode(
     file: TranscoderFile,
-    settings: OutputSettings
+    settings: Settings
 ): Promise<Omit<TranscoderFileOutput, 'name'>> {
     const id = file.id;
     const inputUrl = file.input.url;

@@ -1,4 +1,4 @@
-import { OutputSettings } from '@types';
+import { Settings } from '@types';
 import {
     isHorizontalAlignment,
     isStickerMotionType,
@@ -6,7 +6,7 @@ import {
     isVerticalAlignment,
 } from '@utils';
 
-function isOutputSettings(param: unknown): param is OutputSettings {
+function isSettings(param: unknown): param is Settings {
     if (!(param && typeof param === 'object')) return false;
 
     return (
@@ -25,4 +25,4 @@ function isOutputSettings(param: unknown): param is OutputSettings {
     );
 }
 
-export { isOutputSettings };
+export { isSettings };
