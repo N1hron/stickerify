@@ -2,9 +2,9 @@ import { Card, Link } from '@components/ui';
 
 import styles from './style.module.scss';
 
-function GithubLink() {
+function GithubPage() {
     return (
-        <Card className={styles.githubLink}>
+        <Card className={styles.githubPage}>
             <Link href='https://github.com/N1hron/stickerify' aria-label='GitHub'>
                 GitHub page
             </Link>
@@ -12,4 +12,4 @@ function GithubLink() {
     );
 }
 
-export { GithubLink };
+export { GithubPage };
