@@ -7,6 +7,8 @@
     background-color: var(--color-accent-025);
     font-size: var(--font-size-xm);
     border-radius: calc(var(--border-radius));
-    box-shadow: 0 0.1rem 0.2rem 0.1rem hsl(from var(--color-accent-500) h s l / 0.25);
+    box-shadow:
+        0rem 0.0625rem 0.125rem 0rem hsl(from var(--color-accent-800) h s l / 0.3),
+        0rem 0.0625rem 0.1875rem 0.0625rem hsl(from var(--color-accent-800) h s l / 0.15);
     text-transform: none;
 }

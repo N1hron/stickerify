@@ -1,66 +1,85 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import styles from './style.module.scss';
 
 type TooltipProps = {
-    elementId: string;
+    targetId: string;
     children: React.ReactNode;
-    visible?: boolean;
 };
 
 const tooltipOffsetRem = 0.75;
 const rootFontSizePx = parseFloat(getComputedStyle(document.documentElement).fontSize);
 const tooltipOffsetPx = rootFontSizePx * tooltipOffsetRem;
 
-function Tooltip({ elementId, children, visible }: TooltipProps) {
-    const ref = useRef<HTMLDivElement>(null);
+function Tooltip({ targetId, children }: TooltipProps) {
+    const tooltipRef = useRef<HTMLDivElement>(null);
+    const targetRef = useRef<Element>(null);
 
     const [tooltipHeight, setTooltipHeight] = useState(0);
     const [tooltipWidth, setTooltipWidth] = useState(0);
-    const [elementHeight, setElementHeight] = useState(0);
-    const [elementWidth, setElementWidth] = useState(0);
-    const [elementX, setElementX] = useState(0);
-    const [elementY, setElementY] = useState(0);
+    const [targetHeight, setElementHeight] = useState(0);
+    const [targetWidth, setElementWidth] = useState(0);
+    const [targetX, setElementX] = useState(0);
+    const [targetY, setElementY] = useState(0);
+
+    const [visible, setVisible] = useState(false);
+
+    useEffect(() => {
+        const target = document.getElementById(targetId);
+        targetRef.current = target;
+
+        const showTooltip = () => setVisible(true);
+        const hideTooltip = () => setVisible(false);
+
+        target?.addEventListener('mouseenter', showTooltip);
+        target?.addEventListener('mouseleave', hideTooltip);
+
+        return () => {
+            target?.removeEventListener('mouseenter', showTooltip);
+            target?.removeEventListener('mouseleave', hideTooltip);
+        };
+    }, []);
 
     useLayoutEffect(() => {
-        const element = document.getElementById(elementId);
+        const target = targetRef.current;
+        const tooltip = tooltipRef.current;
 
-        if (element && ref.current) {
-            const elementRect = element.getBoundingClientRect();
-            const tooltipRect = ref.current.getBoundingClientRect();
+        if (target && tooltip) {
+            const targetRect = target.getBoundingClientRect();
+            const tooltipRect = tooltip.getBoundingClientRect();
 
             setTooltipWidth(tooltipRect.width);
             setTooltipHeight(tooltipRect.height);
-            setElementX(elementRect.x);
-            setElementY(elementRect.y);
-            setElementWidth(elementRect.width);
-            setElementHeight(elementRect.height);
+            setElementX(targetRect.x);
+            setElementY(targetRect.y);
+            setElementWidth(targetRect.width);
+            setElementHeight(targetRect.height);
         }
     }, [visible]);
 
     const setLeft = () => {
         const documentWidth = document.documentElement.offsetWidth;
         const enoughSpaceRight =
-            documentWidth - elementX - elementWidth - tooltipOffsetPx > tooltipWidth;
+            documentWidth - targetX - targetWidth - tooltipOffsetPx > tooltipWidth;
 
         if (enoughSpaceRight) {
-            return `${elementX + elementWidth + tooltipOffsetPx}px`;
+            return `${targetX + targetWidth + tooltipOffsetPx}px`;
         } else {
-            return `${elementX - tooltipWidth - tooltipOffsetPx}px`;
+            return `${targetX - tooltipWidth - tooltipOffsetPx}px`;
         }
     };
 
     const setTop = () => {
         const documentHeight = document.documentElement.offsetHeight;
-        const enoughSpaceBottom = documentHeight - elementY > tooltipHeight;
+        const enoughSpaceBottom = documentHeight - targetY > tooltipHeight;
 
         if (enoughSpaceBottom) {
-            return tooltipHeight > elementHeight
-                ? `${elementY}px`
-                : `${elementY + (elementHeight - tooltipHeight) / 2}px`;
+            return tooltipHeight > targetHeight && tooltipHeight > rootFontSizePx * 1.5625
+                ? `${targetY}px`
+                : `${targetY + (targetHeight - tooltipHeight) / 2}px`;
         } else {
-            return `${elementY + elementHeight - tooltipHeight}px`;
+            return `${targetY + targetHeight - tooltipHeight}px`;
         }
     };
 
@@ -70,7 +89,7 @@ function Tooltip({ elementId, children, visible }: TooltipProps) {
             className={styles.tooltip}
             role='tooltip'
             style={{ left: setLeft(), top: setTop() }}
-            ref={ref}
+            ref={tooltipRef}
         >
             {children}
         </div>,

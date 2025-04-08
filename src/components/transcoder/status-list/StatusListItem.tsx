@@ -1,4 +1,4 @@
-import { useId, useState } from 'react';
+import { useId } from 'react';
 import clsx from 'clsx';
 
 import { TranscoderFileStatus } from '@/types';
@@ -14,7 +14,6 @@ type StatusListItemProps = {
 function StatusListItem({ status }: StatusListItemProps) {
     const id = useId();
     const cl = clsx(styles.statusListItem, styles[status]);
-    const [showTooltip, setShowTooltip] = useState(false);
 
     function renderIcon() {
         switch (status) {
@@ -42,20 +41,10 @@ function StatusListItem({ status }: StatusListItemProps) {
         }
     }
 
-    function handleMouseEnter() {
-        setShowTooltip(true);
-    }
-
-    function handleMouseLeave() {
-        setShowTooltip(false);
-    }
-
     return (
-        <li className={cl} id={id} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        <li className={cl} id={id}>
             {renderIcon()}
-            <Tooltip elementId={id} visible={showTooltip}>
-                {renderTooltipContent()}
-            </Tooltip>
+            <Tooltip targetId={id}>{renderTooltipContent()}</Tooltip>
         </li>
     );
 }
