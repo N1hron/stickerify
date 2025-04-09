@@ -5,7 +5,7 @@ import { TranscoderFileStatus } from '@/types';
 import { CheckIcon, DoubleCheckIcon, ErrorIcon, LoadingIcon } from '@components/icons';
 import { Tooltip } from '@/components/ui';
 
-import styles from '../style.module.scss';
+import styles from './style.module.scss';
 
 type StatusListItemProps = {
     status: TranscoderFileStatus;

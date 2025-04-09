@@ -6,7 +6,7 @@ import { TranscoderFile } from '@types';
 import { Divider, Checkbox, Card } from '@components/ui';
 import { formatFileSize } from '@utils';
 
-import styles from '../style.module.scss';
+import styles from './style.module.scss';
 
 type FileListItemProps = {
     number: number;

@@ -2,7 +2,7 @@ import { useAppSelector } from '@/store/hooks';
 import { selectAllFiles } from '@/store/slices/transcoder';
 import { StatusListItem } from './StatusListItem';
 
-import styles from '../style.module.scss';
+import styles from './style.module.scss';
 
 function StatusList() {
     const files = useAppSelector(selectAllFiles);

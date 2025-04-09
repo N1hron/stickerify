@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import clsx from 'clsx';
 
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { addFiles, selectAllFiles, selectAllowAdd } from '@/store/slices/transcoder';
@@ -7,17 +8,17 @@ import { validateFiles } from '@/utils';
 import { config } from '@/data';
 import { FileListItem } from './FileListItem';
 
-import styles from '../style.module.scss';
-import clsx from 'clsx';
+import styles from './style.module.scss';
 
 function FileList() {
     const dispatch = useAppDispatch();
 
-    const [dragEnterCount, setDragEnterCount] = useState(0);
     const files = useAppSelector(selectAllFiles);
     const allowAdd = useAppSelector(selectAllowAdd);
     const stickerMotionType = useAppSelector(selectSetting('stickerMotionType'));
     const accept = config.accept[stickerMotionType];
+
+    const [dragEnterCount, setDragEnterCount] = useState(0);
     const isDraggingOver = dragEnterCount > 0;
 
     const cl = clsx(styles.fileList, isDraggingOver && styles.draggingOver);

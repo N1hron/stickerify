@@ -9,20 +9,25 @@ import style from './style.module.scss';
 function TranscoderStatus() {
     const transcoderStatus = useAppSelector(selectTranscoderStatus);
     const isFilesEmpty = useAppSelector(selectIsFilesEmpty);
+    const cl = clsx(style.status, style[transcoderStatus]);
 
     function renderIcon() {
-        if (transcoderStatus === 'loading') {
-            return <LoadingIcon />;
-        } else if (transcoderStatus === 'ready' && isFilesEmpty) {
-            return <UploadIcon />;
-        } else if (transcoderStatus === 'error') {
-            return <ErrorIcon />;
+        switch (transcoderStatus) {
+            case 'loading':
+                return <LoadingIcon />;
+            case 'ready':
+                return <UploadIcon />;
+            case 'error':
+                return <ErrorIcon />;
+            default:
+                return null;
         }
     }
 
+    if (!isFilesEmpty || transcoderStatus === 'idle') return null;
     return (
-        <div className={style.status} inert>
-            <div className={clsx(style.statusIcon, style[transcoderStatus])}>{renderIcon()}</div>
+        <div className={cl} inert>
+            {renderIcon()}
         </div>
     );
 }

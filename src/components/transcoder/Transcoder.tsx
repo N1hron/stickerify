@@ -29,9 +29,12 @@ function Transcoder() {
                 <FileList />
                 <StatusList />
             </div>
-            <TranscoderStatus />
             <TranscoderFooter />
-            <div className={styles.borderRight}></div>
+
+            <div className={styles.outline}>
+                <TranscoderStatus />
+            </div>
+            <div className={styles.outlineRight}></div>
         </div>
     );
 }
