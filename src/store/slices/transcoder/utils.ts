@@ -15,7 +15,7 @@ function prepareFiles(files: File[]) {
                 id,
                 input: { name, ext, size, url },
                 output: { name, ext: null, size: null, url: null },
-                status: 'idle',
+                status: 'ready',
                 isSelected: false,
             };
         }),

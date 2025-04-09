@@ -11,7 +11,7 @@ export type Settings = {
 };
 
 export type TranscoderStatus = 'idle' | 'loading' | 'ready' | 'transcoding' | 'error';
-export type TranscoderFileStatus = 'idle' | 'transcoding' | 'success' | 'error';
+export type TranscoderFileStatus = 'ready' | 'transcoding' | 'success' | 'error';
 
 export type TranscoderFileInput = {
     name: string;

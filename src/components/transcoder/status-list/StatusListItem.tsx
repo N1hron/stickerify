@@ -17,7 +17,7 @@ function StatusListItem({ status }: StatusListItemProps) {
 
     function renderIcon() {
         switch (status) {
-            case 'idle':
+            case 'ready':
                 return <CheckIcon />;
             case 'transcoding':
                 return <LoadingIcon />;
@@ -30,7 +30,7 @@ function StatusListItem({ status }: StatusListItemProps) {
 
     function renderTooltipContent() {
         switch (status) {
-            case 'idle':
+            case 'ready':
                 return 'UPLOADED';
             case 'transcoding':
                 return 'TRANSCODING';
