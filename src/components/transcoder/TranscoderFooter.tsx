@@ -1,4 +1,4 @@
-import { Card, FileInput, Button } from '@ui';
+import { Card, FileInput, Button, Divider } from '@ui';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import {
     addFiles,
@@ -8,11 +8,12 @@ import {
     selectAllowRemove,
     selectAllowTranscode,
     selectDownloadableFiles,
+    selectFilesAmount,
     selectTranscoderStatus,
     transcodeSelectedFiles,
 } from '@slices/transcoder';
 import { downloadFile } from '@utils';
-import { FILE_ACCEPT } from '@config';
+import { FILE_ACCEPT, FILE_LIMIT } from '@config';
 
 import styles from './style.module.scss';
 
@@ -59,19 +60,28 @@ function TranscoderFooter() {
 function AddFiles() {
     const dispatch = useAppDispatch();
     const allowAdd = useAppSelector(selectAllowAdd);
+    const filesAmount = useAppSelector(selectFilesAmount);
 
     function handleFilesChange(files: File[]) {
         dispatch(addFiles(files));
     }
 
     return (
-        <FileInput
-            label='Add'
-            accept={FILE_ACCEPT}
-            disabled={!allowAdd}
-            mini
-            onChange={handleFilesChange}
-        />
+        <div className={styles.addFiles}>
+            <div className={styles.fileCount}>
+                <span>
+                    {filesAmount} / {FILE_LIMIT}
+                </span>
+            </div>
+            <Divider vertical />
+            <FileInput
+                label='Add'
+                accept={FILE_ACCEPT}
+                disabled={!allowAdd}
+                mini
+                onChange={handleFilesChange}
+            />
+        </div>
     );
 }
 

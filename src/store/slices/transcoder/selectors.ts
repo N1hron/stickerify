@@ -77,6 +77,7 @@ const selectDownloadableFiles = createSelector([selectSelectedFiles], (selectedF
 
 export {
     selectAllFiles,
+    selectFilesAmount,
     selectSelectedFiles,
     selectTranscoderStatus,
     selectDownloadableFiles,
