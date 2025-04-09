@@ -1,13 +1,22 @@
-.button {
+$border-width-min: var(--border-width-thin);
+$border-width-max: var(--border-width-thick);
+$border-width-diff: calc($border-width-max - $border-width-min);
+$content-height: calc(var(--button-full-height) - $border-width-diff);
+
+.buttonWrapper {
     --color-icon: var(--color-text-alt);
     --button-full-height: 2rem;
 
-    $border-width-min: var(--border-width-thin);
-    $border-width-max: var(--border-width-thick);
-    $border-width-diff: calc($border-width-max - $border-width-min);
-    $content-height: calc(var(--button-full-height) - $border-width-diff);
+    display: block;
 
+    &:has(.button:active:not(:disabled)) {
+        padding-top: $border-width-diff;
+    }
+}
+
+.button {
     min-width: $content-height;
+    width: 100%;
     height: var(--button-full-height);
     padding: 0 0.5rem;
     line-height: 1;
@@ -48,7 +57,6 @@
 
         &:active {
             height: $content-height;
-            margin-top: $border-width-diff;
             border-bottom-width: $border-width-min;
         }
 

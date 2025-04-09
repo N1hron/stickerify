@@ -10,7 +10,11 @@ type ButtonProps = {
 function Button({ color = 'accent', mini, className, ...props }: ButtonProps) {
     const cl = clsx(styles.button, styles[color], mini && styles.mini, className);
 
-    return <button className={cl} {...props}></button>;
+    return (
+        <div className={styles.buttonWrapper}>
+            <button className={cl} {...props}></button>
+        </div>
+    );
 }
 
 export { Button };
