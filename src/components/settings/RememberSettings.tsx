@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { selectRememberSettings, setRememberSettings } from '@/store/slices/settings';
-import { Checkbox, Divider } from '@components/ui';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { selectRememberSettings, setRememberSettings } from '@slices/settings';
+import { Checkbox, Divider } from '@ui';
 
 import styles from './style.module.scss';
 

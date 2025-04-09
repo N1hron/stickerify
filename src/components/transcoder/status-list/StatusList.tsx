@@ -1,5 +1,5 @@
-import { useAppSelector } from '@/store/hooks';
-import { selectAllFiles } from '@/store/slices/transcoder';
+import { useAppSelector } from '@store/hooks';
+import { selectAllFiles } from '@slices/transcoder';
 import { StatusListItem } from './StatusListItem';
 
 import styles from './style.module.scss';

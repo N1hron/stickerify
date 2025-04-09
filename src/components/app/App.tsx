@@ -1,7 +1,7 @@
 import { Logo } from '@components/logo/Logo';
-import { Settings } from '@/components/settings/Settings';
-import { GithubPage } from '@/components/github-page/GithubLink';
-import { Transcoder } from '@/components/transcoder/Transcoder';
+import { Settings } from '@components/settings/Settings';
+import { GithubPage } from '@components/github-page/GithubLink';
+import { Transcoder } from '@components/transcoder/Transcoder';
 
 import styles from './style.module.scss';
 

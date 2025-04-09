@@ -3,12 +3,9 @@
     max-width: 15rem;
     position: fixed;
     z-index: 10;
-
     background-color: var(--color-accent-025);
     font-size: var(--font-size-xm);
     border-radius: calc(var(--border-radius));
-    box-shadow:
-        0rem 0.0625rem 0.125rem 0rem hsl(from var(--color-accent-800) h s l / 0.3),
-        0rem 0.0625rem 0.1875rem 0.0625rem hsl(from var(--color-accent-800) h s l / 0.15);
+    box-shadow: var(--box-shadow);
     text-transform: none;
 }

@@ -19,7 +19,10 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      '@config': path.resolve(__dirname, './src/config.ts'),
       '@components': path.resolve(__dirname, './src/components'),
+      '@ui': path.resolve(__dirname, './src/components/ui'),
+      '@icons': path.resolve(__dirname, './src/components/icons'),
       '@data': path.resolve(__dirname, './src/data'),
       '@store': path.resolve(__dirname, './src/store'),
       '@slices': path.resolve(__dirname, './src/store/slices'),

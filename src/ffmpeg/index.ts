@@ -1,8 +1,8 @@
 import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile, toBlobURL } from '@ffmpeg/util';
 
-import { TranscoderFileOutput, Settings, TranscoderFile } from '@/types';
-import { createCommand, getOutputExt } from './utils';
+import { TranscoderFileOutput, Settings, TranscoderFile } from '@types';
+import { createCommand } from './utils';
 
 const ffmpeg = new FFmpeg();
 const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.10/dist/esm';
@@ -24,29 +24,26 @@ async function transcode(
     file: TranscoderFile,
     settings: Settings
 ): Promise<Omit<TranscoderFileOutput, 'name'>> {
-    const id = file.id;
-    const inputUrl = file.input.url;
-    const inputExt = file.input.ext;
-    const outputExt = getOutputExt(settings.stickerMotionType);
-    const inputName = `file-${id}.${inputExt}`;
-    const outputName = `file-${id}-out.${outputExt}`;
+    const { command, writeName, readName, outputExt } = createCommand(file, settings);
 
-    const command = createCommand(inputName, outputName, settings);
-    await ffmpeg.writeFile(inputName, await fetchFile(inputUrl));
-    const code = await ffmpeg.exec(command);
+    await ffmpeg.writeFile(writeName, await fetchFile(file.input.url));
+    const statusCode = await ffmpeg.exec(command);
 
-    if (code !== 0) {
-        throw new Error(`Could not trancode ${file.input.name}.${inputExt}, code: ${code}`);
+    if (statusCode !== 0) {
+        throw new Error(
+            `Could not trancode ${file.input.name}.${file.input.ext}, code: ${statusCode}`
+        );
     }
 
-    const outputFile = await ffmpeg.readFile(outputName);
-    const blob = new Blob([outputFile]);
-    const outputUrl = URL.createObjectURL(blob);
+    const outputFile = await ffmpeg.readFile(readName);
+    const outputBlob = new Blob([outputFile]);
+    const outputUrl = URL.createObjectURL(outputBlob);
+    const outputSize = outputBlob.size;
 
     return {
         url: outputUrl,
         ext: outputExt,
-        size: blob.size,
+        size: outputSize,
     };
 }
 

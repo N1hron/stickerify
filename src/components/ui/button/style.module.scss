@@ -11,16 +11,13 @@
     height: var(--button-full-height);
     padding: 0 0.5rem;
     line-height: 1;
-
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-
     border: solid $border-width-min var(--button-color-border);
     border-bottom-width: $border-width-max;
     border-radius: var(--border-radius);
-
     background-color: var(--button-color);
     text-transform: uppercase;
     font-weight: inherit;

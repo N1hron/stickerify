@@ -1,8 +1,8 @@
 import { createSelector } from '@reduxjs/toolkit';
 
 import { RootState } from '@store';
-import { config } from '@/data';
-import { TranscoderFile, TranscoderFileOutput } from '@/types';
+import { FILE_LIMIT } from '@config';
+import { TranscoderFile, TranscoderFileOutput } from '@types';
 
 const selectAllFiles = (state: RootState) => {
     return state.transcoder.files;
@@ -34,7 +34,7 @@ const selectSelectedFiles = createSelector([selectAllFiles], (files) =>
 const selectAllowAdd = createSelector(
     [selectFilesAmount, selectTranscoderStatus],
     (amount, transcoderStatus) => {
-        return amount < config.fileLimit && transcoderStatus === 'ready';
+        return amount < FILE_LIMIT && transcoderStatus === 'ready';
     }
 );
 

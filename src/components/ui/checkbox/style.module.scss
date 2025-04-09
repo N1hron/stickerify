@@ -22,12 +22,10 @@
     appearance: none;
     width: 100%;
     height: 100%;
-
     background-color: var(--color-accent-050);
     border: solid var(--border-width-thin) var(--color-accent-200);
     border-bottom: solid var(--border-width-thick) var(--color-accent-200);
     border-radius: 0.15rem;
-
     cursor: pointer;
 
     &:checked {
@@ -104,11 +102,9 @@
     height: auto;
     stroke-width: 2.39;
     opacity: 0;
-
     top: calc(50% - var(--border-width-thin));
     left: 50%;
     transform: translate(-50%, -50%);
-
     pointer-events: none;
 }
 

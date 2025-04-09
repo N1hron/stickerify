@@ -1,8 +1,8 @@
 import { useState, useId } from 'react';
 import clsx from 'clsx';
 
-import { Label, Button } from '@components/ui';
-import { ArrowIcon } from '@components/icons';
+import { Label, Button } from '@ui';
+import { ArrowIcon } from '@icons';
 
 import styles from './style.module.scss';
 

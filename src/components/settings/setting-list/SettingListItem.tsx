@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { selectSetting, setSetting } from '@/store/slices/settings';
-import { Checkbox, SpinButton } from '@components/ui';
+import { selectSetting, setSetting } from '@slices/settings';
+import { Checkbox, SpinButton } from '@ui';
 import { Settings } from '@types';
 
 type SettingListItemProps<S extends keyof Settings> = {

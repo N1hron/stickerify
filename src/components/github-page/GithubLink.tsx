@@ -1,4 +1,4 @@
-import { Card, Link } from '@components/ui';
+import { Card, Link } from '@ui';
 
 import styles from './style.module.scss';
 

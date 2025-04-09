@@ -1,6 +1,6 @@
 import { AppMiddleware } from '@store';
-import { isPayloadAction } from '@/utils';
-import { TranscoderFile } from '@/types';
+import { isPayloadAction } from '@utils';
+import { TranscoderFile } from '@types';
 
 const preventFileDuplicates: AppMiddleware =
     ({ getState }) =>

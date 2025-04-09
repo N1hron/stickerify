@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { selectIsDefaultSettings, restoreDefaultSettings } from '@/store/slices/settings';
-import { Button, Divider } from '@components/ui';
+import { selectIsDefaultSettings, restoreDefaultSettings } from '@slices/settings';
+import { Button, Divider } from '@ui';
 
 import styles from './style.module.scss';
 

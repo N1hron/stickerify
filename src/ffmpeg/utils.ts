@@ -1,10 +1,5 @@
-import {
-    HorizontalAlignment,
-    Settings,
-    StickerMotionType,
-    StickerSizeType,
-    VerticalAlignment,
-} from '@/types';
+import { HorizontalAlignment, Settings, TranscoderFile, VerticalAlignment } from '@types';
+import { FILE_SIZE_PX } from '@config';
 import {
     maxQualityWebp,
     oneFrame,
@@ -47,14 +42,6 @@ function getPadding(
     return [padX, padY] as const;
 }
 
-function getSizePx(stickerSizeType: StickerSizeType) {
-    return stickerSizeType === 'emoji' ? 100 : 512;
-}
-
-function getOutputExt(stickerMotionType: StickerMotionType) {
-    return stickerMotionType === 'static' ? 'webp' : 'webm';
-}
-
 function createCommandScale({
     stickerSizeType,
     horizontalAlignment,
@@ -62,7 +49,7 @@ function createCommandScale({
     removeEmptySpaces,
     scaleUpSmallStickers,
 }: Settings) {
-    const sizePx = getSizePx(stickerSizeType);
+    const sizePx = FILE_SIZE_PX[stickerSizeType];
     const [padX, padY] = getPadding(sizePx, horizontalAlignment, verticalAlignment);
 
     switch (stickerSizeType) {
@@ -91,24 +78,32 @@ function createCommandScale({
     }
 }
 
-function createCommandStatic(inputName: string, outputName: string, settings: Settings) {
+function createTransformOptions(settings: Settings) {
     const scale = createCommandScale(settings);
 
-    return ['-i', inputName].concat(oneFrame, scale, maxQualityWebp, [outputName]);
+    return [...oneFrame, ...scale, ...maxQualityWebp];
 }
 
-// TODO
-function createCommandVideo() {
-    return [];
+function createCommand(file: TranscoderFile, settings: Settings) {
+    const id = file.id;
+
+    const inputExt = file.input.ext;
+    const outputExt = 'webp'; // Make dynamic later
+    const writeName = `file-${id}.${inputExt}`;
+    const readName = `file-${id}-out.${outputExt}`;
+
+    const inputOptions = ['-i', writeName];
+    const transformOptions = createTransformOptions(settings);
+    const outputOptions = [readName];
+
+    const command = [...inputOptions, ...transformOptions, ...outputOptions];
+
+    return {
+        command,
+        writeName,
+        readName,
+        outputExt,
+    };
 }
 
-function createCommand(inputName: string, outputName: string, settings: Settings) {
-    switch (settings.stickerMotionType) {
-        case 'static':
-            return createCommandStatic(inputName, outputName, settings);
-        case 'video':
-            return createCommandVideo();
-    }
-}
-
-export { createCommand, getOutputExt };
+export { createCommand };

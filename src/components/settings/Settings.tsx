@@ -1,5 +1,4 @@
-import { Card } from '@components/ui';
-
+import { Card } from '@ui';
 import { SettingList } from './setting-list/SettingList';
 import { RememberSettings } from './RememberSettings';
 import { RestoreDefaultSettings } from './RestoreDefaultSettings';

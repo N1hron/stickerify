@@ -22,10 +22,14 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
 
+    /* Path aliases */
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"],
+      "@config": ["src/config.ts"],
       "@components/*": ["src/components/*"],
+      "@ui": ["src/components/ui"],
+      "@icons": ["src/components/icons"],
       "@data": ["src/data"],
       "@store/*": ["src/store/*"],
       "@store": ["src/store"],

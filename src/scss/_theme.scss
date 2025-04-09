@@ -75,6 +75,10 @@
     --outline-focus: dotted var(--border-width) var(--color-accent-500);
     --outline-focus-offset: var(--border-width-thin);
 
+    --box-shadow:
+        0rem 0.0625rem 0.125rem 0rem hsl(from var(--color-accent-800) h s l / 0.3),
+        0rem 0.0625rem 0.1875rem 0.0625rem hsl(from var(--color-accent-800) h s l / 0.15);
+
     // Transitions
     --transition-duration: 0.2s;
     --transition-duration-slow: calc(var(--transition-duration) * 2);

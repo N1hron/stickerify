@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { load, transcode } from '@/ffmpeg';
-import { AppDispatch, RootState } from '@/store';
+import { AppDispatch, RootState } from '@store';
 import { selectSelectedFiles, setFileOutput, setFileStatus, setStatus } from '@slices/transcoder';
 
 const loadTranscoder = createAsyncThunk('transcoder/loadTranscoder', load);

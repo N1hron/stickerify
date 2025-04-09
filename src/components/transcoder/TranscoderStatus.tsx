@@ -2,7 +2,7 @@ import clsx from 'clsx';
 
 import { useAppSelector } from '@store/hooks';
 import { selectIsFilesEmpty, selectTranscoderStatus } from '@slices/transcoder';
-import { UploadIcon, LoadingIcon, ErrorIcon } from '@components/icons';
+import { UploadIcon, LoadingIcon, ErrorIcon } from '@icons';
 
 import style from './style.module.scss';
 

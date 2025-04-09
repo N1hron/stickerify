@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import clsx from 'clsx';
 
-import { Button } from '@components/ui';
+import { Button } from '@ui';
 import { validateFiles } from '@utils';
 
 import styles from './style.module.scss';

@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { Card, Divider, Checkbox } from '@components/ui';
+import { Card, Divider, Checkbox } from '@ui';
 import {
     selectIsAllFilesSelected,
     selectIsFilesEmpty,

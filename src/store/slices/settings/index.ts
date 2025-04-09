@@ -10,7 +10,6 @@ type SettingsSliceState = {
 
 const defaultSettings: Settings = {
     stickerSizeType: 'sticker',
-    stickerMotionType: 'static',
     horizontalAlignment: 'middle',
     verticalAlignment: 'middle',
     scaleUpSmallStickers: true,

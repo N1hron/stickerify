@@ -1,5 +1,5 @@
-import { Card, FileInput, Button } from '@components/ui';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { Card, FileInput, Button } from '@ui';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
 import {
     addFiles,
     removeSelectedFiles,
@@ -10,12 +10,11 @@ import {
     selectDownloadableFiles,
     selectTranscoderStatus,
     transcodeSelectedFiles,
-} from '@/store/slices/transcoder';
-import { downloadFile } from '@/utils';
+} from '@slices/transcoder';
+import { downloadFile } from '@utils';
+import { FILE_ACCEPT } from '@config';
 
 import styles from './style.module.scss';
-import { selectSetting } from '@/store/slices/settings';
-import { config } from '@/data';
 
 function TranscoderFooter() {
     const dispatch = useAppDispatch();
@@ -60,8 +59,6 @@ function TranscoderFooter() {
 function AddFiles() {
     const dispatch = useAppDispatch();
     const allowAdd = useAppSelector(selectAllowAdd);
-    const stickerMotionType = useAppSelector(selectSetting('stickerMotionType'));
-    const accept = config.accept[stickerMotionType];
 
     function handleFilesChange(files: File[]) {
         dispatch(addFiles(files));
@@ -70,7 +67,7 @@ function AddFiles() {
     return (
         <FileInput
             label='Add'
-            accept={accept}
+            accept={FILE_ACCEPT}
             disabled={!allowAdd}
             mini
             onChange={handleFilesChange}

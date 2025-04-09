@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import clsx from 'clsx';
 
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { addFiles, selectAllFiles, selectAllowAdd } from '@/store/slices/transcoder';
-import { selectSetting } from '@/store/slices/settings';
-import { validateFiles } from '@/utils';
-import { config } from '@/data';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { addFiles, selectAllFiles, selectAllowAdd } from '@slices/transcoder';
+import { validateFiles } from '@utils';
+import { FILE_ACCEPT } from '@config';
 import { FileListItem } from './FileListItem';
 
 import styles from './style.module.scss';
@@ -15,8 +14,6 @@ function FileList() {
 
     const files = useAppSelector(selectAllFiles);
     const allowAdd = useAppSelector(selectAllowAdd);
-    const stickerMotionType = useAppSelector(selectSetting('stickerMotionType'));
-    const accept = config.accept[stickerMotionType];
 
     const [dragEnterCount, setDragEnterCount] = useState(0);
     const isDraggingOver = dragEnterCount > 0;
@@ -46,7 +43,7 @@ function FileList() {
             event.preventDefault();
 
             const files = Array.from(event.dataTransfer.files);
-            const [validFiles] = validateFiles(files, accept);
+            const [validFiles] = validateFiles(files, FILE_ACCEPT);
 
             dispatch(addFiles(validFiles));
             setDragEnterCount(0);

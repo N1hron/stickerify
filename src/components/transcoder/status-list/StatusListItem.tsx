@@ -1,9 +1,9 @@
 import { useId } from 'react';
 import clsx from 'clsx';
 
-import { TranscoderFileStatus } from '@/types';
-import { CheckIcon, DoubleCheckIcon, ErrorIcon, LoadingIcon } from '@components/icons';
-import { Tooltip } from '@/components/ui';
+import { TranscoderFileStatus } from '@types';
+import { CheckIcon, DoubleCheckIcon, ErrorIcon, LoadingIcon } from '@icons';
+import { Tooltip } from '@ui';
 
 import styles from './style.module.scss';
 

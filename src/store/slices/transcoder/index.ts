@@ -1,15 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { FILE_LIMIT } from '@config';
+import { prepareFiles, findFile, revokeFileURLs } from './utils';
+import { loadTranscoder, transcodeSelectedFiles } from './thunks';
 import {
     TranscoderFile,
     TranscoderFileOutput,
     TranscoderFileStatus,
     TranscoderStatus,
 } from '@types';
-import { config } from '@data';
-
-import { prepareFiles, findFile, revokeFileURLs } from './utils';
-import { loadTranscoder, transcodeSelectedFiles } from './thunks';
 
 type TranscoderSliceState = {
     files: TranscoderFile[];
@@ -27,7 +26,7 @@ const transcoderSlice = createSlice({
     reducers: {
         addFiles: {
             reducer: (state, action: PayloadAction<TranscoderFile[]>) => {
-                state.files = [...state.files, ...action.payload].slice(0, config.fileLimit);
+                state.files = [...state.files, ...action.payload].slice(0, FILE_LIMIT);
             },
             prepare: prepareFiles,
         },
