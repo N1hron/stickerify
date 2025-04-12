@@ -1,81 +1,84 @@
-$border-width-min: var(--border-width-thin);
-$border-width-max: var(--border-width-thick);
-$border-width-diff: calc($border-width-max - $border-width-min);
-$content-height: calc(var(--button-full-height) - $border-width-diff);
-
-.buttonWrapper {
+.button {
     --color-icon: var(--color-text-alt);
     --button-full-height: 2rem;
 
-    display: block;
+    $border-width-min: var(--border-width-thin);
+    $border-width-max: var(--border-width-thick);
+    $border-width-diff: calc($border-width-max - $border-width-min);
+    $content-height: calc(var(--button-full-height) - $border-width-diff);
 
-    &:has(.button:active:not(:disabled)) {
+    display: block;
+    height: var(--button-full-height);
+    min-width: $content-height;
+
+    &:has(button:active:not(:disabled)) {
         padding-top: $border-width-diff;
     }
-}
 
-.button {
-    min-width: $content-height;
-    width: 100%;
-    height: var(--button-full-height);
-    padding: 0 0.5rem;
-    line-height: 1;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    border: solid $border-width-min var(--button-color-border);
-    border-bottom-width: $border-width-max;
-    border-radius: var(--border-radius);
-    background-color: var(--button-color);
-    text-transform: uppercase;
-    font-weight: inherit;
-    color: var(--color-text-alt);
-    user-select: none;
-    cursor: pointer;
-
-    svg {
+    button {
+        width: 100%;
         height: 100%;
-        width: auto;
-    }
-
-    &:disabled {
-        --color-icon: var(--color-text-alt);
-
-        background-color: var(--color-disabled-300);
-        border-color: var(--color-disabled-500);
+        padding: 0 0.5rem;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        border: solid $border-width-min var(--button-color-border);
+        border-bottom-width: $border-width-max;
+        border-radius: var(--border-radius);
+        background-color: var(--button-color);
+        text-transform: uppercase;
+        font-weight: inherit;
         color: var(--color-text-alt);
-        cursor: default;
-    }
+        user-select: none;
+        cursor: pointer;
 
-    &:not(:disabled) {
-        @media (hover: hover) {
-            &:hover {
-                background-color: var(--button-color-hover);
+        svg {
+            height: 100%;
+            width: auto;
+        }
+
+        &:disabled {
+            --color-icon: var(--color-text-alt);
+
+            background-color: var(--color-disabled-300);
+            border-color: var(--color-disabled-500);
+            color: var(--color-text-alt);
+            cursor: default;
+        }
+
+        &:not(:disabled) {
+            @media (hover: hover) {
+                &:hover {
+                    background-color: var(--button-color-hover);
+                }
+            }
+
+            &:active {
+                height: $content-height;
+                border-bottom-width: $border-width-min;
+            }
+
+            &:focus-visible {
+                outline: var(--outline-focus);
+                outline-offset: var(--outline-focus-offset);
             }
         }
 
-        &:active {
-            height: $content-height;
-            border-bottom-width: $border-width-min;
+        &:has(svg:only-child) {
+            padding: 0;
         }
-
-        &:focus-visible {
-            outline: var(--outline-focus);
-            outline-offset: var(--outline-focus-offset);
-        }
-    }
-
-    &:has(svg:only-child) {
-        padding: 0;
     }
 
     &.mini {
         --button-full-height: 1.5rem;
 
-        padding: 0 0.25rem;
-        gap: 0.25rem;
-        font-size: var(--font-size-xm);
+        button {
+            padding: 0 0.25rem;
+            gap: 0.25rem;
+            font-size: var(--font-size-xm);
+        }
     }
 
     &.accent {

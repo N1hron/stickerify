@@ -11,8 +11,8 @@ function Button({ color = 'accent', mini, className, ...props }: ButtonProps) {
     const cl = clsx(styles.button, styles[color], mini && styles.mini, className);
 
     return (
-        <div className={styles.buttonWrapper}>
-            <button className={cl} {...props}></button>
+        <div className={cl}>
+            <button {...props}></button>
         </div>
     );
 }
