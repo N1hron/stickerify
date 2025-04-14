@@ -1,5 +1,5 @@
 // Extract only first frame
-const oneFrame = ['-vframes', '1'];
+const oneFrame = ['-frames:v', '1'];
 
 // Set max quality for webp
 const maxQualityWebp = ['-quality', '100'];
