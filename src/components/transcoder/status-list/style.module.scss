@@ -8,7 +8,7 @@
     row-gap: 0.25rem;
 
     &Item {
-        --color-icon: var(--color-accent-500);
+        --color-icon: var(--color-accent-400);
         --color-icon-shadow: var(--color-accent-300);
 
         height: 1.5rem;
@@ -39,12 +39,12 @@
         }
 
         &.success {
-            --color-icon: var(--color-success-500);
+            --color-icon: var(--color-success-400);
             --color-icon-shadow: var(--color-success-300);
         }
 
         &.error {
-            --color-icon: var(--color-danger-500);
+            --color-icon: var(--color-danger-400);
             --color-icon-shadow: var(--color-danger-300);
         }
     }

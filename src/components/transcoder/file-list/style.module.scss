@@ -34,6 +34,9 @@
 
             &:focus {
                 outline: none;
+                background-color: var(--color-accent-400);
+                border-color: var(--color-accent-700);
+                color: var(--color-text-alt);
             }
         }
     }

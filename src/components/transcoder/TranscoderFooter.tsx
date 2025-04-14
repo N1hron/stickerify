@@ -73,7 +73,6 @@ function AddFiles() {
                     {filesAmount} / {FILE_LIMIT}
                 </span>
             </div>
-            <Divider vertical />
             <FileInput
                 label='Add'
                 accept={FILE_ACCEPT}
@@ -81,6 +80,7 @@ function AddFiles() {
                 mini
                 onChange={handleFilesChange}
             />
+            <Divider vertical />
         </div>
     );
 }

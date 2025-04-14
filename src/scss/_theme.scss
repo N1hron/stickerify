@@ -5,8 +5,10 @@
     --color-main-700: hsl(216, 25%, 35%);
     --color-main-600: hsl(216, 25%, 43%);
     --color-main-500: hsl(216, 25%, 49%);
+    --color-main-450: hsl(216, 25%, 53%);
     --color-main-400: hsl(216, 25%, 56%);
     --color-main-300: hsl(216, 25%, 64%);
+    --color-main-250: hsl(216, 25%, 70%);
     --color-main-200: hsl(216, 25%, 75%);
     --color-main-100: hsl(216, 25%, 85%);
     --color-main-050: hsl(216, 25%, 94%);
@@ -52,7 +54,10 @@
     --color-icon: var(--color-text);
 
     --color-disabled-500: var(--color-main-500);
+    --color-disabled-450: var(--color-main-450);
+    --color-disabled-400: var(--color-main-400);
     --color-disabled-300: var(--color-main-300);
+    --color-disabled-250: var(--color-main-250);
     --color-disabled-200: var(--color-main-200);
     --color-disabled-050: var(--color-main-050);
 
