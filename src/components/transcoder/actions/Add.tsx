@@ -16,11 +16,6 @@ function Add() {
 
     return (
         <div className={styles.add}>
-            <div className={styles.fileCount}>
-                <span>
-                    {filesAmount} / {FILE_LIMIT}
-                </span>
-            </div>
             <FileInput
                 label='Add'
                 accept={FILE_ACCEPT}
@@ -28,6 +23,9 @@ function Add() {
                 mini
                 onChange={handleFilesChange}
             />
+            <div className={styles.fileCount}>
+                {filesAmount} / {FILE_LIMIT}
+            </div>
             <Divider vertical />
         </div>
     );
