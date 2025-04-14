@@ -6,7 +6,7 @@ import { TranscoderStatus } from './TranscoderStatus';
 import { TranscoderHeader } from './TranscoderHeader';
 import { FileList } from './file-list/FileList';
 import { StatusList } from './status-list/StatusList';
-import { TranscoderFooter } from './TranscoderFooter';
+import { Actions } from './actions/Actions';
 
 import styles from './style.module.scss';
 
@@ -29,7 +29,7 @@ function Transcoder() {
                 <FileList />
                 <StatusList />
             </div>
-            <TranscoderFooter />
+            <Actions />
 
             <div className={styles.outline}>
                 <TranscoderStatus />
