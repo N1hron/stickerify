@@ -5,3 +5,4 @@ export { safeStringify } from './safeStringify';
 export { validateFiles } from './validateFiles';
 export { formatFileSize } from './formatFileSize';
 export { downloadFile } from './downloadFile';
+export { downloadZipFile } from './downloadZipFile';

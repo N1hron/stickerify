@@ -12,7 +12,7 @@ import {
     selectTranscoderStatus,
     transcodeSelectedFiles,
 } from '@slices/transcoder';
-import { downloadFile } from '@utils';
+import { downloadFile, downloadZipFile } from '@utils';
 import { FILE_ACCEPT, FILE_LIMIT } from '@config';
 
 import styles from './style.module.scss';
@@ -90,12 +90,19 @@ function DownloadFiles() {
     const downloadableFiles = useAppSelector(selectDownloadableFiles);
 
     function handleDownloadClick() {
-        downloadableFiles.forEach((file) => {
+        if (downloadableFiles.length > 1) {
+            const files = downloadableFiles.map((file) => ({
+                name: `${file.output.name}.${file.output.ext}`,
+                url: file.output.url,
+            }));
+            downloadZipFile(files, 'stickers.zip');
+        } else if (downloadableFiles.length === 1) {
+            const file = downloadableFiles[0];
             const url = file.output.url;
             const name = `${file.output.name}.${file.output.ext}`;
 
             downloadFile(url, name);
-        });
+        }
     }
 
     return (
