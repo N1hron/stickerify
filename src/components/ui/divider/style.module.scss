@@ -3,7 +3,9 @@
 }
 
 .vertical {
-    height: 100%;
+    min-height: 100%;
+    width: var(--border-width-thin);
     border-right: solid var(--border-width-thin) var(--color-accent-200);
     border-top: none;
+    align-self: stretch;
 }
