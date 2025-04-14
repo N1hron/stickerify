@@ -36,6 +36,9 @@ async function transcode(
     }
 
     const outputFile = await ffmpeg.readFile(readName);
+    await ffmpeg.deleteFile(writeName);
+    await ffmpeg.deleteFile(readName);
+
     const outputBlob = new Blob([outputFile]);
     const outputUrl = URL.createObjectURL(outputBlob);
     const outputSize = outputBlob.size;
