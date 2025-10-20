@@ -1,11 +1,9 @@
 .divider {
-    border-top: solid var(--border-width-thin) var(--color-accent-200);
-}
+    height: var(--border-width-thin);
+    background-color: var(--color-accent-200);
+    margin: 0.5rem 0;
 
-.vertical {
-    min-height: 100%;
-    width: var(--border-width-thin);
-    border-right: solid var(--border-width-thin) var(--color-accent-200);
-    border-top: none;
-    align-self: stretch;
+    &.disableMargin {
+        margin: 0;
+    }
 }

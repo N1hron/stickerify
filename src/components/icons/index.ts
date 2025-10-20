@@ -4,3 +4,4 @@ export { LoadingIcon } from './LoadingIcon';
 export { ErrorIcon } from './ErrorIcon';
 export { CheckIcon } from './CheckIcon';
 export { DoubleCheckIcon } from './DoubleCheckIcon';
+export { ImageIcon } from './ImageIcon';

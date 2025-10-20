@@ -3,13 +3,13 @@ import clsx from 'clsx';
 import styles from './style.module.scss';
 
 type DividerProps = {
-    vertical?: boolean;
+    disableMargin?: boolean;
 };
 
-function Divider({ vertical }: DividerProps) {
-    const cl = clsx(styles.divider, vertical && styles.vertical);
+function Divider({ disableMargin = false }: DividerProps) {
+    const cl = clsx(styles.divider, disableMargin && styles.disableMargin);
 
-    return <div className={cl} aria-hidden></div>;
+    return <div className={cl} />;
 }
 
 export { Divider };

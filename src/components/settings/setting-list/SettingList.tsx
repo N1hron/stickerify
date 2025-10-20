@@ -1,14 +1,10 @@
-import clsx from 'clsx';
-
 import { SettingListItem } from './SettingListItem';
 
 import styles from '../style.module.scss';
 
 function SettingList() {
-    const cl = clsx(styles.settingsItem, styles.settingList);
-
     return (
-        <ul className={cl}>
+        <ul className={styles.settingList}>
             <SettingListItem
                 name='stickerSizeType'
                 label='Sticker size type'

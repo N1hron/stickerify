@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { Settings } from '@types';
 import { safeParseJson, isSettings } from '@utils';
+import { Settings } from '@types';
 
 type SettingsSliceState = {
     items: Settings;
@@ -29,7 +29,11 @@ function getInitialState(): SettingsSliceState {
     const remember = safeParseJson(rememberLS);
 
     if (remember === true && isSettings(settings)) {
-        return { items: settings, remember };
+        return {
+            ...defaultState,
+            items: settings,
+            remember,
+        };
     } else if (remember === false) {
         return { ...defaultState, remember };
     }
@@ -57,7 +61,7 @@ const settingsSlice = createSlice({
     },
 });
 
+export { defaultSettings };
 export const reducer = settingsSlice.reducer;
 export const { setSetting, setRememberSettings, restoreDefaultSettings } = settingsSlice.actions;
 export * from './selectors';
-export { defaultSettings };
