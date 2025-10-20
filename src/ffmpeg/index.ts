@@ -35,7 +35,7 @@ async function transcode(
         );
     }
 
-    const outputFile = await ffmpeg.readFile(readName);
+    const outputFile = (await ffmpeg.readFile(readName)) as Uint8Array<ArrayBuffer> | string;
     await ffmpeg.deleteFile(writeName);
     await ffmpeg.deleteFile(readName);
 
