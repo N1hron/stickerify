@@ -22,7 +22,9 @@ function Card<T extends React.ElementType = 'div'>({
     ...props
 }: CardProps<T>) {
     const Element: React.ElementType = as || 'div';
-    return <Element className={clsx(styles.card, mini && styles.mini, className)} {...props} />;
+    const cl = clsx(styles.card, mini && styles.mini, className);
+
+    return <Element className={cl} {...props} />;
 }
 
 export { Card };

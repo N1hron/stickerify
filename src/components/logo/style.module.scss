@@ -1,4 +1,6 @@
 .logo {
+    flex-shrink: 0;
+
     h1 {
         color: var(--color-accent-500);
         text-shadow: 0 var(--border-width-thick) 0 var(--color-accent-200);

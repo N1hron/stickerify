@@ -4,6 +4,12 @@
     background-color: var(--color-accent-025);
     border: solid var(--border-width-thin) var(--color-accent-200);
     border-bottom-width: var(--border-width-thick);
+    overflow-y: scroll;
+    scrollbar-width: none;
+
+    > * {
+        flex-shrink: 0;
+    }
 }
 
 .mini {
