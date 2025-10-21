@@ -31,6 +31,7 @@ export type TranscoderFile = {
     input: TranscoderFileInput;
     output: TranscoderFileOutput;
     status: TranscoderFileStatus;
+    message?: string;
     isSelected: boolean;
 };
 

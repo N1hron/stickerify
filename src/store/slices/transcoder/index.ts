@@ -45,11 +45,21 @@ const transcoderSlice = createSlice({
 
             if (file) file.output = outputFile;
         },
-        setFileStatus: (state, action: PayloadAction<[string, TranscoderFileStatus]>) => {
-            const [id, status] = action.payload;
+        setFileStatus: (
+            state,
+            action: PayloadAction<{
+                id: string;
+                status: TranscoderFileStatus;
+                message?: string;
+            }>
+        ) => {
+            const { id, status, message } = action.payload;
             const file = findFile(state.files, id);
 
-            if (file) file.status = status;
+            if (file) {
+                file.status = status;
+                file.message = message;
+            }
         },
         removeSelectedFiles: (state) => {
             state.files = state.files.filter((file) => {

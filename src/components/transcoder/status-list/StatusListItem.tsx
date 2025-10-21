@@ -9,9 +9,10 @@ import styles from './style.module.scss';
 
 type StatusListItemProps = {
     status: TranscoderFileStatus;
+    message?: string;
 };
 
-function StatusListItem({ status }: StatusListItemProps) {
+function StatusListItem({ status, message }: StatusListItemProps) {
     const id = useId();
     const cl = clsx(styles.statusListItem, styles[status]);
 
@@ -37,7 +38,7 @@ function StatusListItem({ status }: StatusListItemProps) {
             case 'success':
                 return 'TRANSCODED';
             case 'error':
-                return 'ERROR';
+                return message ? message.toUpperCase() : 'ERROR';
         }
     }
 

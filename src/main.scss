@@ -24,6 +24,13 @@ body {
     }
 }
 
+input {
+    &::selection {
+        color: var(--color-accent-400);
+        background-color: var(--color-text-alt);
+    }
+}
+
 * {
     margin: 0;
     padding: 0;

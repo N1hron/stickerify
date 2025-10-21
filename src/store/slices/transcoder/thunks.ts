@@ -1,8 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { load, transcode } from '@/ffmpeg';
+import { load, reload, transcode } from '@/ffmpeg';
 import { AppDispatch, RootState } from '@store';
 import { selectSelectedFiles, setFileOutput, setFileStatus, setStatus } from '@slices/transcoder';
+import { devLog } from '@/utils/devLog';
 
 const loadTranscoder = createAsyncThunk('transcoder/loadTranscoder', load);
 
@@ -20,16 +21,26 @@ const transcodeSelectedFiles = createAsyncThunk<
         const file = selectedFiles[i];
         const id = file.id;
 
-        dispatch(setFileStatus([id, 'transcoding']));
+        dispatch(setFileStatus({ id, status: 'transcoding' }));
 
         await transcode(file, settings)
-            .then((res) => {
-                dispatch(setFileOutput([id, { ...file.output, ...res }]));
-                dispatch(setFileStatus([id, 'success']));
+            .catch(async (error) => {
+                if (error === 'RuntimeError: index out of bounds') {
+                    devLog('Index out of bounds, reloading FFmpeg');
+
+                    await reload();
+                    return transcode(file, settings);
+                } else {
+                    throw error;
+                }
+            })
+            .then((result) => {
+                dispatch(setFileOutput([id, { ...file.output, ...result }]));
+                dispatch(setFileStatus({ id, status: 'success' }));
             })
             .catch((error) => {
-                console.log(error);
-                dispatch(setFileStatus([id, 'error']));
+                devLog(error);
+                dispatch(setFileStatus({ id, status: 'error', message: 'Unsupported' }));
             });
     }
 

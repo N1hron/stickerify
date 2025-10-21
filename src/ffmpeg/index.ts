@@ -3,21 +3,35 @@ import { fetchFile, toBlobURL } from '@ffmpeg/util';
 
 import { TranscoderFileOutput, Settings, TranscoderFile } from '@types';
 import { createCommand } from './utils';
+import { devLog } from '@/utils/devLog';
 
 const ffmpeg = new FFmpeg();
 const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.10/dist/esm';
+let coreURL: string | undefined = undefined;
+let wasmURL: string | undefined = undefined;
 
 async function load() {
-    if (import.meta.env.DEV) {
-        ffmpeg.on('log', ({ message }) => {
-            console.log(message);
-        });
+    ffmpeg.on('log', ({ message }) => {
+        devLog(message);
+    });
+
+    if (!coreURL) {
+        coreURL = await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript');
+    }
+
+    if (!wasmURL) {
+        wasmURL = await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm');
     }
 
     return ffmpeg.load({
-        coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
-        wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
+        coreURL,
+        wasmURL,
     });
+}
+
+function reload() {
+    ffmpeg.terminate();
+    return load();
 }
 
 async function transcode(
@@ -27,6 +41,11 @@ async function transcode(
     const { command, writeName, readName, outputExt } = createCommand(file, settings);
 
     await ffmpeg.writeFile(writeName, await fetchFile(file.input.url));
+
+    devLog('==================================================');
+    devLog('============ Executing FFmpeg command ============');
+    devLog('==================================================');
+
     const statusCode = await ffmpeg.exec(command);
 
     if (statusCode !== 0) {
@@ -50,4 +69,4 @@ async function transcode(
     };
 }
 
-export { load, transcode };
+export { load, transcode, reload };

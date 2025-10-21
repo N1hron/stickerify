@@ -10,7 +10,7 @@ function StatusList() {
     return (
         <ul className={styles.statusList}>
             {files.map((file) => (
-                <StatusListItem key={file.id} status={file.status} />
+                <StatusListItem key={file.id} status={file.status} message={file.message} />
             ))}
         </ul>
     );
