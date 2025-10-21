@@ -1,0 +1,24 @@
+import { ImageIcon } from '../icons';
+import { useSourceSize } from './useSourceSize';
+import { useAppSelector } from '@/store/hooks';
+import { selectSetting } from '@/store/slices/settings';
+import { stickerSizeTypeToPx } from '@/utils';
+
+import styles from './style.module.scss';
+
+function PlaygroundStickerSource() {
+    const stickerSizeType = useAppSelector(selectSetting('stickerSizeType'));
+    const stickerSizeTypePx = stickerSizeTypeToPx(stickerSizeType);
+    const { width: sourceWidth, height: sourceHeight } = useSourceSize();
+
+    const width = (sourceWidth / stickerSizeTypePx) * 100 + '%';
+    const height = (sourceHeight / stickerSizeTypePx) * 100 + '%';
+
+    return (
+        <div className={styles.stickerSource} style={{ width: width, height: height }}>
+            <ImageIcon />
+        </div>
+    );
+}
+
+export { PlaygroundStickerSource };

@@ -28,7 +28,6 @@ export default tseslint
       },
       rules: {
         ...reactHooks.configs.recommended.rules,
-        'react-hooks/exhaustive-deps': ['off'],
         '@typescript-eslint/unbound-method': ['off'],
         '@typescript-eslint/no-floating-promises': ['off'],
         'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],

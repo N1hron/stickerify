@@ -1,3 +1,5 @@
+import { Settings } from './types';
+
 const FILE_ACCEPT = 'image/*, video/*';
 const FILE_LIMIT = 25;
 const FILE_SIZE_PX = {
@@ -5,4 +7,12 @@ const FILE_SIZE_PX = {
     emoji: 100,
 } as const;
 
-export { FILE_ACCEPT, FILE_LIMIT, FILE_SIZE_PX };
+const DEFAULT_SETTINGS: Settings = {
+    stickerSizeType: 'sticker',
+    horizontalAlignment: 'middle',
+    verticalAlignment: 'middle',
+    scaleUpSmallStickers: true,
+    removeEmptySpaces: true,
+};
+
+export { FILE_ACCEPT, FILE_LIMIT, FILE_SIZE_PX, DEFAULT_SETTINGS };

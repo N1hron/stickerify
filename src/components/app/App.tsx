@@ -1,5 +1,6 @@
 import { Logo } from '@components/logo/Logo';
 import { Settings } from '@components/settings/Settings';
+import { Playground } from '../playground/Playground';
 import { GithubPage } from '@components/github-page/GithubLink';
 import { Transcoder } from '@components/transcoder/Transcoder';
 
@@ -21,6 +22,7 @@ function Sidebar() {
         <div className={styles.sidebar}>
             <Logo />
             <Settings />
+            <Playground />
             <GithubPage />
         </div>
     );

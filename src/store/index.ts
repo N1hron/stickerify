@@ -2,11 +2,13 @@ import { combineReducers, configureStore, Middleware } from '@reduxjs/toolkit';
 
 import { reducer as settingsReducer } from '@slices/settings';
 import { reducer as transcoderReducer } from '@slices/transcoder';
+import { reducer as playgroundReducer } from '@slices/playground';
 import { preventFileDuplicates, rememberSettings } from '@store/middleware';
 
 const rootReducer = combineReducers({
     settings: settingsReducer,
     transcoder: transcoderReducer,
+    playground: playgroundReducer,
 });
 
 const store = configureStore({

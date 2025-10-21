@@ -2,22 +2,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { safeParseJson, isSettings } from '@utils';
 import { Settings } from '@types';
+import { DEFAULT_SETTINGS } from '@/config';
 
 type SettingsSliceState = {
     items: Settings;
     remember: boolean;
 };
 
-const defaultSettings: Settings = {
-    stickerSizeType: 'sticker',
-    horizontalAlignment: 'middle',
-    verticalAlignment: 'middle',
-    scaleUpSmallStickers: true,
-    removeEmptySpaces: true,
-};
-
 const defaultState: SettingsSliceState = {
-    items: defaultSettings,
+    items: DEFAULT_SETTINGS,
     remember: true,
 };
 
@@ -53,7 +46,7 @@ const settingsSlice = createSlice({
             state.items[key] = value;
         },
         restoreDefaultSettings: (state) => {
-            state.items = defaultSettings;
+            state.items = DEFAULT_SETTINGS;
         },
         setRememberSettings: (state, action: PayloadAction<boolean>) => {
             state.remember = action.payload;
@@ -61,7 +54,7 @@ const settingsSlice = createSlice({
     },
 });
 
-export { defaultSettings };
+export { DEFAULT_SETTINGS };
 export const reducer = settingsSlice.reducer;
 export const { setSetting, setRememberSettings, restoreDefaultSettings } = settingsSlice.actions;
 export * from './selectors';
