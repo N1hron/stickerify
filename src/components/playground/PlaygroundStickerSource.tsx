@@ -16,7 +16,7 @@ function PlaygroundStickerSource() {
 
     return (
         <div className={styles.stickerSource} style={{ width: width, height: height }}>
-            <ImageIcon />
+            <ImageIcon aria-hidden />
         </div>
     );
 }

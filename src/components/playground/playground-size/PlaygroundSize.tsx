@@ -64,7 +64,7 @@ function PlaygroundSizeWidthInput() {
 
     return (
         <div className={styles.sizeWidthInput}>
-            <input type='text' value={width} onChange={handleChange} />
+            <input type='text' value={width} onChange={handleChange} aria-label='Width' />
             <span>px</span>
         </div>
     );
@@ -95,7 +95,7 @@ function PlaygroundSizeHeightInput() {
 
     return (
         <div className={styles.sizeHeightInput}>
-            <input type='text' value={height} onChange={handleChange} />
+            <input type='text' value={height} onChange={handleChange} aria-label='Height' />
             <span>px</span>
         </div>
     );

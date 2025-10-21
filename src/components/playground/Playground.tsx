@@ -10,7 +10,7 @@ import styles from './style.module.scss';
 
 function Playground() {
     return (
-        <Card className={styles.playground}>
+        <Card className={styles.playground} as='section'>
             <h2 className={styles.title}>Playground</h2>
             <Divider />
 

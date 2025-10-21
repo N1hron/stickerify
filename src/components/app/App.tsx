@@ -10,20 +10,14 @@ function App() {
     return (
         <div className={styles.wrapper}>
             <main className={styles.main}>
-                <Sidebar />
+                <div className={styles.sidebar}>
+                    <Logo />
+                    <Settings />
+                    <Playground />
+                    <GithubPage />
+                </div>
                 <Transcoder />
             </main>
-        </div>
-    );
-}
-
-function Sidebar() {
-    return (
-        <div className={styles.sidebar}>
-            <Logo />
-            <Settings />
-            <Playground />
-            <GithubPage />
         </div>
     );
 }

@@ -1,4 +1,4 @@
-import { Button, Divider } from '@ui';
+import { Button } from '@ui';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { selectIsDefaultSettings, restoreDefaultSettings } from '@slices/settings';
 
@@ -13,17 +13,14 @@ function RestoreDefaultSettings() {
     }
 
     return (
-        <div className={styles.restoreDefaults}>
-            <Divider />
-            <Button
-                className={styles.restoreDefaultsButton}
-                color='accent'
-                onClick={handleRestoreDefaultsClick}
-                disabled={isDefaultSettings}
-            >
-                Restore defaults
-            </Button>
-        </div>
+        <Button
+            className={styles.restoreDefaults}
+            color='accent'
+            onClick={handleRestoreDefaultsClick}
+            disabled={isDefaultSettings}
+        >
+            Restore defaults
+        </Button>
     );
 }
 

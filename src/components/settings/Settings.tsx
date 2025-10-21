@@ -7,7 +7,9 @@ import styles from './style.module.scss';
 
 function Settings() {
     return (
-        <Card className={styles.settings} as='aside' tabIndex={-1}>
+        <Card className={styles.settings} as='section' tabIndex={-1}>
+            <h2 className={styles.title}>Settings</h2>
+            <Divider />
             <SettingList />
             <Divider />
             <RememberSettings />
