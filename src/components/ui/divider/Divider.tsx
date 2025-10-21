@@ -4,10 +4,15 @@ import styles from './style.module.scss';
 
 type DividerProps = {
     disableMargin?: boolean;
+    vertical?: boolean;
 };
 
-function Divider({ disableMargin = false }: DividerProps) {
-    const cl = clsx(styles.divider, disableMargin && styles.disableMargin);
+function Divider({ disableMargin = false, vertical = false }: DividerProps) {
+    const cl = clsx(
+        styles.divider,
+        vertical && styles.vertical,
+        disableMargin && styles.disableMargin
+    );
 
     return <div className={cl} />;
 }

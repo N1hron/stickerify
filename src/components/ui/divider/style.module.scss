@@ -3,6 +3,12 @@
     background-color: var(--color-accent-200);
     margin: 0.5rem 0;
 
+    &.vertical {
+        width: var(--border-width-thin);
+        height: 100%;
+        margin: 0 0.5rem;
+    }
+
     &.disableMargin {
         margin: 0;
     }

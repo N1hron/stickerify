@@ -18,7 +18,7 @@ function TranscoderHeader() {
             <div>Name</div>
             <div>Ext</div>
             <div>Size</div>
-            <Divider vertical />
+            <Divider vertical disableMargin />
             <SelectAll />
         </Card>
     );

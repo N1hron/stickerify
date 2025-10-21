@@ -34,7 +34,7 @@ function FileListItemInner({ number, file }: FileListItemProps) {
             <input type='text' value={name} onChange={handleNameChange} />
             <div>{ext}</div>
             <div>{formatFileSize(size)}</div>
-            <Divider vertical />
+            <Divider vertical disableMargin />
             <Checkbox
                 label='Select file'
                 hideLabel
