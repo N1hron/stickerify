@@ -103,17 +103,19 @@
         }
     }
 
-    &VerticalAlignment {
-        &Top {
-            align-items: start;
-        }
+    &:not(.stickerRemoveEmptySpaces) {
+        &.stickerVerticalAlignment {
+            &Top {
+                align-items: start;
+            }
 
-        &Middle {
-            align-items: center;
-        }
+            &Middle {
+                align-items: center;
+            }
 
-        &Bottom {
-            align-items: end;
+            &Bottom {
+                align-items: end;
+            }
         }
     }
 }

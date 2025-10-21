@@ -8,15 +8,16 @@ import {
     selectPlaygroundSourceWidth,
 } from '@/store/slices/playground';
 import { useStickerSizeTypeInPx } from '@/hooks';
+import { Size } from '@/types';
 
-function useSourceSize() {
+function useSourceSize(): Size {
     const scaleUpSmallStickers = useAppSelector(selectSetting('scaleUpSmallStickers'));
     const stickerSizeTypeInPx = useStickerSizeTypeInPx();
     const sourceWidth = useAppSelector(selectPlaygroundSourceWidth);
     const sourceHeight = useAppSelector(selectPlaygroundSourceHeight);
 
     return useMemo(() => {
-        let sourceSize: { width: number; height: number };
+        let sourceSize: Size;
 
         if (scaleUpSmallStickers) {
             sourceSize = scaleToContain(
@@ -25,18 +26,19 @@ function useSourceSize() {
                 stickerSizeTypeInPx,
                 stickerSizeTypeInPx
             );
+        } else {
+            sourceSize = scaleToFit(
+                sourceWidth,
+                sourceHeight,
+                stickerSizeTypeInPx,
+                stickerSizeTypeInPx
+            );
         }
 
-        sourceSize = scaleToFit(
-            sourceWidth,
-            sourceHeight,
-            stickerSizeTypeInPx,
-            stickerSizeTypeInPx
-        );
-
-        sourceSize = { width: Math.round(sourceSize.width), height: Math.round(sourceSize.height) };
-
-        return sourceSize;
+        return {
+            width: Math.round(sourceSize.width),
+            height: Math.round(sourceSize.height),
+        };
     }, [scaleUpSmallStickers, sourceWidth, sourceHeight, stickerSizeTypeInPx]);
 }
 

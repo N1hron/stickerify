@@ -9,10 +9,10 @@ import styles from './style.module.scss';
 function PlaygroundStickerSource() {
     const stickerSizeType = useAppSelector(selectSetting('stickerSizeType'));
     const stickerSizeTypePx = stickerSizeTypeToPx(stickerSizeType);
-    const { width: sourceWidth, height: sourceHeight } = useSourceSize();
+    const sourceSize = useSourceSize();
 
-    const width = (sourceWidth / stickerSizeTypePx) * 100 + '%';
-    const height = (sourceHeight / stickerSizeTypePx) * 100 + '%';
+    const width = (sourceSize.width / stickerSizeTypePx) * 100 + '%';
+    const height = (sourceSize.height / stickerSizeTypePx) * 100 + '%';
 
     return (
         <div className={styles.stickerSource} style={{ width: width, height: height }}>

@@ -5,7 +5,7 @@ import { useAppSelector } from '@/store/hooks';
 import { selectSetting } from '@/store/slices/settings';
 import { capitalize } from '@/utils';
 
-import style from './style.module.scss';
+import styles from './style.module.scss';
 
 type PlaygroundStickerProps = {
     children: ReactNode;
@@ -14,11 +14,13 @@ type PlaygroundStickerProps = {
 function PlaygroundSticker({ children }: PlaygroundStickerProps) {
     const horizontalAlignment = useAppSelector(selectSetting('horizontalAlignment'));
     const verticalAlignment = useAppSelector(selectSetting('verticalAlignment'));
+    const removeEmptySpaces = useAppSelector(selectSetting('removeEmptySpaces'));
 
     const cl = clsx(
-        style.sticker,
-        style[`stickerHorizontalAlignment${capitalize(horizontalAlignment)}`],
-        style[`stickerVerticalAlignment${capitalize(verticalAlignment)}`]
+        styles.sticker,
+        styles[`stickerHorizontalAlignment${capitalize(horizontalAlignment)}`],
+        styles[`stickerVerticalAlignment${capitalize(verticalAlignment)}`],
+        removeEmptySpaces && styles.stickerRemoveEmptySpaces
     );
 
     return <div className={cl}>{children}</div>;
