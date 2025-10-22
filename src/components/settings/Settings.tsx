@@ -10,10 +10,14 @@ function Settings() {
         <Card className={styles.settings} as='section' tabIndex={-1}>
             <h2 className={styles.title}>Settings</h2>
             <Divider />
-            <SettingList />
+            <div className={styles.item}>
+                <SettingList />
+            </div>
             <Divider />
-            <RememberSettings />
-            <RestoreDefaultSettings />
+            <div className={styles.item}>
+                <RememberSettings />
+                <RestoreDefaultSettings />
+            </div>
         </Card>
     );
 }

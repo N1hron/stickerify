@@ -1,11 +1,14 @@
+import { Button } from '@ui';
+import { DownloadIcon } from '@/components/icons';
 import { useAppSelector } from '@store/hooks';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { selectAllowDownload, selectDownloadableFiles } from '@slices/transcoder';
 import { downloadFile, downloadZipFile } from '@utils';
-import { Button } from '@ui';
 
 function Download() {
     const allowDownload = useAppSelector(selectAllowDownload);
     const downloadableFiles = useAppSelector(selectDownloadableFiles);
+    const showIcon = useMediaQuery('(max-width: 23em)');
 
     function handleDownloadClick() {
         if (!allowDownload) return;
@@ -27,7 +30,7 @@ function Download() {
 
     return (
         <Button color='success' mini disabled={!allowDownload} onClick={handleDownloadClick}>
-            Download
+            {showIcon ? <DownloadIcon /> : 'Download'}
         </Button>
     );
 }

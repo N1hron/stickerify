@@ -35,7 +35,7 @@
         cursor: pointer;
 
         svg {
-            height: 100%;
+            height: 85%;
             width: auto;
         }
 
@@ -68,6 +68,15 @@
 
         &:has(svg:only-child) {
             padding: 0;
+        }
+    }
+
+    &.pressed {
+        padding-top: $border-width-diff;
+
+        button {
+            height: $content-height;
+            border-bottom-width: $border-width-min;
         }
     }
 

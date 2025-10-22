@@ -1,3 +1,13 @@
+.playground {
+    grid-row: 3/4;
+    grid-column: 1/2;
+}
+
+.content {
+    max-width: 15rem;
+    margin: 0 auto;
+}
+
 .title {
     padding: 0 0.25rem;
     text-align: center;
@@ -67,6 +77,7 @@
         padding: 0 0.25rem;
         border: solid var(--border-width) var(--color-accent-400);
         border-left: none;
+        border-radius: 0;
         color: var(--color-main-500);
         font-weight: 500;
 
@@ -155,4 +166,17 @@
 
 .randomize {
     margin-top: 0.25rem;
+}
+
+@media (max-width: 47em) {
+    .playground {
+        grid-row: 3/4;
+        grid-column: 2/3;
+    }
+}
+
+@media (max-width: 30em) {
+    .playground {
+        grid-column: 1/2;
+    }
 }

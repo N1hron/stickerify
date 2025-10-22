@@ -13,14 +13,15 @@ function Playground() {
         <Card className={styles.playground} as='section'>
             <h2 className={styles.title}>Playground</h2>
             <Divider />
-
-            <PlaygroundStickerSize />
-            <PlaygroundSticker>
-                <PlaygroundStickerSource />
-                <PlaygroundStickerBorder />
-            </PlaygroundSticker>
-            <PlaygroundSourceSize />
-            <PlaygroundRandomizeSourceSize />
+            <div className={styles.content}>
+                <PlaygroundStickerSize />
+                <PlaygroundSticker>
+                    <PlaygroundStickerSource />
+                    <PlaygroundStickerBorder />
+                </PlaygroundSticker>
+                <PlaygroundSourceSize />
+                <PlaygroundRandomizeSourceSize />
+            </div>
         </Card>
     );
 }
