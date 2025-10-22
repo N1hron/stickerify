@@ -7,12 +7,13 @@ import { useStickerSizeTypeInPx } from '@/hooks';
 import { Size } from '@/types';
 
 function useStickerSize(): Size {
+    const stickerSizeType = useAppSelector(selectSetting('stickerSizeType'));
     const removeEmptySpaces = useAppSelector(selectSetting('removeEmptySpaces'));
     const stickerSizeTypeInPx = useStickerSizeTypeInPx();
     const sourceSize = useSourceSize();
 
     return useMemo(() => {
-        if (removeEmptySpaces) {
+        if (removeEmptySpaces && stickerSizeType === 'sticker') {
             if (sourceSize.height === stickerSizeTypeInPx) {
                 return sourceSize;
             }

@@ -124,7 +124,7 @@
         }
     }
 
-    &:not(.stickerRemoveEmptySpaces) {
+    &:not(.stickerRemoveEmptySpaces.stickerSticker) {
         &.stickerVerticalAlignment {
             &Top {
                 align-items: start;

@@ -12,12 +12,14 @@ type PlaygroundStickerProps = {
 };
 
 function PlaygroundSticker({ children }: PlaygroundStickerProps) {
+    const stickerSizeType = useAppSelector(selectSetting('stickerSizeType'));
     const horizontalAlignment = useAppSelector(selectSetting('horizontalAlignment'));
     const verticalAlignment = useAppSelector(selectSetting('verticalAlignment'));
     const removeEmptySpaces = useAppSelector(selectSetting('removeEmptySpaces'));
 
     const cl = clsx(
         styles.sticker,
+        styles[`sticker${capitalize(stickerSizeType)}`],
         styles[`stickerHorizontalAlignment${capitalize(horizontalAlignment)}`],
         styles[`stickerVerticalAlignment${capitalize(verticalAlignment)}`],
         removeEmptySpaces && styles.stickerRemoveEmptySpaces
