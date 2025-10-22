@@ -1,53 +1,51 @@
 .statusList {
-    padding: 3rem calc(var(--border-width) + 0.5rem) 3rem 0;
-    grid-column: -3/-2;
-    grid-row: 1/-1;
+    padding: 3rem var(--border-radius) 3rem 0;
+    grid-column: 3/4;
     display: grid;
-    grid-template-columns: subgrid;
     grid-auto-rows: 2rem;
     row-gap: 0.25rem;
+}
 
-    &Item {
-        --color-icon: var(--color-accent-500);
-        --color-icon-shadow: var(--color-accent-500);
+.statusListItem {
+    --color-icon: var(--color-accent-500);
+    --color-icon-shadow: var(--color-accent-500);
 
-        height: 1.5rem;
-        place-self: center;
-        border-radius: var(--border-radius);
-        cursor: pointer;
+    height: 1.5rem;
+    border-radius: var(--border-radius);
+    place-self: center;
+    cursor: pointer;
 
-        &:hover {
-            svg {
-                transform: scale(1.125);
-                filter: drop-shadow(0 0 0.125rem var(--color-icon-shadow));
-            }
-        }
-
+    &:hover {
         svg {
-            width: 100%;
-            height: auto;
+            transform: scale(1.125);
+            filter: drop-shadow(0 0 0.125rem var(--color-icon-shadow));
         }
+    }
 
-        &.transcoding {
-            --color-icon: var(--color-accent-500);
+    svg {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
 
-            animation-duration: 2s;
-            animation-iteration-count: infinite;
-            animation-timing-function: linear;
+    &.transcoding {
+        --color-icon: var(--color-accent-500);
 
-            &:global {
-                animation-name: rotate;
-            }
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+
+        &:global {
+            animation-name: rotate;
         }
+    }
 
-        &.success {
-            --color-icon: var(--color-success-500);
-            --color-icon-shadow: var(--color-success-300);
-        }
+    &.success {
+        --color-icon: var(--color-success-500);
+        --color-icon-shadow: var(--color-success-300);
+    }
 
-        &.error {
-            --color-icon: var(--color-danger-500);
-            --color-icon-shadow: var(--color-danger-300);
-        }
+    &.error {
+        --color-icon: var(--color-danger-500);
+        --color-icon-shadow: var(--color-danger-300);
     }
 }

@@ -2,11 +2,11 @@
     margin: 0;
     list-style: none;
     z-index: 4;
-    grid-column: 1/-4;
+    grid-column: 1/6;
     grid-row: -2/-1;
     display: flex;
-    justify-content: space-between;
     gap: 0.25rem;
+    justify-content: space-between;
 
     li {
         flex-shrink: 0;

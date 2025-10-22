@@ -31,9 +31,14 @@ function FileListItemInner({ number, file }: FileListItemProps) {
     return (
         <Card className={styles.fileListItem} as='li'>
             <div>{number}</div>
-            <input type='text' value={name} onChange={handleNameChange} />
-            <div>{ext}</div>
-            <div>{formatFileSize(size)}</div>
+            <input
+                className={styles.fileName}
+                type='text'
+                value={name}
+                onChange={handleNameChange}
+            />
+            <div className={styles.fileExtension}>{ext}</div>
+            <div className={styles.fileSize}>{formatFileSize(size)}</div>
             <Divider vertical disableMargin />
             <Checkbox
                 label='Select file'

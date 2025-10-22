@@ -15,9 +15,9 @@ function TranscoderHeader() {
     return (
         <Card className={styles.header} mini>
             <div>№</div>
-            <div>Name</div>
-            <div>Ext</div>
-            <div>Size</div>
+            <div className={styles.headerName}>Name</div>
+            <div className={styles.headerExtension}>Ext</div>
+            <div className={styles.headerSize}>Size</div>
             <Divider vertical disableMargin />
             <SelectAll />
         </Card>
