@@ -15,6 +15,7 @@ Upload an image, choose whether you want a sticker or emoji, optionally trim pad
 
 ## Key features
 
+- Upload and convert up to 25 images at a time.
 - Two size modes: **sticker** and **emoji**.
 - Automatic resizing of large images.
 - Optional scaling up of small images.
@@ -22,3 +23,4 @@ Upload an image, choose whether you want a sticker or emoji, optionally trim pad
 - Horizontal alignment: left/center/right.
 - Vertical alignment: top/center/bottom.
 - Export as WEBP.
+- Export as ZIP for multiple images.
