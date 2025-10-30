@@ -20,6 +20,7 @@ function SettingList() {
                 label='Vertical alignment'
                 options={['top', 'middle', 'bottom']}
             />
+            <SettingListItem name='outputFormat' label='Output format' options={['webp', 'png']} />
             <SettingListItem name='scaleUpSmallStickers' label='Scale up small stickers' />
             <SettingListItem name='removeEmptySpaces' label='Remove empty spaces if possible' />
         </ul>

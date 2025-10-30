@@ -1,5 +1,6 @@
 import { HorizontalAlignment, Settings, TranscoderFile, VerticalAlignment } from '@types';
 import { FILE_SIZE_PX } from '@config';
+import { isOutputFormat } from '@/utils/typeguards/isOutputFormat';
 import {
     maxQualityWebp,
     oneFrame,
@@ -88,7 +89,7 @@ function createCommand(file: TranscoderFile, settings: Settings) {
     const id = file.id;
 
     const inputExt = file.input.ext;
-    const outputExt = 'webp'; // Make dynamic later
+    const outputExt = isOutputFormat(settings.outputFormat) ? settings.outputFormat : 'webp';
     const writeName = `file-${id}.${inputExt}`;
     const readName = `file-${id}-out.${outputExt}`;
 

@@ -13,6 +13,7 @@ const DEFAULT_SETTINGS: Settings = {
     verticalAlignment: 'middle',
     scaleUpSmallStickers: true,
     removeEmptySpaces: true,
+    outputFormat: 'webp',
 };
 
 export { FILE_ACCEPT, FILE_LIMIT, FILE_SIZE_PX, DEFAULT_SETTINGS };

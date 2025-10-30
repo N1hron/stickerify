@@ -1,6 +1,7 @@
 export type StickerSizeType = 'sticker' | 'emoji';
 export type HorizontalAlignment = 'left' | 'middle' | 'right';
 export type VerticalAlignment = 'top' | 'middle' | 'bottom';
+export type OutputFormat = 'webp' | 'png';
 
 export type Settings = {
     stickerSizeType: StickerSizeType;
@@ -8,6 +9,7 @@ export type Settings = {
     verticalAlignment: VerticalAlignment;
     scaleUpSmallStickers: boolean;
     removeEmptySpaces: boolean;
+    outputFormat: OutputFormat;
 };
 
 export type TranscoderStatus = 'idle' | 'loading' | 'ready' | 'transcoding' | 'error';
