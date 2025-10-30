@@ -1,29 +1,28 @@
-[EN](README.md) | [RU](README.ru.md)
+# Stickerify
 
-# Stickerify — Telegram Sticker & Emoji Converter
-
-Convert images into static Telegram-compatible stickers and emojis, ensuring correct size and format.
+Online converter that transforms images into static Telegram-compatible stickers and emojis.
 
 ## What it does
 
-Stickerify prepares and converts your images so they meet Telegram’s static sticker [requirements](https://core.telegram.org/stickers#static-stickers-and-emoji):
+Stickerify converts your images so they meet Telegram’s static sticker and emoji [requirements](https://core.telegram.org/stickers#static-stickers-and-emoji):
 
-> #### Image Requirements
-> 
 > - For stickers, one side must be exactly 512 pixels in size – the other side can be 512 pixels or less.
 > - For emoji, images must be exactly 100x100 pixels in size.
 > - The image file must be in either .PNG or .WEBP format.
 
-Upload an image, choose whether you want a sticker or emoji, optionally trim padding, set horizontal/vertical alignment, and download a ready-to-upload WEBP file.
+It allows you to:
 
-## Key features
+- Choose output type: sticker or emoji.
+- Scale down large images.
+- Scale up small images.
+- Trim empty spaces.
+- Align images horizontally and vertically.
+- Upload and convert up to 25 images at a time.
+- Download result as .WEBP file.
+- Download multiple results as ZIP file.
 
-- Upload and convert up to **25 images** at a time.
-- Two size modes: **sticker** and **emoji**.
-- Automatic resizing of large images.
-- Optional scaling up of small images.
-- Optional trimming of empty space.
-- Horizontal alignment: left / center / right.
-- Vertical alignment: top / center / bottom.
-- Export as **WEBP**.
-- Export as **ZIP** for multiple images.
+Additionally, it has a preview tool that allows you to see how the final result will look for selected options and image size.
+
+## Usage
+
+Navigate to https://stickerify.vercel.app/ and start using.
