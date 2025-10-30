@@ -13,12 +13,13 @@ Stickerify converts your images so they meet Telegram’s static sticker and emo
 It allows you to:
 
 - Choose output type: sticker or emoji.
+- Choose output format: WEBP or PNG.
+- Choose output name.
 - Scale down large images.
 - Scale up small images.
 - Trim empty spaces.
 - Align images horizontally and vertically.
 - Upload and convert up to 25 images at a time.
-- Download result as .WEBP file.
 - Download multiple results as ZIP file.
 
 Additionally, it has a preview tool that allows you to see how the final result will look for selected options and image size.
