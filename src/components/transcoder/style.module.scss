@@ -33,9 +33,7 @@
 }
 
 .header {
-    $header-padding: calc(
-        0.75rem + var(--border-width) + var(--border-radius) + var(--border-width-thin) + 0.5rem
-    );
+    $header-padding: calc(0.75rem + var(--border-width) + var(--border-radius) + 0.5rem);
 
     z-index: 4;
     display: grid;
@@ -125,26 +123,10 @@
         grid-row: 3/4;
         grid-column: 1/3;
     }
-
-    .headerSize {
-        display: none;
-    }
-
-    .headerName {
-        grid-column: 2/4;
-    }
 }
 
 @media (max-width: 30em) {
     .transcoder {
         grid-column: 1/2;
-    }
-
-    .headerName {
-        grid-column: 2/5;
-    }
-
-    .headerExtension {
-        display: none;
     }
 }
