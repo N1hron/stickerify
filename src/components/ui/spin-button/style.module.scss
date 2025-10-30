@@ -51,8 +51,14 @@
     user-select: none;
 }
 
-.icon {
-    stroke-width: 1.756;
+.button {
+    padding: 0;
+
+    .icon {
+        stroke-width: 2;
+        height: 100%;
+        width: 100%;
+    }
 }
 
 .iconRight {

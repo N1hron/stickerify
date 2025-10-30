@@ -62,6 +62,7 @@ function SpinButton<T extends string>({
             </Label>
             <div className={styles.wrapper}>
                 <Button
+                    className={styles.button}
                     aria-hidden
                     tabIndex={-1}
                     aria-label='Previous option'
@@ -96,6 +97,7 @@ function SpinButton<T extends string>({
                     </div>
                 </div>
                 <Button
+                    className={styles.button}
                     aria-hidden
                     tabIndex={-1}
                     aria-label='Next option'
