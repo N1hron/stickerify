@@ -13,7 +13,7 @@ function Transcode() {
 
     return (
         <Button mini disabled={!allowTranscode} onClick={handleTranscodeClick}>
-            Transcode
+            Convert
         </Button>
     );
 }

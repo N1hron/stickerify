@@ -42,7 +42,7 @@ function Tabs() {
                 </>
             )}
 
-            <Tab tabNames={['transcoder']}>Transcoder</Tab>
+            <Tab tabNames={['transcoder']}>Converter</Tab>
         </div>
     );
 }

@@ -34,9 +34,9 @@ function StatusListItem({ status, message }: StatusListItemProps) {
             case 'ready':
                 return 'UPLOADED';
             case 'transcoding':
-                return 'TRANSCODING';
+                return 'CONVERTING...';
             case 'success':
-                return 'TRANSCODED';
+                return 'CONVERTED';
             case 'error':
                 return message ? message.toUpperCase() : 'ERROR';
         }

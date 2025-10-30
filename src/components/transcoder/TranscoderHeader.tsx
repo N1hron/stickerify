@@ -14,10 +14,7 @@ function TranscoderHeader() {
     if (isFilesEmpty) return null;
     return (
         <Card className={styles.header} mini>
-            <div>№</div>
-            <div className={styles.headerName}>Name</div>
-            <div className={styles.headerExtension}>Ext</div>
-            <div className={styles.headerSize}>Size</div>
+            <h2 className={styles.title}>Converter</h2>
             <Divider vertical disableMargin />
             <SelectAll />
         </Card>

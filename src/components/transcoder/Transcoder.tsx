@@ -23,7 +23,7 @@ function Transcoder() {
     }, []);
 
     return (
-        <div className={styles.transcoder}>
+        <section className={styles.transcoder}>
             <TranscoderHeader />
             <div className={styles.list} tabIndex={-1}>
                 <FileList />
@@ -35,7 +35,7 @@ function Transcoder() {
                 <TranscoderStatus />
             </div>
             <div className={styles.outlineRight}></div>
-        </div>
+        </section>
     );
 }
 

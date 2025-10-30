@@ -1,6 +1,6 @@
 import { useAppSelector } from '@store/hooks';
 import { selectTranscoderStatus } from '@slices/transcoder';
-import { Card } from '@/components/ui';
+import { Card, Divider } from '@/components/ui';
 import { Add } from './Add';
 import { Remove } from './Remove';
 import { Transcode } from './Transcode';
@@ -16,6 +16,7 @@ function Actions() {
         <Card className={styles.actions} as='menu' mini>
             <li>
                 <Add />
+                <Divider className={styles.actionsDivider} vertical disableMargin />
             </li>
             <li>
                 <Remove />

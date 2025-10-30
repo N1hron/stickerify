@@ -13,7 +13,7 @@ function Add() {
 
     return (
         <FileInput
-            label='Add'
+            label='Upload'
             accept={FILE_ACCEPT}
             disabled={!allowAdd}
             mini

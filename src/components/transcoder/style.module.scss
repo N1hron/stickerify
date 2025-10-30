@@ -38,13 +38,12 @@
     );
 
     z-index: 4;
-    font-size: var(--font-size-xm);
     display: grid;
     place-items: center;
     grid-column: 1/6;
     grid-row: 1/2;
     display: grid;
-    grid-template-columns: 1.25rem 1fr 3rem 4rem auto auto;
+    grid-template-columns: 1fr auto auto;
     column-gap: 0.5rem;
     padding-left: $header-padding;
     padding-right: $header-padding;
