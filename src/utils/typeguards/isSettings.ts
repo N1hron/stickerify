@@ -9,14 +9,14 @@ function isSettings(param: unknown): param is Settings {
         'stickerSizeType' in param &&
         'horizontalAlignment' in param &&
         'verticalAlignment' in param &&
-        'scaleUpSmallStickers' in param &&
+        'scaleUpSmallImages' in param &&
         'removeEmptySpaces' in param &&
         'outputFormat' in param &&
         isStickerSizeType(param.stickerSizeType) &&
         isHorizontalAlignment(param.horizontalAlignment) &&
         isVerticalAlignment(param.verticalAlignment) &&
         isOutputFormat(param.outputFormat) &&
-        typeof param.scaleUpSmallStickers === 'boolean' &&
+        typeof param.scaleUpSmallImages === 'boolean' &&
         typeof param.removeEmptySpaces === 'boolean'
     );
 }

@@ -48,14 +48,14 @@ function createCommandScale({
     horizontalAlignment,
     verticalAlignment,
     removeEmptySpaces,
-    scaleUpSmallStickers,
+    scaleUpSmallImages,
 }: Settings) {
     const sizePx = FILE_SIZE_PX[stickerSizeType];
     const [padX, padY] = getPadding(sizePx, horizontalAlignment, verticalAlignment);
 
     switch (stickerSizeType) {
         case 'sticker': {
-            if (scaleUpSmallStickers) {
+            if (scaleUpSmallImages) {
                 if (removeEmptySpaces) {
                     return scaleTrimSpaces(sizePx);
                 } else {
@@ -70,7 +70,7 @@ function createCommandScale({
             }
         }
         case 'emoji': {
-            if (scaleUpSmallStickers) {
+            if (scaleUpSmallImages) {
                 return scaleKeepSpaces(sizePx, padX, padY);
             } else {
                 return scaleDownKeepSpaces(sizePx, padX, padY);

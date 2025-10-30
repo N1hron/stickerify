@@ -11,7 +11,7 @@ const DEFAULT_SETTINGS: Settings = {
     stickerSizeType: 'sticker',
     horizontalAlignment: 'middle',
     verticalAlignment: 'middle',
-    scaleUpSmallStickers: true,
+    scaleUpSmallImages: true,
     removeEmptySpaces: true,
     outputFormat: 'webp',
 };

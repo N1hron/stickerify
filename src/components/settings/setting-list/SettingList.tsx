@@ -21,7 +21,7 @@ function SettingList() {
                 options={['top', 'middle', 'bottom']}
             />
             <SettingListItem name='outputFormat' label='Output format' options={['webp', 'png']} />
-            <SettingListItem name='scaleUpSmallStickers' label='Scale up small stickers' />
+            <SettingListItem name='scaleUpSmallImages' label='Scale up small images' />
             <SettingListItem name='removeEmptySpaces' label='Remove empty spaces if possible' />
         </ul>
     );

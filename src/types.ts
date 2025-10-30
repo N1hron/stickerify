@@ -7,7 +7,7 @@ export type Settings = {
     stickerSizeType: StickerSizeType;
     horizontalAlignment: HorizontalAlignment;
     verticalAlignment: VerticalAlignment;
-    scaleUpSmallStickers: boolean;
+    scaleUpSmallImages: boolean;
     removeEmptySpaces: boolean;
     outputFormat: OutputFormat;
 };
