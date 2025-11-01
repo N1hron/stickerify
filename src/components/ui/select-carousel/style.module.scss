@@ -1,0 +1,36 @@
+.selectCarousel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.content {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.value {
+  background-color: var(--color-blue-50);
+  border: solid var(--border-width-thin) var(--color-blue-200);
+  border-bottom-width: var(--border-width-thick);
+  border-radius: var(--border-radius);
+  flex-grow: 1;
+  display: grid;
+  place-content: center;
+  font-size: var(--font-size-xm);
+  cursor: default;
+}
+
+.button {
+  flex-shrink: 0;
+
+  &Next {
+    .icon {
+      rotate: 180deg;
+    }
+  }
+}
+
+.label {
+  cursor: default;
+}

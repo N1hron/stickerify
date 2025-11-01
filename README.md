@@ -1,29 +1,73 @@
-# Stickerify
+# React + TypeScript + Vite
 
-Online converter that transforms images into static Telegram-compatible stickers and emojis.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## What it does
+Currently, two official plugins are available:
 
-Stickerify converts your images so they meet Telegram’s static sticker and emoji [requirements](https://core.telegram.org/stickers#static-stickers-and-emoji):
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-> - For stickers, one side must be exactly 512 pixels in size – the other side can be 512 pixels or less.
-> - For emoji, images must be exactly 100x100 pixels in size.
-> - The image file must be in either .PNG or .WEBP format.
+## React Compiler
 
-It allows you to:
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-- Choose output type: sticker or emoji.
-- Choose output format: WEBP or PNG.
-- Choose output name.
-- Scale down large images.
-- Scale up small images.
-- Trim empty spaces.
-- Align images horizontally and vertically.
-- Upload and convert up to 25 images at a time.
-- Download multiple results as ZIP file.
+## Expanding the ESLint configuration
 
-Additionally, it has a preview tool that allows you to see how the final result will look for selected options and image size.
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-## Usage
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-Navigate to https://stickerify.vercel.app/ and start using.
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+]);
+```
+
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x';
+import reactDom from 'eslint-plugin-react-dom';
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+]);
+```

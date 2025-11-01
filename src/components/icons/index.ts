@@ -1,9 +1,0 @@
-export { ArrowIcon } from './ArrowIcon';
-export { UploadIcon } from './UploadIcon';
-export { LoadingIcon } from './LoadingIcon';
-export { ErrorIcon } from './ErrorIcon';
-export { CheckIcon } from './CheckIcon';
-export { DoubleCheckIcon } from './DoubleCheckIcon';
-export { ImageIcon } from './ImageIcon';
-export { SettingsIcon } from './SettingsIcon';
-export { DownloadIcon } from './DownloadIcon';

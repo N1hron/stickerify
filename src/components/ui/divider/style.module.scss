@@ -1,19 +1,13 @@
 .divider {
-    height: var(--border-width-thin);
-    width: 100%;
-    background-color: var(--color-accent-200);
-    flex-shrink: 0;
+  width: 100%;
+  height: var(--border-width-thin);
+  margin: 0.5rem 0;
+  background-color: var(--color-blue-200);
+  flex-shrink: 0;
 
-    &:not(.disableMargin) {
-        margin: 0.5rem 0;
-    }
-
-    &.vertical {
-        width: var(--border-width-thin);
-        height: 100%;
-
-        &:not(.disableMargin) {
-            margin: 0 0.5rem;
-        }
-    }
+  &Vertical {
+    height: 100%;
+    width: var(--border-width-thin);
+    margin: 0 0.5rem;
+  }
 }

@@ -1,54 +1,31 @@
-@use './scss/modern-normalize';
-@use './scss/fonts';
-@use './scss/theme';
-@use './scss/animations';
-@use './scss/utils';
+@use './styles/modern-normalize';
+@use './styles/reset';
+@use './styles/fonts';
+@use './styles/theme';
+
+html {
+  font-family: 'Roboto', 'Roboto-fallback', sans-serif;
+  background-color: var(--color-blue-50);
+  text-transform: uppercase;
+  color: var(--color-text);
+}
 
 body {
-    min-height: 100vh;
-    background-color: var(--color-accent-050);
-    color: var(--color-text);
-    font-family: var(--font-family);
-    font-weight: 500;
-    text-transform: uppercase;
+  font-size: var(--font-size-xm);
+  font-weight: 500;
+}
 
-    @supports (min-height: 100dvh) {
-        min-height: 100dvh;
-    }
+#root {
+  height: 100dvh;
+
+  @supports not (height: 100dvh) {
+    height: 100vh;
+  }
 }
 
 * {
-    &::selection {
-        color: var(--color-text-alt);
-        background-color: var(--color-accent-400);
-    }
-}
-
-input {
-    &::selection {
-        color: var(--color-accent-400);
-        background-color: var(--color-text-alt);
-    }
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    line-height: var(--line-height);
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    color: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    line-height: 1;
-}
-
-ul {
-    list-style: none;
+  &::selection {
+    color: var(--color-text-alt);
+    background-color: var(--color-blue-500);
+  }
 }

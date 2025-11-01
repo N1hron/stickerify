@@ -1,22 +1,14 @@
-import clsx from 'clsx';
-
 import styles from './style.module.scss';
 
+import clsx from 'clsx';
+
 type DividerProps = {
-    disableMargin?: boolean;
-    vertical?: boolean;
-    className?: string;
+  className?: string;
+  vertical?: boolean;
 };
 
-function Divider({ disableMargin = false, vertical = false, className }: DividerProps) {
-    const cl = clsx(
-        styles.divider,
-        vertical && styles.vertical,
-        disableMargin && styles.disableMargin,
-        className
-    );
+export function Divider({ vertical, className }: DividerProps) {
+  const cl = clsx(styles.divider, vertical && styles.dividerVertical, className);
 
-    return <div className={cl} />;
+  return <div className={cl} />;
 }
-
-export { Divider };

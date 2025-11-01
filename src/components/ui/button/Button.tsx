@@ -1,27 +1,28 @@
 import clsx from 'clsx';
+import type { ComponentPropsWithRef } from 'react';
 
 import styles from './style.module.scss';
 
 type ButtonProps = {
-    color?: 'accent' | 'success' | 'danger';
-    mini?: boolean;
-    pressed?: boolean;
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+  mini?: boolean;
+  icon?: boolean;
+  pressed?: boolean;
+} & ComponentPropsWithRef<'button'>;
 
-function Button({ color = 'accent', mini, pressed, className, ...props }: ButtonProps) {
-    const cl = clsx(
-        styles.button,
-        styles[color],
-        mini && styles.mini,
-        pressed && styles.pressed,
-        className
-    );
+function Button({ mini, icon, pressed, className, children, ...props }: ButtonProps) {
+  const cl = clsx(
+    styles.button,
+    mini && styles.buttonMini,
+    icon && styles.buttonIcon,
+    pressed && styles.buttonPressed,
+    className
+  );
 
-    return (
-        <div className={cl}>
-            <button {...props}></button>
-        </div>
-    );
+  return (
+    <button className={cl} {...props}>
+      <span className={styles.content}>{children}</span>
+    </button>
+  );
 }
 
 export { Button };

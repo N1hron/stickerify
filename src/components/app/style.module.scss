@@ -1,49 +1,38 @@
-.wrapper {
-    --app-spacing: 0.75rem;
+$header-height: 4rem;
 
-    height: 100dvh;
-    max-width: 60rem;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 var(--app-spacing);
-    overflow: hidden;
+.app {
+  box-sizing: border-box;
+  max-width: 75rem;
+  padding: 0.75rem;
+  height: 100%;
+  margin: 0 auto;
+}
 
-    @supports not (height: 100dvh) {
-        height: 100vh;
-    }
+.app,
+.main {
+  display: grid;
+  grid-template-columns: 15rem 1fr 15rem;
+  grid-template-rows: $header-height 1fr auto;
+  gap: 0.5rem;
+}
+
+.header {
+  grid-row: 1/2;
+  grid-column: 1/2;
+  z-index: 2;
+}
+
+.title {
+  color: var(--color-blue-500);
+  text-shadow: 0 var(--border-width-thick) 0 var(--color-blue-200);
+  font-size: var(--font-size-xl);
+  text-align: center;
+  user-select: none;
+  line-height: 1;
 }
 
 .main {
-    padding: var(--app-spacing) 0;
-    height: 100%;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 15rem 1fr;
-    grid-template-rows: auto 1fr auto auto;
-    gap: var(--app-spacing);
-    justify-content: center;
-    overflow: hidden;
-}
-
-.sidebar {
-    width: 14.25rem;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--app-spacing);
-}
-
-@media (max-width: 47em) {
-    .main {
-        grid-template-columns: repeat(2, minmax(14rem, 15rem));
-        grid-template-rows: auto auto 1fr auto;
-    }
-}
-
-@media (max-width: 30em) {
-    .main {
-        --app-spacing: 0.5rem;
-
-        grid-template-columns: 1fr;
-    }
+  grid-row: 1/-1;
+  grid-column: 1/-1;
+  z-index: 1;
 }

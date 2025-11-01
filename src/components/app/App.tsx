@@ -1,29 +1,17 @@
-import { Logo } from '@components/logo/Logo';
-import { Tabs } from '../tabs/Tabs';
-import { Settings } from '@components/settings/Settings';
-import { Playground } from '../playground/Playground';
-import { GithubPage } from '@components/github-page/GithubLink';
-import { Transcoder } from '@components/transcoder/Transcoder';
-import { useAppSelector } from '@/store/hooks';
-import { selectTabs } from '@/store/slices/tabs';
+import { OutputSettings } from '../output-settings/OutputSettings';
+import { Card } from '../ui/card/Card';
 
 import styles from './style.module.scss';
 
-function App() {
-    const tabs = useAppSelector(selectTabs);
-
-    return (
-        <div className={styles.wrapper}>
-            <main className={styles.main}>
-                <Logo />
-                <Tabs />
-                {tabs.settings && <Settings />}
-                {tabs.playground && <Playground />}
-                {tabs.transcoder && <Transcoder />}
-                <GithubPage />
-            </main>
-        </div>
-    );
+export function App() {
+  return (
+    <div className={styles.app}>
+      <Card className={styles.header} as='header'>
+        <h1 className={styles.title}>Shiiru</h1>
+      </Card>
+      <main className={styles.main}>
+        <OutputSettings />
+      </main>
+    </div>
+  );
 }
-
-export { App };

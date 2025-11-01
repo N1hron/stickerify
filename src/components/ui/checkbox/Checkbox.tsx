@@ -1,46 +1,53 @@
-import { useId } from 'react';
 import clsx from 'clsx';
+import { useId, type ComponentPropsWithRef } from 'react';
 
-import { Label } from '@ui';
-import { CheckIcon } from '@icons';
+import CheckIcon from '@/assets/icons/check.svg?react';
 
 import styles from './style.module.scss';
 
-type CheckboxProps = {
-    label: string;
-    hideLabel?: boolean;
-    checked?: boolean;
-    disabled?: boolean;
-    onChange?: (checked: boolean) => void;
+type CheckboxProps = ComponentPropsWithRef<'div'> & {
+  value: boolean;
+  setValue: (value: boolean) => void;
+  label: string;
+  hideLabel?: string;
+  disabled?: boolean;
 };
 
-function Checkbox({ label, hideLabel, checked, disabled, onChange }: CheckboxProps) {
-    const inputId = useId();
+export function Checkbox({
+  value,
+  setValue,
+  label,
+  hideLabel,
+  disabled,
+  className,
+}: CheckboxProps) {
+  const inputId = useId();
+  const cl = clsx(styles.checkbox, className);
 
-    function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-        if (onChange) {
-            onChange(event.target.checked);
-        }
-    }
+  function handleChange() {
+    setValue(!value);
+  }
 
-    return (
-        <div className={styles.checkbox}>
-            <div className={styles.inputWrapper}>
-                <input
-                    className={styles.input}
-                    id={inputId}
-                    type='checkbox'
-                    onChange={handleChange}
-                    checked={checked}
-                    disabled={disabled}
-                />
-                <CheckIcon className={styles.icon} aria-hidden />
-            </div>
-            <Label className={clsx(styles.label, hideLabel && 'visually-hidden')} htmlFor={inputId}>
-                {label}
-            </Label>
-        </div>
-    );
+  return (
+    <div className={cl}>
+      <div className={styles.inputWrapper}>
+        <input
+          id={inputId}
+          className={styles.input}
+          type='checkbox'
+          checked={value}
+          aria-label={hideLabel ? label : undefined}
+          disabled={disabled}
+          onChange={handleChange}
+        />
+        <CheckIcon className={styles.icon} aria-hidden />
+      </div>
+
+      {!hideLabel && (
+        <label className={styles.label} htmlFor={inputId}>
+          {label}
+        </label>
+      )}
+    </div>
+  );
 }
-
-export { Checkbox };

@@ -1,0 +1,31 @@
+.outputSettings {
+  grid-row: 2/-1;
+  grid-column: 1/2;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stringItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  flex-grow: 1;
+}
+
+.restore {
+  margin-top: 0.5rem;
+}

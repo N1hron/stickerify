@@ -1,30 +1,22 @@
 import clsx from 'clsx';
+import type { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
 
 import styles from './style.module.scss';
+import { CardTitle } from './CardTitle';
 
-type CardBaseProps<T extends React.ElementType> = {
-    as?: T;
-    className?: string;
-    mini?: boolean;
-};
+type CardElementType = ElementType<{ children?: ReactNode; className?: string }>;
 
-type CardAdditionalProps<T extends React.ElementType> = Omit<
-    React.ComponentPropsWithRef<T>,
-    keyof CardBaseProps<T>
->;
+type CardProps<T extends CardElementType> = {
+  as?: T;
+} & ComponentPropsWithRef<T>;
 
-type CardProps<T extends React.ElementType> = CardBaseProps<T> & CardAdditionalProps<T>;
+function Card<T extends CardElementType = 'div'>({ as, className, ...props }: CardProps<T>) {
+  const Element: CardElementType = as || 'div';
+  const cl = clsx(styles.card, className);
 
-function Card<T extends React.ElementType = 'div'>({
-    as,
-    className,
-    mini,
-    ...props
-}: CardProps<T>) {
-    const Element: React.ElementType = as || 'div';
-    const cl = clsx(styles.card, mini && styles.mini, className);
-
-    return <Element className={cl} {...props} />;
+  return <Element className={cl} {...props} />;
 }
+
+Card.Title = CardTitle;
 
 export { Card };

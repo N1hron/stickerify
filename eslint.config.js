@@ -3,37 +3,32 @@ import globals from 'globals';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
-import react from 'eslint-plugin-react';
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import reactX from 'eslint-plugin-react-x';
+import reactDom from 'eslint-plugin-react-dom';
+import { defineConfig, globalIgnores } from 'eslint/config';
 
-export default tseslint
-  .config(
-    { ignores: ['dist'] },
-    {
-      extends: [js.configs.recommended, ...tseslint.configs.recommendedTypeChecked],
-      files: ['**/*.{ts,tsx}'],
-      languageOptions: {
-        ecmaVersion: 2020,
-        globals: globals.browser,
-        parserOptions: {
-          project: ['./tsconfig.node.json', './tsconfig.app.json'],
-          tsconfigRootDir: import.meta.dirname,
-        },
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.recommendedTypeChecked,
+      reactHooks.configs['recommended-latest'],
+      reactRefresh.configs.vite,
+      reactX.configs['recommended-typescript'],
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
       },
-      settings: { react: { version: '19' } },
-      plugins: {
-        'react-hooks': reactHooks,
-        'react-refresh': reactRefresh,
-        react,
-      },
-      rules: {
-        ...reactHooks.configs.recommended.rules,
-        '@typescript-eslint/unbound-method': ['off'],
-        '@typescript-eslint/no-floating-promises': ['off'],
-        'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
-        ...react.configs.recommended.rules,
-        ...react.configs['jsx-runtime'].rules,
-      },
-    }
-  )
-  .concat(eslintPluginPrettierRecommended);
+      ecmaVersion: 2020,
+      globals: globals.browser,
+    },
+    rules: {
+      '@typescript-eslint/unbound-method': 'off',
+    },
+  },
+]);
