@@ -16,8 +16,9 @@
         display: block;
         position: absolute;
         right: calc(var(--border-radius) + var(--border-width));
-        width: 2rem;
+        width: 1.75rem;
         height: 2.25rem;
+        right: 0.5rem;
         z-index: 2;
     }
 
