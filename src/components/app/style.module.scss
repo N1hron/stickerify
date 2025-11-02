@@ -41,9 +41,11 @@
 }
 
 @media (max-width: 30em) {
-    .main {
+    .wrapper {
         --app-spacing: 0.5rem;
+    }
 
+    .main {
         grid-template-columns: 1fr;
     }
 }

@@ -8,7 +8,7 @@ import { downloadFile, downloadZipFile } from '@utils';
 function Download() {
     const allowDownload = useAppSelector(selectAllowDownload);
     const downloadableFiles = useAppSelector(selectDownloadableFiles);
-    const showIcon = useMediaQuery('(max-width: 23em)');
+    const showIcon = useMediaQuery('(max-width: 30em)');
 
     function handleDownloadClick() {
         if (!allowDownload) return;

@@ -25,6 +25,7 @@ function Actions() {
                 <Transcode />
             </li>
             <li>
+                <Divider className={styles.actionsDivider} vertical disableMargin />
                 <Download />
             </li>
         </Card>

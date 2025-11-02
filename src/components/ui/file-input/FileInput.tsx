@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { ReactNode, useRef } from 'react';
 import clsx from 'clsx';
 
 import { Button } from '@ui';
@@ -7,22 +7,24 @@ import { validateFiles } from '@utils';
 import styles from './style.module.scss';
 
 type FileInputProps = {
-    label: string;
     accept?: string;
     multiple?: boolean;
     disabled?: boolean;
     mini?: boolean;
+    children: ReactNode;
+    label: string;
     className?: string;
     onChange?: (validFiles: File[], invalidFiles: File[]) => void;
 };
 
 function FileInput({
-    label,
     accept = '',
     multiple = true,
     disabled,
     mini,
     className,
+    children,
+    label,
     onChange,
 }: FileInputProps) {
     const inputRef = useRef<HTMLInputElement>(null);
@@ -54,7 +56,7 @@ function FileInput({
                 tabIndex={-1}
                 onClick={handleBrowse}
             >
-                {label}
+                {children}
             </Button>
             <input
                 className='visually-hidden'
