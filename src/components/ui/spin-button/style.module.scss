@@ -27,8 +27,8 @@
     border: solid var(--border-width-thin) var(--color-accent-200);
     border-bottom-width: var(--border-width-thick);
     border-radius: var(--border-radius);
-    flex-grow: 1;
     overflow: hidden;
+    flex-grow: 1;
 
     &:focus-visible {
         outline: var(--outline-focus);
@@ -57,7 +57,7 @@
     .icon {
         stroke-width: 2;
         height: 100%;
-        width: 100%;
+        width: auto;
     }
 }
 
