@@ -1,4 +1,6 @@
 .transcoder {
+    --list-spacing: 0.75rem;
+
     position: relative;
     flex-grow: 1;
     overflow: hidden;
@@ -34,19 +36,19 @@
 }
 
 .header {
-    $header-padding: calc(0.75rem + var(--border-width) + var(--border-radius) + 0.5rem);
+    $header-horizontal-padding: calc(
+        var(--list-spacing) + var(--border-width) + var(--border-radius) + 0.5rem
+    );
 
     z-index: 4;
     display: grid;
     place-items: center;
     grid-column: 1/6;
     grid-row: 1/2;
-    display: grid;
     grid-template-columns: 1fr auto auto;
     column-gap: 0.5rem;
-    padding-left: $header-padding;
-    padding-right: $header-padding;
-    place-items: center;
+    padding-left: $header-horizontal-padding;
+    padding-right: $header-horizontal-padding;
 }
 
 .list {
@@ -121,6 +123,8 @@
 
 @media (max-width: 47em) {
     .transcoder {
+        --list-spacing: 0.5rem;
+
         grid-row: 3/4;
         grid-column: 1/3;
     }

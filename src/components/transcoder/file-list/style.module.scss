@@ -2,7 +2,7 @@
     border-radius: var(--border-radius);
     grid-column: 1/2;
     display: grid;
-    padding: 3rem 0.75rem;
+    padding: calc(2.25rem + var(--list-spacing)) var(--list-spacing);
     row-gap: 0.25rem;
     grid-auto-rows: 2rem;
 

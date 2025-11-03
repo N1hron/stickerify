@@ -1,5 +1,6 @@
 .statusList {
-    padding: 3rem var(--border-radius) 3rem 0;
+    padding: calc(2.25rem + var(--list-spacing)) var(--border-radius)
+        calc(2.25rem + var(--list-spacing)) 0;
     grid-column: 3/4;
     display: grid;
     grid-auto-rows: 2rem;
