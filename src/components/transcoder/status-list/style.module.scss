@@ -8,8 +8,8 @@
 }
 
 .statusListItem {
-    --color-icon: var(--color-accent-500);
-    --color-icon-shadow: var(--color-accent-500);
+    --color-icon: var(--color-accent-300);
+    --color-icon-shadow: var(--color-accent-300);
 
     height: 1.5rem;
     border-radius: var(--border-radius);
@@ -29,8 +29,6 @@
     }
 
     &.transcoding {
-        --color-icon: var(--color-accent-500);
-
         animation-duration: 2s;
         animation-iteration-count: infinite;
         animation-timing-function: linear;
