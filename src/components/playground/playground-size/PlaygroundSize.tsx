@@ -36,7 +36,7 @@ function PlaygroundSize({
 function PlaygroundSizeTitle() {
     const { title } = usePlaygroundSizeContext();
 
-    return <h2 className={styles.sizeTitle}>{title}</h2>;
+    return <div className={styles.sizeTitle}>{title}</div>;
 }
 
 type PlaygroundSizeWidthProps = {

@@ -9,7 +9,7 @@ type PlaygroundSizeContextValue = {
 };
 
 const PlaygroundSizeContext = createContext<PlaygroundSizeContextValue>({
-    title: 'Sizes',
+    title: '',
     width: 0,
     height: 0,
 });

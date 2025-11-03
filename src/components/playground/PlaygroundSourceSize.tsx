@@ -30,7 +30,7 @@ function PlaygroundSourceSize() {
 
     return (
         <PlaygroundSize
-            title='Source size'
+            title='Source image size'
             width={sourceWidth}
             height={sourceHeight}
             setWidth={setSourceWidth}
