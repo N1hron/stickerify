@@ -5,12 +5,12 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { selectOutputSetting, setOutputSetting } from '@/store/slices/outputSettings';
 import type { OutputBooleanSettingName } from '@/types';
 
-type OutputSettingsBooleanItemProps = {
+type OutputSettingsInputBooleanProps = {
   name: OutputBooleanSettingName;
   label: string;
 };
 
-export function OutputSettingsBooleanItem({ name, label }: OutputSettingsBooleanItemProps) {
+export function OutputSettingsInputBoolean({ name, label }: OutputSettingsInputBooleanProps) {
   const dispatch = useAppDispatch();
   const value = useAppSelector(selectOutputSetting(name));
 
@@ -18,12 +18,8 @@ export function OutputSettingsBooleanItem({ name, label }: OutputSettingsBoolean
     (value: boolean) => {
       dispatch(setOutputSetting([name, value]));
     },
-    [dispatch]
+    [dispatch, name]
   );
 
-  return (
-    <li>
-      <Checkbox label={label} value={value} setValue={setValue} />
-    </li>
-  );
+  return <Checkbox label={label} value={value} setValue={setValue} />;
 }

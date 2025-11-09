@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { SelectCarousel } from '../ui/select-carousel/SelectCarousel';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
@@ -6,26 +6,31 @@ import { selectOutputSetting, setOutputSetting } from '@/store/slices/outputSett
 import { config } from '@/config';
 import type { OutputStringSettingName, OutputStringSettingValue } from '@/types';
 
-type OutputSettingsStringItemProps = {
+type OutputSettingsInputStringProps = {
   name: OutputStringSettingName;
   label: string;
 };
 
-export function OutputSettingsStringItem({ name, label }: OutputSettingsStringItemProps) {
+export function OutputSettingsInputString({ name, label }: OutputSettingsInputStringProps) {
   const dispatch = useAppDispatch();
   const value = useAppSelector(selectOutputSetting(name));
-  const values = config.outputSettings.entries.string[name];
+
+  const values = useMemo(() => {
+    const stringSettings = Object.fromEntries(
+      config.outputSettings.items
+        .filter((item) => 'values' in item)
+        .map((item) => [item.name, item.values])
+    );
+
+    return stringSettings[name];
+  }, [name]);
 
   const setValue = useCallback(
     (value: OutputStringSettingValue<typeof name>) => {
       dispatch(setOutputSetting([name, value]));
     },
-    [dispatch]
+    [dispatch, name]
   );
 
-  return (
-    <li>
-      <SelectCarousel label={label} values={values} value={value} setValue={setValue} />
-    </li>
-  );
+  return <SelectCarousel label={label} values={values} value={value} setValue={setValue} />;
 }

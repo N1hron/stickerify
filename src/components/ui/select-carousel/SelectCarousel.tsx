@@ -28,13 +28,12 @@ function SelectCarousel<V extends string>({
   const maxIndex = values.length - 1;
   const cl = clsx(styles.selectCarousel, className);
 
-  if (index < 0 || index > maxIndex) {
-    setValue(values[0]);
-  }
-
-  const setIndex = useCallback((index: number) => {
-    setValue(values[index]);
-  }, []);
+  const setIndex = useCallback(
+    (index: number) => {
+      setValue(values[index]);
+    },
+    [setValue, values]
+  );
 
   const contextValue: SelectCarouselContextValue = useMemo(
     () => ({

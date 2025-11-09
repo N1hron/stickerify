@@ -1,79 +1,76 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-import { isOutputSettings, safeParseJSON } from '@/utils';
 import { config } from '@/config';
+import { isOutputSettings, safeParseJSON } from '@/utils';
+import type { AppState } from '@/store';
 import type { OutputSettingName, OutputSettings, OutputSettingValue } from '@/types';
-import type { AppState } from '..';
 
 type OutputSettingsState = {
-  entries: OutputSettings;
+  items: OutputSettings;
   remember: boolean;
 };
 
-const defaultEntries: OutputSettings = {
-  sizeType: 'sticker',
-  format: 'webp',
-  horizontalAlignment: 'middle',
-  verticalAlignment: 'middle',
-  trimSpaces: true,
-  scaleUp: true,
-};
+const defaultItems = Object.fromEntries(
+  config.outputSettings.items.map((setting) => [setting.name, setting.default])
+) as OutputSettings;
 
 const defaultState: OutputSettingsState = {
-  entries: defaultEntries,
+  items: defaultItems,
   remember: true,
 };
 
 function getInitialState(): OutputSettingsState {
-  const { localStorageKey, rememberLocalStorageKey } = config.outputSettings;
-  const rememberLS = localStorage.getItem(rememberLocalStorageKey);
-  const entriesLS = localStorage.getItem(localStorageKey);
+  const { keyLS, rememberKeyLS } = config.outputSettings;
+  const rememberLS = localStorage.getItem(rememberKeyLS);
+  const itemsLS = localStorage.getItem(keyLS);
   const remember = safeParseJSON(rememberLS);
-  const entries = safeParseJSON(entriesLS);
+  const items = safeParseJSON(itemsLS);
 
-  if (isOutputSettings(entries)) {
+  if (isOutputSettings(items)) {
     if (remember === true) {
-      return { entries, remember };
+      return { items, remember };
     }
 
     if (remember === false) {
-      localStorage.removeItem(localStorageKey);
-      return { entries: defaultEntries, remember };
+      localStorage.removeItem(keyLS);
+      return { items: defaultItems, remember };
     }
 
-    localStorage.setItem(rememberLocalStorageKey, String(defaultState.remember));
-    return { entries, remember: defaultState.remember };
+    localStorage.setItem(rememberKeyLS, String(defaultState.remember));
+    return { items, remember: defaultState.remember };
   }
 
-  if (entriesLS) {
-    localStorage.removeItem(localStorageKey);
+  if (itemsLS) {
+    localStorage.removeItem(keyLS);
   }
 
   if (typeof remember === 'boolean') {
-    return { entries: defaultEntries, remember };
+    return { items: defaultItems, remember };
   }
 
-  localStorage.setItem(rememberLocalStorageKey, String(defaultState.remember));
+  localStorage.setItem(rememberKeyLS, String(defaultState.remember));
 
   return defaultState;
 }
 
+const initialState = getInitialState();
+
 const outputSettingsSlice = createSlice({
   name: 'outputSettings',
-  initialState: getInitialState,
+  initialState,
   reducers: {
     setOutputSetting<N extends OutputSettingName>(
       state: OutputSettingsState,
       action: PayloadAction<[N, OutputSettingValue<N>]>
     ) {
       const [name, value] = action.payload;
-      state.entries[name] = value;
+      state.items[name] = value;
     },
     setRememberOutputSettings(state, action: PayloadAction<boolean>) {
       state.remember = action.payload;
     },
     resetOutputSettings(state) {
-      state.entries = defaultEntries;
+      state.items = defaultItems;
     },
   },
   selectors: {
@@ -84,7 +81,7 @@ const outputSettingsSlice = createSlice({
       return state.remember;
     },
     selectIsDefaultOutputSettings(state) {
-      return Object.values(state.entries).join('') === Object.values(defaultEntries).join('');
+      return Object.values(defaultItems).join('') === Object.values(state.items).join('');
     },
   },
 });
@@ -98,5 +95,5 @@ export const { selectOutputSettings, selectRememberOutputSettings, selectIsDefau
 export const selectOutputSetting =
   <N extends OutputSettingName>(name: N) =>
   (state: AppState): OutputSettingValue<N> => {
-    return state.outputSettings.entries[name];
+    return state.outputSettings.items[name];
   };

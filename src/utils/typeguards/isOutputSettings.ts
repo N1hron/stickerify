@@ -1,28 +1,22 @@
 import { config } from '@/config';
 import type { OutputSettings } from '@/types';
 
-export function isOutputSettings(value: unknown): value is OutputSettings {
-  if (typeof value !== 'object' || value === null) {
-    return false;
-  }
+export function isOutputSettings(param: unknown): param is OutputSettings {
+  if (!(typeof param === 'object' && param)) return false;
 
-  const valueObj = value as Record<string, unknown>;
-  const booleanSettings = config.outputSettings.entries.boolean;
+  for (const setting of config.outputSettings.items) {
+    if (!(setting.name in param)) return false;
 
-  for (const booleanSetting of booleanSettings) {
-    if (typeof valueObj[booleanSetting] === 'boolean') {
-      continue;
+    const p = param as Record<typeof setting.name, unknown>;
+
+    if (
+      !(
+        ('values' in setting && setting.values.find((v) => v === p[setting.name])) ||
+        typeof p[setting.name] === 'boolean'
+      )
+    ) {
+      return false;
     }
-    return false;
-  }
-
-  const stringSettings = config.outputSettings.entries.string as Record<string, unknown[]>;
-
-  for (const stringSetting of Object.keys(stringSettings)) {
-    if (stringSettings[stringSetting].includes(valueObj[stringSetting])) {
-      continue;
-    }
-    return false;
   }
 
   return true;

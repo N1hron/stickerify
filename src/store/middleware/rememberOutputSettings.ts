@@ -7,32 +7,24 @@ import {
 import { config } from '@/config';
 import type { AppState } from '..';
 
-export const rememberOutputSettingsListener = createListenerMiddleware<AppState>();
+const listener = createListenerMiddleware<AppState>();
 
-rememberOutputSettingsListener.startListening({
-  matcher: isAnyOf(setRememberOutputSettings, setOutputSetting, resetOutputSettings),
+listener.startListening({
+  matcher: isAnyOf(setOutputSetting, resetOutputSettings, setRememberOutputSettings),
   effect(action, { getState }) {
-    const { entries, remember } = getState().outputSettings;
-    const { localStorageKey, rememberLocalStorageKey } = config.outputSettings;
+    const { items, remember } = getState().outputSettings;
+    const { keyLS, rememberKeyLS } = config.outputSettings;
 
-    const saveSettings = () => {
-      localStorage.setItem(localStorageKey, JSON.stringify(entries));
-    };
+    if (remember) {
+      localStorage.setItem(keyLS, JSON.stringify(items));
+    } else {
+      localStorage.removeItem(keyLS);
+    }
 
-    if (setOutputSetting.match(action) && remember) {
-      saveSettings();
-    } else if (resetOutputSettings.match(action)) {
-      localStorage.removeItem(localStorageKey);
-    } else if (setRememberOutputSettings.match(action)) {
-      localStorage.setItem(rememberLocalStorageKey, String(remember));
-
-      if (remember) {
-        saveSettings();
-      } else {
-        localStorage.removeItem(localStorageKey);
-      }
+    if (setRememberOutputSettings.match(action)) {
+      localStorage.setItem(rememberKeyLS, String(remember));
     }
   },
 });
 
-export const rememberOutputSettingsMiddleware = rememberOutputSettingsListener.middleware;
+export const rememberOutputSettingsMiddleware = listener.middleware;
