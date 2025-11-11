@@ -1,6 +1,8 @@
 import clsx from 'clsx';
 import type { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
 
+import { CardTitle } from './CardTitle';
+
 import styles from './style.module.scss';
 
 type CardElementType = ElementType<{ children?: ReactNode; className?: string }>;
@@ -15,5 +17,7 @@ function Card<T extends CardElementType = 'div'>({ as, className, ...props }: Ca
 
   return <Element className={cl} {...props} />;
 }
+
+Card.Title = CardTitle;
 
 export { Card };
