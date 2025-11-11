@@ -9,7 +9,7 @@ type CheckboxProps = ComponentPropsWithRef<'div'> & {
   value: boolean;
   setValue: (value: boolean) => void;
   label: string;
-  hideLabel?: string;
+  hideLabel?: boolean;
   disabled?: boolean;
 };
 

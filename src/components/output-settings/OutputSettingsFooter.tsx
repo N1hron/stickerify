@@ -1,4 +1,4 @@
-import { Divider } from '../ui';
+import { Divider } from '@ui';
 import { OutputSettingsRemember } from './OutputSettingsRemember';
 import { OutputSettingsRestore } from './OutputSettingsRestore';
 

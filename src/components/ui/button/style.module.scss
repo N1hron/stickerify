@@ -13,6 +13,7 @@ $button-width-min: calc(var(--button-height) - $button-pressed-padding-top);
   height: var(--button-height);
   min-width: $button-width-min;
   font-size: var(--font-size-sm);
+  border-radius: var(--border-radius);
 
   &:not(:disabled) {
     cursor: pointer;
@@ -25,6 +26,10 @@ $button-width-min: calc(var(--button-height) - $button-pressed-padding-top);
 
     &:active {
       @extend .buttonPressed;
+    }
+
+    &:focus-visible {
+      outline: revert;
     }
   }
 

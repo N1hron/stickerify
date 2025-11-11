@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 
-import { SelectCarousel } from '../ui/select-carousel/SelectCarousel';
+import { SelectCarousel } from '@ui';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { selectOutputSetting, setOutputSetting } from '@/store/slices/outputSettings';
 import { config } from '@/config';

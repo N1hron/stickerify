@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { Checkbox } from '../ui/checkbox/Checkbox';
+import { Checkbox } from '@ui';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { selectOutputSetting, setOutputSetting } from '@/store/slices/outputSettings';
 import type { OutputBooleanSettingName } from '@/types';

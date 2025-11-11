@@ -1,4 +1,4 @@
-import { Checkbox } from '../ui/checkbox/Checkbox';
+import { Checkbox } from '@ui';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
   selectRememberOutputSettings,

@@ -1,0 +1,15 @@
+.link {
+  color: var(--color-blue-400);
+
+  &::selection {
+    text-decoration-color: white;
+  }
+
+  &:hover {
+    color: var(--color-blue-500);
+  }
+
+  &:active {
+    color: var(--color-blue-600);
+  }
+}

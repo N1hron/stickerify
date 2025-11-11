@@ -1,4 +1,4 @@
-import { Button } from '../ui';
+import { Button } from '@ui';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { resetOutputSettings, selectIsDefaultOutputSettings } from '@/store/slices/outputSettings';
 

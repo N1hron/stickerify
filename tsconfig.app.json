@@ -27,7 +27,7 @@
     /* Path alias */
     "paths": {
       "@/*": ["./src/*"],
-      "@ui/*": ["./src/components/ui/*"],
+      "@ui": ["./src/components/ui"],
       "@icons/*": ["./src/assets/icons/*"]
     }
   },
