@@ -1,11 +1,5 @@
 .selectCarousel {
   display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.content {
-  display: flex;
   gap: 0.25rem;
 }
 
@@ -15,23 +9,19 @@
   border-bottom-width: var(--border-width-thick);
   border-radius: var(--border-radius);
   flex-grow: 1;
-  display: grid;
-  place-content: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: var(--font-size-xm);
   cursor: default;
 }
 
 .button {
   flex-shrink: 0;
-  width: 1.375rem;
 
   &Next {
     .icon {
       rotate: 180deg;
     }
   }
-}
-
-.label {
-  cursor: default;
 }

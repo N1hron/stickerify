@@ -1,20 +1,32 @@
 import clsx from 'clsx';
 import type { ComponentPropsWithRef } from 'react';
 
+import { capitalize } from '@/utils';
+
 import styles from './style.module.scss';
 
 type ButtonProps = {
-  mini?: boolean;
+  size?: 'large' | 'medium' | 'small';
+  kind?: '3d' | 'flat';
+  color?: 'light' | 'blue' | 'green' | 'red';
   icon?: boolean;
-  pressed?: boolean;
 } & ComponentPropsWithRef<'button'>;
 
-function Button({ mini, icon, pressed, className, children, ...props }: ButtonProps) {
+function Button({
+  size = 'large',
+  kind = '3d',
+  color = 'blue',
+  icon = false,
+  className,
+  children,
+  ...props
+}: ButtonProps) {
   const cl = clsx(
     styles.button,
-    mini && styles.buttonMini,
+    styles[`button${capitalize(size)}`],
+    styles[`button${capitalize(kind)}`],
+    styles[`button${capitalize(color)}`],
     icon && styles.buttonIcon,
-    pressed && styles.buttonPressed,
     className
   );
 

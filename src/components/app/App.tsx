@@ -1,5 +1,6 @@
 import { Card, Link } from '@ui';
 import { OutputSettings } from '../output-settings/OutputSettings';
+import { Playground } from '../playground/Playground';
 
 import styles from './style.module.scss';
 
@@ -11,6 +12,7 @@ export function App() {
       </Card>
       <main className={styles.main}>
         <OutputSettings />
+        <Playground />
       </main>
       <Card className={styles.footer} as='footer'>
         <Link href='https://github.com/N1hron/stickerify'>GitHub page</Link>

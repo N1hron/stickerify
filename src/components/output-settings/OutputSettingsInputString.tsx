@@ -1,10 +1,12 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useId, useMemo } from 'react';
 
-import { SelectCarousel } from '@ui';
+import { Label, SelectCarousel } from '@ui';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { selectOutputSetting, setOutputSetting } from '@/store/slices/outputSettings';
 import { config } from '@/config';
 import type { OutputStringSettingName, OutputStringSettingValue } from '@/types';
+
+import styles from './style.module.scss';
 
 type OutputSettingsInputStringProps = {
   name: OutputStringSettingName;
@@ -12,6 +14,7 @@ type OutputSettingsInputStringProps = {
 };
 
 export function OutputSettingsInputString({ name, label }: OutputSettingsInputStringProps) {
+  const labelId = useId();
   const dispatch = useAppDispatch();
   const value = useAppSelector(selectOutputSetting(name));
 
@@ -32,5 +35,12 @@ export function OutputSettingsInputString({ name, label }: OutputSettingsInputSt
     [dispatch, name]
   );
 
-  return <SelectCarousel label={label} values={values} value={value} setValue={setValue} />;
+  return (
+    <div className={styles.stringItem}>
+      <Label tag='span' id={labelId}>
+        {label}
+      </Label>
+      <SelectCarousel aria-labelledby={labelId} values={values} value={value} setValue={setValue} />
+    </div>
+  );
 }

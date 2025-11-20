@@ -1,53 +1,35 @@
 import clsx from 'clsx';
-import { useId, type ComponentPropsWithRef } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
+import { Button } from '../button/Button';
 import CheckIcon from '@/assets/icons/check.svg?react';
 
 import styles from './style.module.scss';
 
-type CheckboxProps = ComponentPropsWithRef<'div'> & {
+type CheckboxProps = Omit<ComponentPropsWithRef<'button'>, 'color' | 'value'> & {
   value: boolean;
   setValue: (value: boolean) => void;
-  label: string;
-  hideLabel?: boolean;
-  disabled?: boolean;
 };
 
-export function Checkbox({
-  value,
-  setValue,
-  label,
-  hideLabel,
-  disabled,
-  className,
-}: CheckboxProps) {
-  const inputId = useId();
+export function Checkbox({ value, setValue, className, ...props }: CheckboxProps) {
   const cl = clsx(styles.checkbox, className);
+  const color = value ? 'blue' : 'light';
 
-  function handleChange() {
+  function handleClick() {
     setValue(!value);
   }
 
   return (
-    <div className={cl}>
-      <div className={styles.inputWrapper}>
-        <input
-          id={inputId}
-          className={styles.input}
-          type='checkbox'
-          checked={value}
-          aria-label={hideLabel ? label : undefined}
-          disabled={disabled}
-          onChange={handleChange}
-        />
-        <CheckIcon className={styles.icon} aria-hidden />
-      </div>
-
-      {!hideLabel && (
-        <label className={styles.label} htmlFor={inputId}>
-          {label}
-        </label>
-      )}
-    </div>
+    <Button
+      className={cl}
+      size='small'
+      icon
+      color={color}
+      aria-checked={value}
+      onClick={handleClick}
+      {...props}
+    >
+      <CheckIcon className={styles.icon} aria-hidden />
+    </Button>
   );
 }

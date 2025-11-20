@@ -1,6 +1,7 @@
 import { Card, Divider } from '@ui';
 import { OutputSettingsList } from './OutputSettingsList';
-import { OutputSettingsFooter } from './OutputSettingsFooter';
+import { OutputSettingsRemember } from './OutputSettingsRemember';
+import { OutputSettingsRestore } from './OutputSettingsRestore';
 
 import styles from './style.module.scss';
 
@@ -10,7 +11,9 @@ export function OutputSettings() {
       <Card.Title>Output settings</Card.Title>
       <Divider />
       <OutputSettingsList />
-      <OutputSettingsFooter />
+      <Divider />
+      <OutputSettingsRemember />
+      <OutputSettingsRestore />
     </Card>
   );
 }

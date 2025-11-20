@@ -1,9 +1,11 @@
-import { useCallback } from 'react';
+import { useCallback, useId } from 'react';
 
-import { Checkbox } from '@ui';
+import { Checkbox, Label } from '@ui';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { selectOutputSetting, setOutputSetting } from '@/store/slices/outputSettings';
 import type { OutputBooleanSettingName } from '@/types';
+
+import styles from './style.module.scss';
 
 type OutputSettingsInputBooleanProps = {
   name: OutputBooleanSettingName;
@@ -11,6 +13,7 @@ type OutputSettingsInputBooleanProps = {
 };
 
 export function OutputSettingsInputBoolean({ name, label }: OutputSettingsInputBooleanProps) {
+  const checkboxId = useId();
   const dispatch = useAppDispatch();
   const value = useAppSelector(selectOutputSetting(name));
 
@@ -21,5 +24,12 @@ export function OutputSettingsInputBoolean({ name, label }: OutputSettingsInputB
     [dispatch, name]
   );
 
-  return <Checkbox label={label} value={value} setValue={setValue} />;
+  return (
+    <div className={styles.booleanItem}>
+      <Checkbox id={checkboxId} value={value} setValue={setValue} />
+      <Label tag='label' htmlFor={checkboxId}>
+        {label}
+      </Label>
+    </div>
+  );
 }

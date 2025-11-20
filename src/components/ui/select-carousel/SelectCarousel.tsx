@@ -11,18 +11,15 @@ type SelectCarouselProps<V extends string> = ComponentPropsWithRef<'div'> & {
   values: V[];
   value: V;
   setValue: (value: V) => void;
-  label: string;
 };
 
 function SelectCarousel<V extends string>({
   values,
   value,
   setValue,
-  label,
   className,
   ...props
 }: SelectCarouselProps<V>) {
-  const labelId = useId();
   const valueId = useId();
   const index = values.indexOf(value);
   const maxIndex = values.length - 1;
@@ -48,16 +45,11 @@ function SelectCarousel<V extends string>({
 
   return (
     <div className={cl} {...props}>
-      <span className={styles.label} id={labelId}>
-        {label}
-      </span>
-      <div className={styles.content} role='region' aria-labelledby={labelId}>
-        <SelectCarouselContext value={contextValue}>
-          <SelectCarouselButton />
-          <SelectCarouselValue />
-          <SelectCarouselButton next />
-        </SelectCarouselContext>
-      </div>
+      <SelectCarouselContext value={contextValue}>
+        <SelectCarouselButton direction='previous' />
+        <SelectCarouselValue />
+        <SelectCarouselButton direction='next' />
+      </SelectCarouselContext>
     </div>
   );
 }

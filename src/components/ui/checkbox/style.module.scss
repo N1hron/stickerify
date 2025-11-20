@@ -1,97 +1,15 @@
-$checkbox-input-height: 1.125rem;
-$checkbox-input-width: calc(
-  $checkbox-input-height - var(--border-width-thick) + var(--border-width-thin)
-);
-
 .checkbox {
-  display: flex;
-  gap: 0.25rem;
-  cursor: pointer;
+  width: min-content;
 
-  &:has(.input:not(:disabled)) {
-    &:hover {
-      .input {
-        background-color: var(--color-blue-75);
-
-        &:checked {
-          background-color: var(--color-blue-600);
-        }
-      }
-    }
-
-    &:active {
-      .inputWrapper {
-        padding-top: calc(var(--border-width-thick) - var(--border-width-thin));
-      }
-
-      .input {
-        height: $checkbox-input-width;
-        border-bottom-width: var(--border-width-thin);
-      }
-
-      .icon {
-        top: var(--border-width-thick);
-      }
-    }
-  }
-
-  &:has(.input:disabled) {
-    cursor: default;
-  }
-}
-
-.label {
-  line-height: 1.2855;
-  cursor: default;
-}
-
-.inputWrapper {
-  position: relative;
-  display: inline-block;
-  height: $checkbox-input-height;
-  width: $checkbox-input-width;
-  cursor: inherit;
-}
-
-.input {
-  appearance: none;
-  height: $checkbox-input-height;
-  width: $checkbox-input-width;
-  border: solid var(--border-width-thin) var(--color-blue-200);
-  border-bottom-width: var(--border-width-thick);
-  border-radius: 0.15rem;
-  background-color: var(--color-blue-50);
-  cursor: inherit;
-
-  &:disabled {
-    background-color: var(--color-disabled-300);
-    border-color: var(--color-disabled-500);
-  }
-
-  &:checked:not(:disabled) {
-    background-color: var(--color-blue-500);
-    border-color: var(--color-blue-800);
-  }
-
-  &:checked {
-    + .icon {
-      opacity: 1;
+  &[aria-checked='true'] {
+    .icon {
+      display: block;
     }
   }
 }
 
 .icon {
-  position: absolute;
-  opacity: 0;
-  left: var(--border-width-thin);
-  top: var(--border-width-thin);
-  right: var(--border-width-thin);
-  width: calc($checkbox-input-width - var(--border-width-thin) * 2);
+  display: none;
   height: auto;
   stroke-width: 2.5;
-  pointer-events: none;
-
-  path {
-    stroke: var(--color-text-alt);
-  }
 }

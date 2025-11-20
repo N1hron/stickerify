@@ -1,79 +1,14 @@
-$button-pressed-padding-top: calc(var(--border-width-thick) - var(--border-width-thin));
-$button-width-min: calc(var(--button-height) - $button-pressed-padding-top);
-
 .button {
-  --button-height: 2rem;
-
-  --button-content-color: var(--color-blue-500);
-  --button-content-color-hover: var(--color-blue-600);
-  --button-content-color-border: var(--color-blue-800);
+  --color: var(--color-text-alt);
 
   all: unset;
   box-sizing: border-box;
-  height: var(--button-height);
-  min-width: $button-width-min;
-  font-size: var(--font-size-sm);
-  border-radius: var(--border-radius);
-
-  &:not(:disabled) {
-    cursor: pointer;
-
-    &:hover {
-      .content {
-        background-color: var(--button-content-color-hover);
-      }
-    }
-
-    &:active {
-      @extend .buttonPressed;
-    }
-
-    &:focus-visible {
-      outline: revert;
-    }
-  }
-
-  &:disabled {
-    .content {
-      background-color: var(--color-disabled-300);
-      border-color: var(--color-disabled-500);
-    }
-  }
-
-  &Mini {
-    --button-height: 1.5rem;
-    font-size: var(--font-size-xm);
-  }
-
-  &Icon {
-    .content {
-      padding: 0;
-    }
-  }
-
-  &Pressed {
-    padding-top: $button-pressed-padding-top;
-
-    .content {
-      border-bottom-width: var(--border-width-thin);
-    }
-  }
-}
-
-.content {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  padding: 0 0.5rem;
-  border: solid var(--border-width-thin) var(--button-content-color-border);
-  border-bottom-width: var(--border-width-thick);
-  border-radius: var(--border-radius);
-  background-color: var(--color-blue-500);
-  color: var(--color-text-alt);
-  pointer-events: none;
-  user-select: none;
+  height: var(--height);
+  min-width: var(--height);
+  font: inherit;
+  text-transform: inherit;
+  color: var(--color);
+  cursor: pointer;
 
   svg {
     height: 100%;
@@ -81,7 +16,126 @@ $button-width-min: calc(var(--button-height) - $button-pressed-padding-top);
   }
 
   path {
-    stroke: var(--color-text-alt);
-    stroke-width: 2;
+    stroke: var(--color);
+  }
+
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: var(--padding);
+    background-color: var(--background);
+    border-radius: inherit;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &:hover {
+    .content {
+      background-color: var(--background-hover);
+    }
+  }
+
+  &:active {
+    .content {
+      background-color: var(--background-active);
+    }
+  }
+
+  &:focus-visible {
+    outline: revert;
+  }
+
+  &Light {
+    --background: var(--color-blue-50);
+    --background-hover: var(--color-blue-75);
+    --background-active: var(--color-blue-100);
+    --border-color: var(--color-blue-200);
+    --color: var(--color-slate-400);
+  }
+
+  &Blue {
+    --background: var(--color-blue-500);
+    --background-hover: var(--color-blue-600);
+    --background-active: var(--color-blue-700);
+    --border-color: var(--color-blue-800);
+  }
+
+  &Red {
+    --background: var(--color-red-500);
+    --background-hover: var(--color-red-600);
+    --background-active: var(--color-red-700);
+    --border-color: var(--color-red-800);
+  }
+
+  &Green {
+    --background: var(--color-green-500);
+    --background-hover: var(--color-green-600);
+    --background-active: var(--color-green-700);
+    --border-color: var(--color-green-800);
+  }
+
+  &:disabled {
+    --background: var(--color-disabled-300);
+    --border-color: var(--color-disabled-500);
+    --color: var(--color-text-alt);
+
+    pointer-events: none;
+  }
+
+  &Large {
+    --height: 2rem;
+
+    font-size: var(--font-size-sm);
+
+    .content {
+      padding: 0 0.5rem;
+    }
+  }
+
+  &Medium {
+    --height: 1.5rem;
+
+    font-size: var(--font-size-xm);
+
+    .content {
+      padding: 0 0.25rem;
+    }
+  }
+
+  &Small {
+    --height: 1.125rem;
+
+    font-size: var(--font-size-xm);
+    border-radius: 0.15rem;
+
+    .content {
+      padding: 0 0.125rem;
+    }
+  }
+
+  &3d {
+    min-width: calc(var(--height) - (var(--border-width-thick) - var(--border-width-thin)));
+    border-radius: var(--border-radius);
+
+    .content {
+      border: solid var(--border-width-thin) var(--border-color);
+      border-bottom-width: var(--border-width-thick);
+    }
+
+    &:active {
+      padding-top: calc(var(--border-width-thick) - var(--border-width-thin));
+
+      .content {
+        border-bottom-width: var(--border-width-thin);
+      }
+    }
+  }
+
+  &Icon {
+    .content {
+      padding: 0;
+    }
   }
 }
