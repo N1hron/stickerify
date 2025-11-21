@@ -32,6 +32,12 @@ $gap: 0.5rem;
   font-size: var(--font-size-sm);
 }
 
+.githubLink {
+  &:focus-visible {
+    padding: 0 0.125rem;
+  }
+}
+
 .title {
   color: var(--color-blue-500);
   text-shadow: 0 var(--border-width-thick) 0 var(--color-blue-200);

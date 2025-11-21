@@ -15,7 +15,9 @@ export function App() {
         <Playground />
       </main>
       <Card className={styles.footer} as='footer'>
-        <Link href='https://github.com/N1hron/stickerify'>GitHub page</Link>
+        <Link className={styles.githubLink} href='https://github.com/N1hron/stickerify'>
+          GitHub page
+        </Link>
       </Card>
     </div>
   );
