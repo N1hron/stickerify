@@ -2,24 +2,27 @@ import clsx from 'clsx';
 
 import ArrowLeft from '@icons/arrow-left.svg?react';
 import { Button } from '../button/Button';
-import { capitalize, wrap } from '@/utils';
-import { useSelectCarouselContext } from './SelectCarouselContext';
+import { capitalize } from '@/utils';
 
 import styles from './style.module.scss';
 
 export type SelectCarouselButtonProps = {
+  incrementIndexBy: (n: number) => void;
   direction: 'next' | 'previous';
+  valueId: string;
 };
 
-export function SelectCarouselButton({ direction }: SelectCarouselButtonProps) {
-  const { index, maxIndex, setIndex, valueId } = useSelectCarouselContext();
+export function SelectCarouselButton({
+  incrementIndexBy,
+  direction,
+  valueId,
+}: SelectCarouselButtonProps) {
   const isNext = direction === 'next';
-  const cl = clsx(styles.button, isNext && styles.buttonNext);
   const label = capitalize(direction);
+  const cl = clsx(styles.button, isNext && styles.buttonNext);
 
   function handleClick() {
-    const step = isNext ? 1 : -1;
-    setIndex(wrap(0, index + step, maxIndex));
+    incrementIndexBy(isNext ? 1 : -1);
   }
 
   return (

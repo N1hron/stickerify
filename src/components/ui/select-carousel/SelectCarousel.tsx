@@ -1,21 +1,20 @@
 import clsx from 'clsx';
-import { useCallback, useId, useMemo, type ComponentPropsWithRef } from 'react';
+import { useId, type ComponentPropsWithRef } from 'react';
 
 import { SelectCarouselButton } from './SelectCarouselButton';
-import { SelectCarouselValue } from './SelectCarouselValue';
-import { SelectCarouselContext, type SelectCarouselContextValue } from './SelectCarouselContext';
+import { wrap } from '@/utils';
 
 import styles from './style.module.scss';
 
 type SelectCarouselProps<V extends string> = ComponentPropsWithRef<'div'> & {
-  values: V[];
   value: V;
+  values: V[];
   setValue: (value: V) => void;
 };
 
 function SelectCarousel<V extends string>({
-  values,
   value,
+  values,
   setValue,
   className,
   ...props
@@ -25,31 +24,27 @@ function SelectCarousel<V extends string>({
   const maxIndex = values.length - 1;
   const cl = clsx(styles.selectCarousel, className);
 
-  const setIndex = useCallback(
-    (index: number) => {
-      setValue(values[index]);
-    },
-    [setValue, values]
-  );
-
-  const contextValue: SelectCarouselContextValue = useMemo(
-    () => ({
-      value,
-      index,
-      maxIndex,
-      setIndex,
-      valueId,
-    }),
-    [value, index, maxIndex, setIndex, valueId]
-  );
+  function incrementIndexBy(n: number) {
+    setValue(values[wrap(0, index + n, maxIndex)]);
+  }
 
   return (
     <div className={cl} {...props}>
-      <SelectCarouselContext value={contextValue}>
-        <SelectCarouselButton direction='previous' />
-        <SelectCarouselValue />
-        <SelectCarouselButton direction='next' />
-      </SelectCarouselContext>
+      <SelectCarouselButton
+        incrementIndexBy={incrementIndexBy}
+        valueId={valueId}
+        direction='previous'
+      />
+
+      <div className={styles.value} id={valueId} aria-live='polite'>
+        {value}
+      </div>
+
+      <SelectCarouselButton
+        incrementIndexBy={incrementIndexBy}
+        valueId={valueId}
+        direction='next'
+      />
     </div>
   );
 }
