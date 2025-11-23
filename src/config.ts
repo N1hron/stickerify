@@ -62,6 +62,8 @@ export const config = {
     keyLS: 'outputSettings',
     rememberKeyLS: 'rememberOutputSettings',
   } as const,
+  maxFiles: 20,
+  accept: 'image/*, video/*',
 } as const;
 
 export type Config = typeof config;

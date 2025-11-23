@@ -1,0 +1,11 @@
+@use '../../../styles/mixins' as m;
+
+.button {
+  &:has(+ .input:focus-visible) {
+    @include m.focus-outline;
+  }
+}
+
+.input {
+  @include m.visually-hidden;
+}

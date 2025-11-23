@@ -4,7 +4,7 @@ import styles from './style.module.scss';
 
 export function Playground() {
   return (
-    <Card className={styles.playground}>
+    <Card as='section' className={styles.playground}>
       <Card.Title>Playground</Card.Title>
       <Divider />
     </Card>
