@@ -1,28 +1,41 @@
 import { ALL_FORMATS, BlobSource, Input } from 'mediabunny';
 
-import { devLog, loadImage } from '@/utils';
-import type { FileData } from '@/types';
+import { devLog, loadImage, splitFileName } from '@/utils';
+import { config } from '@/config';
+import type { FileData, UploaderItem } from '@/types';
 
 export async function* generateFileData(
   files: FileList,
-  existingFiles: FileData[]
+  uploaderItems: UploaderItem[]
 ): AsyncGenerator<FileData> {
+  let spaceLeft = config.maxFiles - uploaderItems.length;
+
   for (const file of files) {
+    if (spaceLeft <= 0) break;
+
     const isImage = file.type.startsWith('image/');
     const isVideo = file.type.startsWith('video/');
 
     if (!isImage && !isVideo) continue;
 
+    const [baseName, extension] = splitFileName(file.name);
+
     if (
-      existingFiles.find((ef) => {
-        return ef.name === file.name && ef.type === file.type && ef.size === file.size;
+      uploaderItems.find(({ fileData }) => {
+        return (
+          fileData.baseName === baseName &&
+          fileData.extension === extension &&
+          fileData.type === file.type &&
+          fileData.size === file.size
+        );
       })
     ) {
       continue;
     }
 
     const base = {
-      name: file.name,
+      baseName,
+      extension,
       type: file.type,
       size: file.size,
       url: URL.createObjectURL(file),
@@ -36,6 +49,7 @@ export async function* generateFileData(
 
         if (!primaryVideoTrack) continue;
 
+        spaceLeft--;
         yield {
           ...base,
           width: primaryVideoTrack.codedWidth,
@@ -48,6 +62,7 @@ export async function* generateFileData(
         const image = document.createElement('img');
         await loadImage(image, base.url);
 
+        spaceLeft--;
         yield {
           ...base,
           width: image.naturalWidth,

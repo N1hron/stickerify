@@ -48,8 +48,8 @@ export const config = {
         default: 'scale down',
       } as const satisfies OutputSettingItemString<StickerResizeMode>,
       {
-        name: 'format',
-        label: 'File format',
+        name: 'staticFormat',
+        label: 'Static format',
         values: ['png', 'webp'],
         default: 'webp',
       } as const satisfies OutputSettingItemString<StickerFormat>,

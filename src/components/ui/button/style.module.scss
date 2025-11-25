@@ -10,6 +10,8 @@
   font: inherit;
   text-transform: inherit;
   color: var(--color);
+  min-width: var(--height);
+  border-radius: var(--border-radius);
   cursor: pointer;
 
   svg {
@@ -33,24 +35,42 @@
     user-select: none;
   }
 
-  &:hover {
-    .content {
-      background-color: var(--background-hover);
+  &:not(:disabled) {
+    &:hover {
+      .content {
+        background-color: var(--background-hover);
+      }
+    }
+
+    &:active {
+      .content {
+        background-color: var(--background-active);
+      }
+
+      &.button3d {
+        padding-top: calc(var(--border-width-thick) - var(--border-width-thin));
+
+        .content {
+          border-bottom-width: var(--border-width-thin);
+        }
+      }
+    }
+
+    &:focus-visible {
+      @include m.focus-outline-color(var(--background));
+
+      &.buttonLight {
+        outline-color: var(--color-blue-500);
+      }
     }
   }
 
-  &:active {
-    .content {
-      background-color: var(--background-active);
-    }
-  }
+  &:disabled {
+    --background: var(--color-disabled-300);
+    --border-color: var(--color-disabled-500);
+    --color: var(--color-text-alt);
 
-  &:focus-visible {
-    @include m.focus-outline-color(var(--background));
-
-    &.buttonLight {
-      outline-color: var(--color-blue-500);
-    }
+    cursor: not-allowed;
   }
 
   &Light {
@@ -82,14 +102,6 @@
     --border-color: var(--color-green-800);
   }
 
-  &:disabled {
-    --background: var(--color-disabled-300);
-    --border-color: var(--color-disabled-500);
-    --color: var(--color-text-alt);
-
-    pointer-events: none;
-  }
-
   &Large {
     --height: 2rem;
 
@@ -114,6 +126,7 @@
     --height: 1.125rem;
 
     font-size: var(--font-size-xm);
+    border-radius: 0.15rem;
 
     .content {
       padding: 0 0.125rem;
@@ -122,24 +135,15 @@
 
   &3d {
     min-width: calc(var(--height) - (var(--border-width-thick) - var(--border-width-thin)));
-    border-radius: var(--border-radius);
-
-    &.buttonSmall {
-      border-radius: 0.15rem;
-    }
 
     .content {
       border: solid var(--border-width-thin) var(--border-color);
       border-bottom-width: var(--border-width-thick);
     }
+  }
 
-    &:active {
-      padding-top: calc(var(--border-width-thick) - var(--border-width-thin));
-
-      .content {
-        border-bottom-width: var(--border-width-thin);
-      }
-    }
+  &Square {
+    border-radius: 0;
   }
 
   &Icon {

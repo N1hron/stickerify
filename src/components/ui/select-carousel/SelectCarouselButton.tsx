@@ -30,11 +30,11 @@ export function SelectCarouselButton({
       className={cl}
       size='medium'
       icon
-      aria-label={label}
+      title={label}
       aria-controls={valueId}
       onClick={handleClick}
     >
-      <ArrowLeft className={styles.icon} aria-hidden />
+      <ArrowLeft className={styles.icon} aria-label={label} />
     </Button>
   );
 }

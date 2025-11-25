@@ -1,0 +1,135 @@
+@use '../../styles/mixins' as m;
+
+$droparea-border: dashed var(--border-width) var(--accent-color);
+
+.uploader {
+  --accent-color: var(--color-blue-300);
+
+  grid-row: 1/-1;
+  grid-column: 2/3;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  &:has(.dropareaValid) {
+    --accent-color: var(--color-green-300);
+  }
+
+  &:has(.dropareaInvalid) {
+    --accent-color: var(--color-red-300);
+  }
+
+  &:has(.dropareaDisabled:hover) {
+    --accent-color: var(--color-red-300);
+  }
+}
+
+.fileInput {
+  @include m.visually-hidden;
+}
+
+.droparea {
+  height: 100%;
+  z-index: 0;
+  position: relative;
+  border: $droparea-border;
+  overflow: hidden;
+  cursor: pointer;
+
+  &::before {
+    $background-color: hsl(from var(--accent-color) h s l / 0.5);
+
+    content: '';
+    z-index: -1;
+    position: absolute;
+    height: 200%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent 0,
+      transparent 0.3rem,
+      $background-color 0.3rem,
+      $background-color 0.6rem
+    );
+  }
+
+  &:hover {
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  &Disabled {
+    cursor: not-allowed;
+  }
+
+  &Valid {
+    &::before {
+      opacity: 1;
+
+      animation: move-down 15s linear 0s infinite;
+
+      @keyframes move-down {
+        from {
+          transform: translateY(0%);
+        }
+
+        to {
+          transform: translateY(50%);
+        }
+      }
+    }
+  }
+
+  &Invalid {
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
+.upload {
+  flex-grow: 1;
+  position: relative;
+}
+
+.addFiles {
+  z-index: 0;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  &:has(+ .input:focus-visible) {
+    @include m.focus-outline;
+  }
+
+  &::before {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    box-sizing: content-box;
+    left: 0;
+    bottom: 0;
+    width: calc(100% + 0.25rem);
+    height: calc(100% + 0.25rem);
+    border-top: $droparea-border;
+    border-right: $droparea-border;
+    border-top-right-radius: var(--border-radius);
+    background-color: var(--color-blue-25);
+  }
+}
+
+.fileCount {
+  position: absolute;
+  right: var(--border-width);
+  top: var(--border-width);
+  background-color: var(--color-blue-25);
+  padding: 0.25rem;
+  border-bottom-left-radius: var(--border-radius);
+  pointer-events: none;
+  font-size: var(--font-size-sm);
+  color: var(--accent-color);
+}

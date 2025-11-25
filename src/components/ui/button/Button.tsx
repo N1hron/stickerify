@@ -9,6 +9,7 @@ type ButtonProps = {
   size?: 'large' | 'medium' | 'small';
   kind?: '3d' | 'flat';
   color?: 'light' | 'blue' | 'green' | 'red';
+  square?: boolean;
   icon?: boolean;
 } & ComponentPropsWithRef<'button'>;
 
@@ -17,6 +18,7 @@ function Button({
   kind = '3d',
   color = 'blue',
   icon = false,
+  square = false,
   className,
   children,
   ...props
@@ -26,6 +28,7 @@ function Button({
     styles[`button${capitalize(size)}`],
     styles[`button${capitalize(kind)}`],
     styles[`button${capitalize(color)}`],
+    square && styles.buttonSquare,
     icon && styles.buttonIcon,
     className
   );

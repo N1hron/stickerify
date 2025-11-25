@@ -43,7 +43,8 @@ export type OutputBooleanSettingValue<N extends OutputBooleanSettingName> = Outp
 export type OutputBooleanSettings = Pick<OutputSettings, OutputBooleanSettingName>;
 
 export type FileData = {
-  name: string;
+  baseName: string;
+  extension: string;
   type: string;
   size: number;
   duration: number;
@@ -52,12 +53,7 @@ export type FileData = {
   url: string;
 };
 
-export type ConverterFile = FileData & {
+export type UploaderItem = {
   id: string;
-  status: 'idle' | 'error' | 'success';
-  settings: {
-    type: 'video' | 'static';
-    from: number;
-    to: number;
-  };
+  fileData: FileData;
 };

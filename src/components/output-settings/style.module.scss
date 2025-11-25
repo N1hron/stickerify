@@ -23,11 +23,11 @@
 
 .booleanItem,
 .remember {
-  display: flex;
-  align-items: center;
+  display: inline-flex;
 
   label {
     padding-left: 0.25rem;
+    line-height: 1.125rem;
   }
 }
 

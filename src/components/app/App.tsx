@@ -1,7 +1,7 @@
 import { Card, Link } from '@ui';
 import { OutputSettings } from '../output-settings/OutputSettings';
 import { Playground } from '../playground/Playground';
-import { Converter } from '../converter/Converter';
+import { Uploader } from '../uploader/Uploader';
 
 import styles from './style.module.scss';
 
@@ -14,7 +14,7 @@ export function App() {
       <main className={styles.main}>
         <OutputSettings />
         <Playground />
-        <Converter />
+        <Uploader />
       </main>
       <Card className={styles.footer} as='footer'>
         <Link className={styles.githubLink} href='https://github.com/N1hron/stickerify'>

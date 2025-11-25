@@ -5,3 +5,5 @@ export { capitalize } from './capitalize';
 export { devLog } from './devLog';
 export { matchesMimeAccept } from './matchesMimeAccept';
 export { loadImage } from './loadImage';
+export { splitFileName } from './splitFileName';
+export { formatFileSize } from './formatFileSize';

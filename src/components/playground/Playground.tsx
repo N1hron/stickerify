@@ -7,6 +7,7 @@ export function Playground() {
     <Card as='section' className={styles.playground}>
       <Card.Title>Playground</Card.Title>
       <Divider />
+      empty for now
     </Card>
   );
 }

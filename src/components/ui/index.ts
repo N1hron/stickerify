@@ -5,3 +5,4 @@ export { SelectCarousel } from './select-carousel/SelectCarousel';
 export { Checkbox } from './checkbox/Checkbox';
 export { Link } from './link/Link';
 export { Label } from './label/Label';
+export { Table } from './table/Table';
