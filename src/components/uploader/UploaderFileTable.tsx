@@ -1,32 +1,30 @@
-import { useAppSelector } from '@/store/hooks';
-
 import { Table } from '../ui';
-import { UploaderFile } from './UploaderFile';
-import { selectUploaderItems } from '@/store/slices/uploader/index';
+import { UploaderFileTableBody } from './UploaderFileTableBody';
+import { useAppSelector } from '@/store/hooks';
+import { selectShowDuration } from '@/store/slices/uploader';
 
 import styles from './style.module.scss';
 
 export function UploaderFileTable() {
-  const items = useAppSelector(selectUploaderItems);
+  const showDuration = useAppSelector(selectShowDuration);
 
-  if (!items.length) return null;
   return (
     <Table className={styles.fileTable}>
       <Table.Header>
         <Table.Row>
-          <Table.EmptyCell />
-          <Table.Head>№</Table.Head>
+          <Table.EmptyCell colorless />
           <Table.Head grow>Name</Table.Head>
+          <Table.Head>Type</Table.Head>
           <Table.Head>Ext</Table.Head>
           <Table.Head>Size</Table.Head>
-          <Table.EmptyCell />
+          {showDuration && <Table.Head>Duration</Table.Head>}
+          <Table.ButtonCell color='green' colSpan={2}>
+            Run all
+          </Table.ButtonCell>
         </Table.Row>
       </Table.Header>
-      <Table.Body>
-        {items.map((item, i) => (
-          <UploaderFile key={item.id} i={i} item={item} />
-        ))}
-      </Table.Body>
+
+      <UploaderFileTableBody />
     </Table>
   );
 }

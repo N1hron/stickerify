@@ -1,0 +1,1 @@
+export { StaticConverter } from './staticConverter';

@@ -16,8 +16,10 @@ export function UploaderFileInput(props: UploaderFileInputProps) {
   function handleChange({ target }: ChangeEvent<HTMLInputElement>) {
     if (target.files) {
       dispatch(uploadFiles(target.files))
-        .then(() => (target.value = ''))
-        .catch((err) => devLog(err));
+        .catch(devLog)
+        .finally(() => {
+          target.value = '';
+        });
     }
   }
 

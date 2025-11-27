@@ -1,11 +1,12 @@
-import type { ReactNode } from 'react';
+import clsx from 'clsx';
+import type { ComponentPropsWithRef } from 'react';
 
 import styles from './style.module.scss';
 
-type TableBodyProps = {
-  children?: ReactNode;
-};
+type TableBodyProps = ComponentPropsWithRef<'tbody'>;
 
-export function TableBody({ children }: TableBodyProps) {
-  return <tbody className={styles.body}>{children}</tbody>;
+export function TableBody({ className, ...props }: TableBodyProps) {
+  const cl = clsx(styles.body, className);
+
+  return <tbody className={cl} {...props} />;
 }

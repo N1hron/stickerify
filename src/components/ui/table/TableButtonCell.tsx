@@ -1,18 +1,37 @@
-import type { ComponentProps, ReactNode } from 'react';
+import type { ComponentProps, ComponentPropsWithRef, ReactNode } from 'react';
 
 import { Button } from '../button/Button';
 import { TableCell } from './TableCell';
 
 import styles from './style.module.scss';
 
-type TabelButtonCellProps = {
+type TableButtonCellProps = {
   children?: ReactNode;
-} & Pick<ComponentProps<typeof Button>, 'color' | 'icon' | 'aria-label' | 'title' | 'onClick'>;
+} & ComponentPropsWithRef<typeof TableCell> &
+  Pick<ComponentProps<typeof Button>, 'color' | 'icon' | 'title' | 'disabled' | 'onClick'>;
 
-export function TabelButtonCell({ children, ...props }: TabelButtonCellProps) {
+export function TableButtonCell({
+  children,
+  color,
+  icon,
+  title,
+  disabled,
+  onClick,
+  ...props
+}: TableButtonCellProps) {
   return (
-    <TableCell slim colorless>
-      <Button className={styles.button} size='medium' kind='3d' square {...props}>
+    <TableCell slim colorless {...props}>
+      <Button
+        className={styles.button}
+        size='medium'
+        kind='3d'
+        square
+        color={color}
+        icon={icon}
+        title={title}
+        disabled={disabled}
+        onClick={onClick}
+      >
         {children}
       </Button>
     </TableCell>

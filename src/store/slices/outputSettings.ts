@@ -75,7 +75,7 @@ const outputSettingsSlice = createSlice({
   },
   selectors: {
     selectOutputSettings(state) {
-      return state;
+      return state.items;
     },
     selectRememberOutputSettings(state) {
       return state.remember;

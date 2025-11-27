@@ -7,7 +7,7 @@ import { TableBody } from './TableBody';
 import { TableCell } from './TableCell';
 import { TableRow } from './TableRow';
 import { TableEmptyCell } from './TableEmptyCell';
-import { TabelButtonCell } from './TableButtonCell';
+import { TableButtonCell } from './TableButtonCell';
 
 import styles from './style.module.scss';
 
@@ -15,6 +15,7 @@ type TableProps = ComponentPropsWithRef<'table'>;
 
 function Table({ className, ...props }: TableProps) {
   const cl = clsx(styles.table, className);
+
   return <table className={cl} {...props} />;
 }
 
@@ -24,6 +25,6 @@ Table.Body = TableBody;
 Table.Cell = TableCell;
 Table.Row = TableRow;
 Table.EmptyCell = TableEmptyCell;
-Table.ButtonCell = TabelButtonCell;
+Table.ButtonCell = TableButtonCell;
 
 export { Table };

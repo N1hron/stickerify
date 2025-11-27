@@ -10,7 +10,8 @@ export function Uploader() {
   return (
     <Card className={styles.uploader}>
       <UploaderFileTable />
-      <div className={styles.upload}>
+
+      <div className={styles.dropareaWrapper}>
         <UploaderDroparea />
         <UploaderAddFiles />
         <UploaderFileCount />

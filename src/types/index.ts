@@ -14,7 +14,6 @@ export type IconComponent = FunctionComponent<
 >;
 
 export type StickerSizeType = 'sticker' | 'emoji';
-export type StickerSize = 512 | 100;
 export type StickerHorizontalAlignment = 'left' | 'middle' | 'right';
 export type StickerVerticalAlignment = 'top' | 'middle' | 'bottom';
 export type StickerResizeMode = 'fill' | 'contain' | 'cover' | 'scale down';
@@ -42,18 +41,34 @@ export type OutputBooleanSettingName = KeysMatching<OutputSettings, boolean>;
 export type OutputBooleanSettingValue<N extends OutputBooleanSettingName> = OutputSettings[N];
 export type OutputBooleanSettings = Pick<OutputSettings, OutputBooleanSettingName>;
 
-export type FileData = {
-  baseName: string;
-  extension: string;
-  type: string;
+export type SourceData = {
+  name: string;
+  type: 'video' | 'image';
+  mime: string;
   size: number;
   duration: number;
-  width: number;
-  height: number;
   url: string;
 };
 
 export type UploaderItem = {
-  id: string;
-  fileData: FileData;
+  signature: string;
+  data: SourceData;
 };
+
+export type ConverterItem = {
+  status: 'idle' | 'loading' | 'success' | 'error';
+  settings: {
+    type: 'static' | 'video';
+    from: number;
+    to: number;
+  };
+};
+
+export type ResultData = {
+  id: string;
+  name: string;
+  url: string;
+};
+
+export type XY = [x: number, y: number];
+export type WidthHeight = [width: number, height: number];

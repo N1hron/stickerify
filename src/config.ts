@@ -30,17 +30,17 @@ export const config = {
         default: 'sticker',
       } as const satisfies OutputSettingItemString<StickerSizeType>,
       {
-        name: 'horizontalAlignment',
-        label: 'Horizontal alignment',
-        values: ['left', 'middle', 'right'],
-        default: 'middle',
-      } as const satisfies OutputSettingItemString<StickerHorizontalAlignment>,
-      {
         name: 'verticalAlignment',
         label: 'Vertical alignment',
         values: ['top', 'middle', 'bottom'],
         default: 'middle',
       } as const satisfies OutputSettingItemString<StickerVerticalAlignment>,
+      {
+        name: 'horizontalAlignment',
+        label: 'Horizontal alignment',
+        values: ['left', 'middle', 'right'],
+        default: 'middle',
+      } as const satisfies OutputSettingItemString<StickerHorizontalAlignment>,
       {
         name: 'resizeMode',
         label: 'Resize Mode',
@@ -55,7 +55,7 @@ export const config = {
       } as const satisfies OutputSettingItemString<StickerFormat>,
       {
         name: 'trim',
-        label: 'Remove empty spaces',
+        label: 'Remove empty spaces if possible',
         default: true,
       } as const satisfies OutputSettingItemBoolean,
     ],
@@ -64,6 +64,10 @@ export const config = {
   } as const,
   maxFiles: 20,
   accept: 'image/*, video/*',
+  stickerSize: {
+    sticker: 512,
+    emoji: 100,
+  } as const satisfies Record<StickerSizeType, number>,
 } as const;
 
 export type Config = typeof config;

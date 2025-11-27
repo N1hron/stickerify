@@ -13,7 +13,7 @@ export function UploaderAddFiles() {
   const isDisabled = !useAppSelector(selectCanUpload);
 
   function handleClick() {
-    if (inputRef.current && !isDisabled) {
+    if (!isDisabled && inputRef.current) {
       inputRef.current.click();
     }
   }

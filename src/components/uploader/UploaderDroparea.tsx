@@ -20,7 +20,9 @@ export function UploaderDroparea() {
   const cl = clsx(
     styles.droparea,
     isDisabled && styles.dropareaDisabled,
-    isDraggingOver && (isValid ? styles.dropareaValid : styles.dropareaInvalid)
+    isValid && styles.dropareaValid,
+    !isValid && styles.dropareaInvalid,
+    isDraggingOver && styles.dropareaDraggingOver
   );
 
   function validateDataTransfer(dataTransfer: DataTransfer) {
@@ -55,13 +57,13 @@ export function UploaderDroparea() {
     event.preventDefault();
     setDragEnterCount(0);
 
-    if (isValid) {
-      dispatch(uploadFiles(event.dataTransfer.files)).catch((err) => devLog(err));
+    if (!isDisabled && isValid) {
+      dispatch(uploadFiles(event.dataTransfer.files)).catch(devLog);
     }
   }
 
   function handleClick() {
-    if (inputRef.current && !isDisabled) {
+    if (!isDisabled && inputRef.current) {
       inputRef.current.click();
     }
   }
@@ -76,7 +78,7 @@ export function UploaderDroparea() {
         onDrop={handleDrop}
         onClick={handleClick}
       />
-      <UploaderFileInput ref={inputRef} hidden />
+      <UploaderFileInput ref={inputRef} />
     </>
   );
 }

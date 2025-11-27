@@ -1,48 +1,31 @@
-import {
-  createAsyncThunk,
-  createSlice,
-  isAnyOf,
-  nanoid,
-  type PayloadAction,
-} from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 import { config } from '@/config';
+import { createFileSignature, getVideoDuration } from './utils';
+import type { UploaderItem } from '@/types';
 import type { AppDispatch, AppState } from '@/store';
-import type { UploaderItem, FileData } from '@/types';
-import { generateFileData } from './utils';
 
 type UploaderState = {
   items: UploaderItem[];
-  isUploading: boolean;
+  searchTable: Record<string, true>;
 };
 
 const initialState: UploaderState = {
   items: [],
-  isUploading: false,
+  searchTable: {},
 };
 
 const uploaderSlice = createSlice({
   name: 'uploader',
   initialState,
   reducers: {
-    addUploaderItem: {
-      reducer(state, action: PayloadAction<UploaderItem>) {
-        state.items.push(action.payload);
-      },
-      prepare(fileData: FileData): { payload: UploaderItem } {
-        return {
-          payload: {
-            id: nanoid(),
-            fileData,
-          },
-        };
-      },
+    addUploaderItem(state, action: PayloadAction<UploaderItem>) {
+      state.items.push(action.payload);
+      state.searchTable[action.payload.signature] = true;
     },
     removeUploaderItem(state, action: PayloadAction<string>) {
-      state.items = state.items.filter((item) => item.id !== action.payload);
-    },
-    setIsUploading(state, action: PayloadAction<boolean>) {
-      state.isUploading = action.payload;
+      state.items = state.items.filter((item) => item.signature !== action.payload);
+      delete state.searchTable[action.payload];
     },
   },
   selectors: {
@@ -50,35 +33,73 @@ const uploaderSlice = createSlice({
       return state.items;
     },
     selectCanUpload(state) {
-      return !state.isUploading && state.items.length < config.maxFiles;
+      return state.items.length < config.maxFiles;
     },
     selectUploaderItemsCount(state) {
       return state.items.length;
     },
-  },
-  extraReducers(builder) {
-    builder
-      .addCase(uploadFiles.pending, (state) => {
-        state.isUploading = true;
-      })
-      .addMatcher(isAnyOf(uploadFiles.fulfilled, uploadFiles.rejected), (state) => {
-        state.isUploading = false;
-      });
+    selectShowDuration(state) {
+      return !!state.items.find((item) => item.data.duration > 0);
+    },
   },
 });
 
 export const uploaderReducer = uploaderSlice.reducer;
-export const { addUploaderItem, removeUploaderItem, setIsUploading } = uploaderSlice.actions;
-export const { selectUploaderItems, selectCanUpload, selectUploaderItemsCount } =
-  uploaderSlice.selectors;
+export const { addUploaderItem, removeUploaderItem } = uploaderSlice.actions;
+export const {
+  selectUploaderItems,
+  selectCanUpload,
+  selectUploaderItemsCount,
+  selectShowDuration,
+} = uploaderSlice.selectors;
 
 export const uploadFiles = createAsyncThunk<
   void,
   FileList,
-  { dispatch: AppDispatch; state: AppState }
->('uploader/uploadFiles', async (files, { dispatch, getState }) => {
-  const items = getState().uploader.items;
-  for await (const fileData of generateFileData(files, items)) {
-    dispatch(addUploaderItem(fileData));
+  {
+    dispatch: AppDispatch;
+    state: AppState;
+  }
+>('uploader/uploadFiles', async (files, { getState, dispatch }) => {
+  for (const file of files) {
+    const state = getState();
+    const items = state.uploader.items;
+
+    if (items.length >= config.maxFiles) {
+      break;
+    }
+
+    const isImage = file.type.startsWith('image/');
+    const isVideo = file.type.startsWith('video/');
+
+    if (!isImage && !isVideo) {
+      continue;
+    }
+
+    const searchTable = state.uploader.searchTable;
+    const signature = createFileSignature(file);
+    const isNew = searchTable[signature] !== true;
+
+    if (isNew) {
+      let duration = 0;
+
+      if (isVideo) {
+        duration = await getVideoDuration(file);
+      }
+
+      dispatch(
+        addUploaderItem({
+          signature,
+          data: {
+            name: file.name,
+            mime: file.type,
+            type: isImage ? 'image' : 'video',
+            size: file.size,
+            duration,
+            url: URL.createObjectURL(file),
+          },
+        })
+      );
+    }
   }
 });

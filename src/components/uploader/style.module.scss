@@ -11,11 +11,11 @@ $droparea-border: dashed var(--border-width) var(--accent-color);
   flex-direction: column;
   gap: 0.25rem;
 
-  &:has(.dropareaValid) {
+  &:has(.dropareaValid.dropareaDraggingOver) {
     --accent-color: var(--color-green-300);
   }
 
-  &:has(.dropareaInvalid) {
+  &:has(.dropareaInvalid.dropareaDraggingOver) {
     --accent-color: var(--color-red-300);
   }
 
@@ -24,8 +24,10 @@ $droparea-border: dashed var(--border-width) var(--accent-color);
   }
 }
 
-.fileInput {
-  @include m.visually-hidden;
+.fileTable {
+  &:has(.fileTableBody:empty) {
+    display: none;
+  }
 }
 
 .droparea {
@@ -35,6 +37,10 @@ $droparea-border: dashed var(--border-width) var(--accent-color);
   border: $droparea-border;
   overflow: hidden;
   cursor: pointer;
+
+  + .fileInput {
+    display: none;
+  }
 
   &::before {
     $background-color: hsl(from var(--accent-color) h s l / 0.5);
@@ -56,42 +62,39 @@ $droparea-border: dashed var(--border-width) var(--accent-color);
     );
   }
 
+  &Disabled {
+    cursor: not-allowed;
+  }
+
+  &DraggingOver,
   &:hover {
     &::before {
       opacity: 1;
     }
   }
 
-  &Disabled {
-    cursor: not-allowed;
-  }
+  &DraggingOver {
+    &.dropareaValid {
+      &::before {
+        animation-name: move-down;
+        animation-duration: 15s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
 
-  &Valid {
-    &::before {
-      opacity: 1;
-
-      animation: move-down 15s linear 0s infinite;
-
-      @keyframes move-down {
-        from {
-          transform: translateY(0%);
-        }
-
-        to {
-          transform: translateY(50%);
+        @keyframes move-down {
+          from {
+            transform: translateY(0%);
+          }
+          to {
+            transform: translateY(50%);
+          }
         }
       }
     }
   }
-
-  &Invalid {
-    &::before {
-      opacity: 1;
-    }
-  }
 }
 
-.upload {
+.dropareaWrapper {
   flex-grow: 1;
   position: relative;
 }
@@ -102,8 +105,8 @@ $droparea-border: dashed var(--border-width) var(--accent-color);
   left: 0;
   bottom: 0;
 
-  &:has(+ .input:focus-visible) {
-    @include m.focus-outline;
+  + .fileInput {
+    @include m.visually-hidden;
   }
 
   &::before {
@@ -120,6 +123,10 @@ $droparea-border: dashed var(--border-width) var(--accent-color);
     border-top-right-radius: var(--border-radius);
     background-color: var(--color-blue-25);
   }
+
+  &:has(+ .fileInput:focus-visible) {
+    @include m.focus-outline;
+  }
 }
 
 .fileCount {
@@ -132,4 +139,8 @@ $droparea-border: dashed var(--border-width) var(--accent-color);
   pointer-events: none;
   font-size: var(--font-size-sm);
   color: var(--accent-color);
+
+  &::selection {
+    background-color: var(--accent-color);
+  }
 }

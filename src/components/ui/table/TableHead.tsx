@@ -1,15 +1,14 @@
-import type { ReactNode } from 'react';
+import clsx from 'clsx';
+import type { ComponentPropsWithRef } from 'react';
 
 import styles from './style.module.scss';
-import clsx from 'clsx';
 
 type TableHeadProps = {
-  children?: ReactNode;
   grow?: boolean;
-};
+} & ComponentPropsWithRef<'th'>;
 
-export function TableHead({ children, grow }: TableHeadProps) {
+export function TableHead({ grow, ...props }: TableHeadProps) {
   const cl = clsx(styles.head, grow && styles.grow);
 
-  return <th className={cl}>{children}</th>;
+  return <th className={cl} {...props} />;
 }
